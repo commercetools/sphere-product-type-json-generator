@@ -46,7 +46,7 @@ module.exports = (grunt)->
         flatten: true
         cwd: "src/spec"
         src: ["*.spec.coffee"]
-        dest: "spec"
+        dest: "test"
         ext: ".spec.js"
 
     concat:
