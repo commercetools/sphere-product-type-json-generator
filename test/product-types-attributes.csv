@@ -1,6 +1,6 @@
 name,type,isVariant,isRequired,isSearchable,label.de,label.en,key,enumlabel.en,enumlabel.de
-gender,enum,FALSCH,FALSCH,FALSCH,Geschlecht,gender,M,male,männlich
+gender,enum,false,false,false,Geschlecht,gender,M,male,männlich
 ,,,,,,,W,female,weiblich
 ,,,,,,,U,unisex,unisex
-designer,enum,FALSCH,FALSCH,FALSCH,Designer,designer,HUG,Hugo Boss,Hugo Boss
+designer,enum,false,false,false,Designer,designer,HUG,Hugo Boss,Hugo Boss
 ,,,,,,,DUG,Dolce&Gabana,Dolce&Gabana
