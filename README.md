@@ -22,7 +22,7 @@ grunt build
 ## How to run
 
 ```
-node lib/run.js --product-types product-types.csv --product-types-attributes product-types-attributes.csv
+node lib/run.js --product-types-csv data/sample-product-types.csv --product-types-attributes-csv data/sample-product-types-attributes.csv
 ```
 
 ### How to test

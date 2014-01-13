@@ -5,7 +5,7 @@ before_script:
 - npm install -g grunt-cli
 script:
 - npm test
-- node lib/run.js --product-types-csv product-types.csv --product-types-attributes-csv product-types-attributes.csv
+- node lib/run.js --product-types-csv data/sample-product-types.csv --product-types-attributes-csv data/sample-product-types-attributes.csv
 notifications:
   hipchat:
     rooms: 
