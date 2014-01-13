@@ -29,7 +29,7 @@ module.exports = (grunt)->
 
     clean:
       default: "lib"
-      test: "spec"
+      test: "test"
 
     coffee:
       options:
@@ -75,9 +75,9 @@ module.exports = (grunt)->
         stderr: true
         failOnError: true
       coverage:
-        command: "istanbul cover jasmine-node --captureExceptions spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+        command: "istanbul cover jasmine-node --captureExceptions test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
       jasmine:
-        command: "jasmine-node --captureExceptions spec"
+        command: "jasmine-node --captureExceptions test"
 
   # load plugins that provide the tasks defined in the config
   grunt.loadNpmTasks "grunt-coffeelint"
