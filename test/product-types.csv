@@ -1,4 +1,4 @@
-name,description,name,gender,designer
-epic-base,bla,,x,
-men,foo,,x,x
-women,bar,,,x
+name,description,gender,designer
+epic-base,,x,
+men,,x,x
+women,,,x
