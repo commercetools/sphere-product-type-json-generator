@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- '0.10'
+before_script:
+- npm install -g grunt-cli
+script:
+- npm test
+- node lib/run.js --product-types-csv product-types.csv --product-types-attributes-csv product-types-attributes.csv
+notifications:
+  hipchat:
+    rooms: 
+    template:
+    - ! '%{repository}#%{build_number} (%{author}): %{message} (<a href="%{build_url}">Details</a>
+      <a href="%{compare_url}">Compare</a>)'
+    format: html
+    on_success: change
+    on_failure: change
+env:
+  global:
