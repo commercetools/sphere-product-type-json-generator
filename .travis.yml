@@ -5,10 +5,12 @@ before_script:
 - npm install -g grunt-cli
 script:
 - npm test
-- node lib/run.js --product-types-csv data/sample-product-types.csv --product-types-attributes-csv data/sample-product-types-attributes.csv
+- node lib/run.js --product-types-csv data/sample-product-types.csv --product-types-attributes-csv
+  data/sample-product-types-attributes.csv
 notifications:
   hipchat:
-    rooms: 
+    rooms:
+      secure: etWwsSqV4DaQA4yo2G2mqzUQqFEZUWHXBs2zTHToCGbUqyVVCLBBslLpkCXnd8vY+YGPaMcmfK7Jh+kSHlS2XTC0itzSky/dEYPpzhQbHdo1Stwei9CFardyJQn5X77o4MNcR5gdPqZ1Spql5DyKBjpdzkAVhWRUid39bywi9EM=
     template:
     - ! '%{repository}#%{build_number} (%{author}): %{message} (<a href="%{build_url}">Details</a>
       <a href="%{compare_url}">Compare</a>)'
@@ -16,4 +18,4 @@ notifications:
     on_success: change
     on_failure: change
 env:
-  global:
+  global: 
