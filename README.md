@@ -1,7 +1,7 @@
-sphere-producttype-json-generator
+sphere-product-type-json-generator
 =================================
 
-[![Build Status](https://travis-ci.org/svenmueller/sphere-producttype-json-generator.png?branch=master)](https://travis-ci.org/svenmueller/sphere-producttype-json-generator)
+[![Build Status](https://travis-ci.org/svenmueller/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/svenmueller/sphere-product-type-json-generator)
 
 A command line for processing given _CSV_ files and generating a _JSON_ product type representation file for each product type. As input two _CSV_ files are required:
 * a _CSV_ file describing available attribute values (e.g. for atttributes of type _Enumeration_)
