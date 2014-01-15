@@ -24,7 +24,7 @@ readCsvPromise = (path) ->
 
 promises = Q.all [readCsvPromise(argv.types), readCsvPromise(argv.attributes)]
 
-Q.spread promises, (types, attributes) ->
+promises.spread (types, attributes) ->
   generator = new ProductTypeGenerator
   generator.run types, attributes, (success) ->
     process.exit 1 unless success
