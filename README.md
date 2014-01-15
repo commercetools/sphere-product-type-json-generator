@@ -37,3 +37,6 @@ To run them on any file change
 grunt watch:test
 ```
 
+## Styleguide
+We <3 CoffeeScript here at commercetools! So please have a look at this referenced [coffeescript styleguide](https://github.com/polarmobile/coffeescript-style-guide) when doing changes to the code.
+
