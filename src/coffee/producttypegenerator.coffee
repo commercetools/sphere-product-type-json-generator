@@ -1,4 +1,3 @@
-xmlbuilder = require 'xmlbuilder'
 FS = require 'fs'
 Q = require 'q'
 

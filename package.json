@@ -44,7 +44,6 @@
     "optimist": "0.6.0",
     "underscore": "~1.5.2",
     "q": "~1.0.0",
-    "xmlbuilder": "0.4.2"
   },
   "devDependencies": {
     "coveralls": "~2.1.0",
