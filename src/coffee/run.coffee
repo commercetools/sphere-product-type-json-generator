@@ -22,7 +22,9 @@ readCsvPromise = (path) ->
     deferred.reject(new Error(error))
   deferred.promise
 
-Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes)->
+Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes) ->
   generator = new ProductTypeGenerator
   generator.run types, attributes, (success) ->
     process.exit 1 unless success
+.fail (error) ->
+  console.log "An error occured: #{error.message}"
