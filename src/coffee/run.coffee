@@ -16,7 +16,7 @@ Reads a CSV file by given path and returns a promise for the result.
 readCsvPromise = (path) ->
   deferred = Q.defer()
   CSV().from.path(path)
-  .to (data) ->
+  .to.array (data, count) ->
     deferred.resolve(data)
   .on "error", (error) ->
     deferred.reject(new Error(error))

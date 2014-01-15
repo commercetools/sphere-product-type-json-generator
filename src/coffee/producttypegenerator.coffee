@@ -14,12 +14,12 @@ class ProductTypeGenerator
 
   ###
   Creates sphere product type representation files using JSON format.
-  @return true if generation was successfull otherwise false
+  @param {array} types Entire types CSV as an array of records.
+  @param {array} attributes Entire attributes CSV as an array of records.
+  @param {function} callback The callback function to be invoked when the method finished its work.
+  @return Result of the given callback
   ###
   run: (types, attributes, callback) ->
-    console.log "ProductTypeGenerator.run()"
-    console.log "#{types}"
-    console.log "#{attributes}"
     callback true
 
 module.exports = ProductTypeGenerator
