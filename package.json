@@ -43,7 +43,7 @@
     "csv": "  0.3.6",
     "optimist": "0.6.0",
     "underscore": "~1.5.2",
-    "q": "~1.0.0",
+    "q": "~1.0.0"
   },
   "devDependencies": {
     "coveralls": "~2.1.0",
