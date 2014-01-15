@@ -17,6 +17,9 @@ class ProductTypeGenerator
   @return Result of the given callback
   ###
   run: (types, attributes, callback) ->
+    for column, i in types
+      console.log column
+
     callback true
 
 module.exports = ProductTypeGenerator
