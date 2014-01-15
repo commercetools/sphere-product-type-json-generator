@@ -40,6 +40,7 @@
     "test": "grunt coverage"
   },
   "dependencies": {
+    "csv": "  0.3.6",
     "optimist": "0.6.0",
     "underscore": "~1.5.2",
     "q": "~1.0.0",
