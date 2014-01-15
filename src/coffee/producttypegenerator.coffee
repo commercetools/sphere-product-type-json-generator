@@ -10,7 +10,7 @@ class ProductTypeGenerator
   _options = {}
 
   constructor: (options = {}) ->
-    _option = options
+    @_options = options
 
   ###
   Creates sphere product type representation files using JSON format.
