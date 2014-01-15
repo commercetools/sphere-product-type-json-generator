@@ -5,9 +5,7 @@ Q = require 'q'
 Class for generating JSON product type representations from CSV files.
 ###
 class ProductTypeGenerator
-  
-  _options = {}
-
+    
   constructor: (options = {}) ->
     @_options = options
 
