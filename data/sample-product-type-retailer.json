@@ -1,0 +1,174 @@
+{
+  "name": "epic-base"
+  ,"description": "Basistyp für alle Produkte"
+  ,"attributes": [
+
+    { "name": "mastersku", "label": { "de": "Master SKU" }, "type": "text",
+      "isVariant": true, "isRequired": true, "inputHint": "SingleLine" }
+
+    ,{ "name": "color", "label": { "de": "Farbe (Freitext)" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" }
+
+    ,{ "name": "colorCode", "label": { "de": "Farbcode" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "green", "label": { "de": "Grün" } },
+        { "key": "black", "label": { "de": "Schwarz" } },
+        { "key": "blue", "label": { "de": "Blau" } }
+      ]
+    }
+
+    ,{ "name": "designer", "label": { "de": "Designer" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "HB", "label": { "de": "Hugo Boss" } },
+        { "key": "DG", "label": { "de": "Dolce & Gabana" } },
+        { "key": "PR", "label": { "de": "Prada" } },
+        { "key": "DI", "label": { "de": "Diesel" } }
+      ]
+    }    
+
+    ,{ "name": "gender", "label": { "de": "Geschlecht" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "M", "label": { "de": "männlich" } },
+        { "key": "W", "label": { "de": "weiblich" } },
+        { "key": "U", "label": { "de": "unisex" } }
+      ]
+    }
+
+    ,{ "name": "season", "label": { "de": "Saison" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "spring", "label": { "de": "Frühling" } },
+        { "key": "summer", "label": { "de": "Sommer" } },
+        { "key": "fall", "label": { "de": "Herbst" } },
+        { "key": "winter", "label": { "de": "Winter" } }
+      ]
+    }
+
+    ,{ "name": "occasion", "label": { "de": "Style" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "business", "label": { "de": "Business" } },
+        { "key": "party", "label": { "de": "Party" } },
+        { "key": "holiday", "label": { "de": "Urlaub" } }
+      ]
+    }
+
+    ,{ "name": "size", "label": { "de": "Größe" }, "type": "lenum",
+      "isVariant": true, "isRequired": true, "inputHint": "SingleLine", "values": [
+        { "key": "XS", "label": { "de": "XS" } },
+        { "key": "S", "label": { "de": "S" } },
+        { "key": "M", "label": { "de": "M" } },
+        { "key": "L", "label": { "de": "L" } },
+        { "key": "XL", "label": { "de": "XL" } },
+        { "key": "XXL", "label": { "de": "XXL" } }
+      ]
+    }
+
+    ,{ "name": "heelHight", "label": { "de": "Absatzhöhe" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "5", "label": { "de": "5" } },
+        { "key": "6", "label": { "de": "6" } },
+        { "key": "7", "label": { "de": "7" } },
+        { "key": "8", "label": { "de": "8" } },
+        { "key": "9", "label": { "de": "9" } },
+        { "key": "10", "label": { "de": "10" } }
+      ]
+    }
+
+    ,{ "name": "fitCut", "label": { "de": "Schnitt" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "boot", "label": { "de": "Bootcut" } },
+        { "key": "regular", "label": { "de": "Regular Fit" } },
+        { "key": "slim", "label": { "de": "Slim Fit" } },
+        { "key": "straight", "label": { "de": "Straight Cut" } },
+        { "key": "carrot", "label": { "de": "Karrottenjeans" } }
+      ]
+    }
+
+    ,{ "name": "closing", "label": { "de": "verschließbar" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "yes", "label": { "de": "Ja" } },
+        { "key": "no", "label": { "de": "Nein" } }
+      ]
+    }
+
+    ,{ "name": "pockets", "label": { "de": "Taschen" }, "type": "number",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" }
+
+    ,{ "name": "sleeves", "label": { "de": "Ärmel" }, "type": "number",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" }
+
+    ,{ "name": "hoody", "label": { "de": "Hoody" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "yes", "label": { "de": "Ja" } },
+        { "key": "no", "label": { "de": "Nein" } }
+      ]
+    }
+
+    ,{ "name": "lining", "label": { "de": "Futter" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" }
+
+    ,{ "name": "collarType", "label": { "de": "Stoff" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" } 
+
+    ,{ "name": "beltIncluded", "label": { "de": "Gürtel inkl." }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "yes", "label": { "de": "Ja" } },
+        { "key": "no", "label": { "de": "Nein" } }
+      ]
+    }     
+
+    ,{ "name": "uvProtection", "label": { "de": "UV-Schutz" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "yes", "label": { "de": "Ja" } },
+        { "key": "no", "label": { "de": "Nein" } }
+      ]
+    } 
+
+    ,{ "name": "length", "label": { "de": "L" }, "type": "number",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" }
+
+    ,{ "name": "analogDigital", "label": { "de": "Analog oder Digital" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "analog", "label": { "de": "Analog" } },
+        { "key": "digital", "label": { "de": "Digital" } }
+      ]
+    } 
+
+    ,{ "name": "battery", "label": { "de": "Batterie" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" }
+
+    ,{ "name": "gemstones", "label": { "de": "Edelsteine" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" } 
+
+    ,{ "name": "fastening", "label": { "de": "Schließmechanismus" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" }
+
+    ,{ "name": "waterproofed", "label": { "de": "Wasserdicht" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "yes", "label": { "de": "Ja" } },
+        { "key": "no", "label": { "de": "Nein" } }
+      ]
+    } 
+
+    ,{ "name": "strap", "label": { "de": "Gurt" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" } 
+
+    ,{ "name": "lock", "label": { "de": "Schloss" }, "type": "lenum",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine", "values": [
+        { "key": "yes", "label": { "de": "Ja" } },
+        { "key": "no", "label": { "de": "Nein" } }
+      ]
+    } 
+
+    ,{ "name": "rrp", "label": {"de": "UVP"}, "type": "money",
+      "isVariant": false, "isRequired": false, "inputHint": "SingleLine" }
+
+    ,{ "name": "detailedDesciption1", "label": { "de":"detailierte Beschreibung" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "MultiLine" }
+
+    ,{ "name": "detailedDesciption2", "label": { "de":"detailierte Beschreibung" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "MultiLine" }
+
+    ,{ "name": "detailedDesciption3", "label": { "de":"detailierte Beschreibung" }, "type": "text",
+      "isVariant": false, "isRequired": false, "inputHint": "MultiLine" }
+  ]
+}
