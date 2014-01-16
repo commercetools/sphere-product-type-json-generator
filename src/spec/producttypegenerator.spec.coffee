@@ -9,3 +9,66 @@ describe 'ProductTypeGenerator', ->
 
   it 'should initialize with options', ->
     expect(@generator._options).toBe 'foo'
+
+  it 'should return languages for localized property header', ->
+    expect(@generator._languages('label', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).toEqual ['de', 'en']
+
+  it 'should return no languages for not localized property header', ->
+    expect(@generator._languages('name', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).toEqual []
+
+  it 'should return no languages for not localized property header', ->
+
+    attributeRow1 =
+      'name': 'gender'
+      'type': 'enum'
+      'isVariant': 'false'
+      'isRequired': 'false'
+      'isSearchable': 'false'
+      'label.de': 'Geschlecht'
+      'label.en': 'gender'
+      'key': 'M'
+      'enumlabel.en': 'male'
+      'enumlabel.de': 'männlich'
+
+    attributeRow2 =
+      'name': ''
+      'type': ''
+      'isVariant': ''
+      'isRequired': ''
+      'isSearchable': ''
+      'label.de': ''
+      'label.en': ''
+      'key': 'W'
+      'enumlabel.en': 'female'
+      'enumlabel.de': 'weiblich'
+
+    attributeRow3 =
+      'name': ''
+      'type': ''
+      'isVariant': ''
+      'isRequired': ''
+      'isSearchable': ''
+      'label.de': ''
+      'label.en': ''
+      'key': 'U'
+      'enumlabel.en': 'unisex'
+      'enumlabel.de': 'unisex'
+
+    expectedAttributeDefinition =
+      'gender':
+        'name': 'gender'
+        'label':
+          'de': 'Designer'
+          'en': 'Designer'
+        'type': 'enum'
+        'isVariant': 'false'
+        'isRequired': 'false'
+        'inputHint': 'false'
+        'values': {}
+
+
+    expect(@generator._attributesDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
+
+
+
+
