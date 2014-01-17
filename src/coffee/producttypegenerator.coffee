@@ -56,8 +56,8 @@ class ProductTypeGenerator
         attributeDefinition =
           name: row[ATTRIBUTE_NAME]
           label:
-            'de': 'Designer'
-            'en': 'Designer'
+            de: 'Designer'
+            en: 'Designer'
           type: row[ATTRIBUTE_TYPE]
           isVariant: row[ATTRIBUTE_IS_VARIANT]
           isRequired: row[ATTRIBUTE_IS_REQUIRED]
