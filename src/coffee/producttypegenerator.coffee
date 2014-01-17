@@ -50,14 +50,11 @@ class ProductTypeGenerator
 
     for row, rowIndex in attributes
 
-      # get language values from label header
-      languages = @_languages ATTRIBUTE_LABEL, _.keys row
-
       # check if attribute name is empty
       if !!row[ATTRIBUTE_NAME]
         attributeDefinition =
           name: row[ATTRIBUTE_NAME]
-          label: @_i18n row, ATTRIBUTE_LABEL, languages
+          label: @_i18n row, ATTRIBUTE_LABEL
           type: row[ATTRIBUTE_TYPE]
           isVariant: row[ATTRIBUTE_IS_VARIANT]
           isRequired: row[ATTRIBUTE_IS_REQUIRED]
@@ -75,7 +72,7 @@ class ProductTypeGenerator
         when ATTRIBUTE_TYPE_LENUM
           attributeDefinition['values'] = _.union (attributeDefinition['values'] or []),
             key: row[ATTRIBUTE_TYPE_ENUM_KEY]
-            label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{ATTRIBUTE_LABEL}", languages
+            label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{ATTRIBUTE_LABEL}"
 
     attributeDefinitions
 
@@ -104,11 +101,11 @@ class ProductTypeGenerator
   Returns an object containing a key/value pairs (language/value) for each language.
   @param {object} row The row object containing key/value pairs (header/value).
   @param {string}  header The attribute property header
-  @param {array}  languages The languages used for i18n.
   @return Object with i18n values
   ###
-  _i18n: (row, header, languages) ->
+  _i18n: (row, header) ->
     i18n = {}
+    languages = @_languages header, _.keys row
     for language in languages
       i18n[language] = row["#{header}.#{language}"]
     i18n

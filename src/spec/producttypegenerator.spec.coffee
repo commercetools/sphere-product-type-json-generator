@@ -16,6 +16,25 @@ describe 'ProductTypeGenerator', ->
   it 'should return no languages for not localized property header', ->
     expect(@generator._languages('name', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).toEqual []
 
+  it 'should return an object with localized values', ->
+
+    attributeRow =
+      name: 'gender'
+      type: 'lenum'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Geschlecht'
+      'label.en': 'gender'
+      key: 'M'
+      'enumlabel.en': 'male'
+      'enumlabel.de': 'männlich'
+
+    expect(@generator._i18n(attributeRow, 'label')).toEqual {de: 'Geschlecht', en: 'gender'}
+
+  it 'should return an object with no localized values', ->
+    expect(@generator._i18n(['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'], 'name')).toEqual []
+
   it 'should return JSON attribute definitions', ->
 
     attributeRow1 =
