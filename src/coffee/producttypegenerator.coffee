@@ -34,7 +34,7 @@ class ProductTypeGenerator
     callback true
 
   ###
-  Creates as JSON object containing all attribute definitions from given attribute CSV.
+  Creates a JSON object containing all attribute definitions from given attribute CSV.
   @param {array} attributes Entire attributes CSV as an array of records.
   @return attribute definitions as JSON object
   ###
