@@ -20,7 +20,7 @@ describe 'ProductTypeGenerator', ->
 
     attributeRow1 =
       name: 'gender'
-      type: 'enum'
+      type: 'lenum'
       isVariant: 'false'
       isRequired: 'false'
       isSearchable: 'false'
@@ -58,14 +58,13 @@ describe 'ProductTypeGenerator', ->
       gender:
         name: 'gender'
         label:
-          de: 'Designer'
-          en: 'Designer'
-        type: 'enum'
+          de: 'Geschlecht'
+          en: 'gender'
+        type: 'lenum'
         isVariant: 'false'
         isRequired: 'false'
         inputHint: 'false'
-        values: {}
-
+        values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
 
     expect(@generator._attributesDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
 

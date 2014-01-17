@@ -7,8 +7,10 @@ Class for generating JSON product type representations from CSV files.
 ###
 class ProductTypeGenerator
 
-  ATTRIBUTE_TYPE_ENUM = "enum"
-  ATTRIBUTE_TYPE_TEXT = "text"
+  ATTRIBUTE_TYPE_ENUM = 'enum'
+  ATTRIBUTE_TYPE_LENUM = 'lenum'
+  ATTRIBUTE_TYPE_ENUM_KEY = 'key'
+  ATTRIBUTE_TYPE_TEXT = 'text'
   ATTRIBUTE_TYPES = {ATTRIBUTE_TYPE_ENUM, ATTRIBUTE_TYPE_TEXT}
 
   ATTRIBUTE_NAME = 'name'
@@ -55,22 +57,27 @@ class ProductTypeGenerator
       if !!row[ATTRIBUTE_NAME]
         attributeDefinition =
           name: row[ATTRIBUTE_NAME]
-          label:
-            de: 'Designer'
-            en: 'Designer'
+          label: @_i18n row, ATTRIBUTE_LABEL, languages
           type: row[ATTRIBUTE_TYPE]
           isVariant: row[ATTRIBUTE_IS_VARIANT]
           isRequired: row[ATTRIBUTE_IS_REQUIRED]
           inputHint: row[ATTRIBUTE_IS_REQUIRED]
 
-        switch row[ATTRIBUTE_TYPE]
-          when ATTRIBUTE_TYPE_ENUM
-            attributeDefinition['values'] = {}
-
         # store attribute definition using name as key for easy access
         attributeDefinitions[row[ATTRIBUTE_NAME]] = attributeDefinition
         # store last processed attribute for further usage (reading next rows)
         lastProcessedAttributeDefinition = attributeDefinition
+      else
+        # process additional attribute rows
+        attributeDefinition = lastProcessedAttributeDefinition
+
+      switch attributeDefinition[ATTRIBUTE_TYPE]
+        when ATTRIBUTE_TYPE_LENUM
+          attributeDefinition['values'] = [] unless attributeDefinition['values']
+          value =
+            key: row[ATTRIBUTE_TYPE_ENUM_KEY]
+            label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{ATTRIBUTE_LABEL}", languages
+          attributeDefinition['values'].push value
 
     attributeDefinitions
 
@@ -94,5 +101,11 @@ class ProductTypeGenerator
     # see http://coffeescript.org/#loops
     (languages(h) for h in headers when h.match(regexp))
 
+
+  _i18n: (row, header, languages) ->
+    i18n = {}
+    for language in languages
+      i18n[language] = row["#{header}.#{language}"]
+    i18n
 
 module.exports = ProductTypeGenerator
