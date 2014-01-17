@@ -1,5 +1,6 @@
 FS = require 'fs'
 Q = require 'q'
+_ = require("underscore")._
 
 ###
 Class for generating JSON product type representations from CSV files.
