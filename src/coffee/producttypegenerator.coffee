@@ -12,6 +12,7 @@ class ProductTypeGenerator
   ATTRIBUTE_TYPE_ENUM_KEY = 'key'
   ATTRIBUTE_TYPE_TEXT = 'text'
   ATTRIBUTE_TYPES = {ATTRIBUTE_TYPE_ENUM, ATTRIBUTE_TYPE_TEXT}
+  ATTRIBUTE_ENUM_VALUES = 'values'
 
   ATTRIBUTE_NAME = 'name'
   ATTRIBUTE_LABEL = 'label'
@@ -70,7 +71,7 @@ class ProductTypeGenerator
 
       switch attributeDefinition[ATTRIBUTE_TYPE]
         when ATTRIBUTE_TYPE_LENUM
-          attributeDefinition['values'] = _.union (attributeDefinition['values'] or []),
+          attributeDefinition[ATTRIBUTE_ENUM_VALUES] = _.union (attributeDefinition[ATTRIBUTE_ENUM_VALUES] or []),
             key: row[ATTRIBUTE_TYPE_ENUM_KEY]
             label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{ATTRIBUTE_LABEL}"
 
