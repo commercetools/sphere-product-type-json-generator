@@ -16,7 +16,7 @@ describe 'ProductTypeGenerator', ->
   it 'should return no languages for not localized property header', ->
     expect(@generator._languages('name', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).toEqual []
 
-  it 'should return no languages for not localized property header', ->
+  it 'should return JSON attribute definitions', ->
 
     attributeRow1 =
       name: 'gender'
