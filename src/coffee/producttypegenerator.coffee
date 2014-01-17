@@ -102,6 +102,13 @@ class ProductTypeGenerator
     (languages(h) for h in headers when h.match(regexp))
 
 
+  ###
+  Returns a list of languages (for i18n) used for given attribute property header.
+  @param {array} row The row array containing row values.
+  @param {string}  header The attribute property header
+  @param {array}  languages The languages used for i18n.
+  @return List with language values
+  ###
   _i18n: (row, header, languages) ->
     i18n = {}
     for language in languages
