@@ -85,7 +85,7 @@ describe 'ProductTypeGenerator', ->
         inputHint: 'false'
         values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
 
-    expect(@generator._attributesDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
 
 
 

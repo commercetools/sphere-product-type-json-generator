@@ -33,16 +33,24 @@ class ProductTypeGenerator
   ###
   run: (types, attributes, callback) ->
 
-    attributesDefinitions = @_attributesDefinitions attributes
+    # build object with all attribute defintions for later usage
+    attributeDefinitions = @_createAttributeDefinitions attributes
+
+    # build product type definitions
+    productTypeDefinitions = @_createProductTypes types, attributeDefinitions
+
+    # outpur product type files
+    for productTypeDefinition in productTypeDefinitions
+      @_writeFile productTypeDefinition
 
     callback true
 
   ###
   Returns an object containing all attribute definitions from given attribute CSV.
   @param {array} attributes Entire attributes CSV as an array of records.
-  @return attribute definitions as object
+  @return Object containing all attribute definitions
   ###
-  _attributesDefinitions: (attributes) ->
+  _createAttributeDefinitions: (attributes) ->
 
     # all attributes
     attributeDefinitions = {}
@@ -110,5 +118,20 @@ class ProductTypeGenerator
     for language in languages
       i18n[language] = row["#{header}.#{language}"]
     i18n
+
+  ###
+  Returns an object containing a key/value pairs (language/value) for each language.
+  @param {array} types Entire types CSV as an array of records.
+  @param {object} attributeDefinitions The object containing all attribute definitions
+  @return Array containing product type definition objects
+  ###
+  _createProductTypes: (types, attributeDefinitions) ->
+    []
+
+  ###
+  Outputs given product definition as a file in JSON format.
+  @param {object} productTypeDefinition The object containing product type definition.
+  ###
+  _writeFile: (productTypeDefinition) ->
 
 module.exports = ProductTypeGenerator
