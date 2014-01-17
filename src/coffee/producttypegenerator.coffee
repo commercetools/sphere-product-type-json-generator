@@ -37,7 +37,7 @@ class ProductTypeGenerator
     attributeDefinitions = @_createAttributeDefinitions attributes
 
     # build product type definitions
-    productTypeDefinitions = @_createProductTypes types, attributeDefinitions
+    productTypeDefinitions = @_createProductTypesDefinitions types, attributeDefinitions
 
     # outpur product type files
     for productTypeDefinition in productTypeDefinitions
@@ -125,7 +125,7 @@ class ProductTypeGenerator
   @param {object} attributeDefinitions The object containing all attribute definitions
   @return Array containing product type definition objects
   ###
-  _createProductTypes: (types, attributeDefinitions) ->
+  _createProductTypesDefinitions: (types, attributeDefinitions) ->
     []
 
   ###
