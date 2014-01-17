@@ -73,11 +73,9 @@ class ProductTypeGenerator
 
       switch attributeDefinition[ATTRIBUTE_TYPE]
         when ATTRIBUTE_TYPE_LENUM
-          attributeDefinition['values'] = [] unless attributeDefinition['values']
-          value =
+          attributeDefinition['values'] = _.union (attributeDefinition['values'] or []),
             key: row[ATTRIBUTE_TYPE_ENUM_KEY]
             label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{ATTRIBUTE_LABEL}", languages
-          attributeDefinition['values'].push value
 
     attributeDefinitions
 
