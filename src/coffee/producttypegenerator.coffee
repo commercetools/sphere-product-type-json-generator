@@ -37,9 +37,9 @@ class ProductTypeGenerator
     callback true
 
   ###
-  Creates a JSON object containing all attribute definitions from given attribute CSV.
+  Returns an object containing all attribute definitions from given attribute CSV.
   @param {array} attributes Entire attributes CSV as an array of records.
-  @return attribute definitions as JSON object
+  @return attribute definitions as object
   ###
   _attributesDefinitions: (attributes) ->
 
@@ -103,11 +103,11 @@ class ProductTypeGenerator
 
 
   ###
-  Returns a list of languages (for i18n) used for given attribute property header.
-  @param {array} row The row array containing row values.
+  Returns an object containing a key/value pairs (language/value) for each language.
+  @param {object} row The row object containing key/value pairs (header/value).
   @param {string}  header The attribute property header
   @param {array}  languages The languages used for i18n.
-  @return List with language values
+  @return Object with i18n values
   ###
   _i18n: (row, header, languages) ->
     i18n = {}
