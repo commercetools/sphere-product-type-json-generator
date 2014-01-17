@@ -97,7 +97,7 @@ class ProductTypeGenerator
 
     # this will iterate over the array and execute the function if the condition is passed, returning a "filtered" array
     # see http://coffeescript.org/#loops
-    (languages(h) for h in headers when h.match(regexp))
+    (languages(header) for header in headers when header.match(regexp))
 
 
   ###
