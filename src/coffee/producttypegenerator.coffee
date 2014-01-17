@@ -81,15 +81,18 @@ class ProductTypeGenerator
   @return List with language values
   ###
   _languages: (name, headers) ->
-    languages = []
     regexp = new RegExp("^#{name}\.[a-zA-Z]{2}", 'i')
-    for header in headers
-      if regexp.test header
-        values = header.split('.')
-        if values.length > 1
-          # get language part from header
-          languages.push values[1]
-    languages
+    languages = (header) ->
+      # `match` will return null if there is no match, otherwise it returns an array with the matched group
+      # In this case it will output this
+      # 'label.de'.match(regexp) => ["label.de"]
+      matched = header.match(regexp)
+      # here we can safely access `matched` and split it since we know it matched what we wanted
+      _.last(matched[0].split(".")) if matched
+
+    # this will iterate over the array and execute the function if the condition is passed, returning a "filtered" array
+    # see http://coffeescript.org/#loops
+    (languages(h) for h in headers when h.match(regexp))
 
 
 module.exports = ProductTypeGenerator
