@@ -49,7 +49,7 @@ class ProductTypeGenerator
     for row, rowIndex in attributes
 
       # get language values from label header
-      languages = @_languages ATTRIBUTE_LABEL, Object.keys(row)
+      languages = @_languages ATTRIBUTE_LABEL, _.keys row
 
       # check if attribute name is empty
       if !!row[ATTRIBUTE_NAME]
