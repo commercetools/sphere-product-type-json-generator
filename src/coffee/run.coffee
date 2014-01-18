@@ -2,7 +2,7 @@ CSV = require('csv')
 Q = require('q')
 
 argv = require('optimist')
-  .usage('Usage: $0 --types product-types.csv --attributes product-types-attributes.csv --target generated')
+  .usage('Usage: $0 --types product-types.csv --attributes product-types-attributes.csv --target ./')
   .demand(['types', 'attributes', 'target'])
   .argv
 
