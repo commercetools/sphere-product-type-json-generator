@@ -1,11 +1,14 @@
-FS = require 'fs'
+fs = require 'fs'
 Q = require 'q'
+moment = require 'moment'
 _ = require("underscore")._
 
 ###
 Class for generating JSON product type representations from CSV files.
 ###
 class ProductTypeGenerator
+
+  PRODUCT_TYPE_NAME = 'name'
 
   ATTRIBUTE_TYPE_ENUM = 'enum'
   ATTRIBUTE_TYPE_LENUM = 'lenum'
@@ -126,12 +129,29 @@ class ProductTypeGenerator
   @return Array containing product type definition objects
   ###
   _createProductTypesDefinitions: (types, attributeDefinitions) ->
-    []
+
+    productTypeDefinitions = []
+
+    for row, rowIndex in types
+      productTypeDefinition =
+        name: row['name']
+        description: row['description']
+
+      productTypeDefinitions.push productTypeDefinition
+
+    productTypeDefinitions
 
   ###
   Outputs given product definition as a file in JSON format.
   @param {object} productTypeDefinition The object containing product type definition.
   ###
-  _writeFile: (productTypeDefinition) ->
+  _writeFile: (productTypeDefinition, path) ->
+
+    prettified = JSON.stringify productTypeDefinition, null, 4
+
+    fileName = "#{@_options.target}/product-type-#{productTypeDefinition[PRODUCT_TYPE_NAME]}-#{moment().format('YYYYMMDD-MMSSSSS')}.json"
+    fs.writeFile fileName, prettified, (error) ->
+      if error
+        console.log "Error while writing file #{fileName}: #{error}"
 
 module.exports = ProductTypeGenerator

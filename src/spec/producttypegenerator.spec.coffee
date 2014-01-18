@@ -87,6 +87,32 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
 
+  it 'should return an array with product type definitions', ->
+
+    productTypeDefinition1 =
+      name: 'ProductType1'
+      description: 'Description1'
+
+    productTypeDefinition2 =
+      name: 'ProductType2'
+      description: 'Description2'
+
+    productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
+
+    attributeDefinitions = []
+
+    expectedProductTypeDefinition1 =
+      name: 'ProductType1'
+      description: 'Description1'
+
+    expectedProductTypeDefinition2 =
+      name: 'ProductType2'
+      description: 'Description2'
+
+    expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
+
+
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).toEqual expectedProductTypeDefinitions
 
 
 

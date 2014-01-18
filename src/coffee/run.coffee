@@ -2,11 +2,14 @@ CSV = require('csv')
 Q = require('q')
 
 argv = require('optimist')
-  .usage('Usage: $0 --types product-types.csv --attributes product-types-attributes.csv')
-  .demand(['types', 'attributes'])
+  .usage('Usage: $0 --types product-types.csv --attributes product-types-attributes.csv --target generated')
+  .demand(['types', 'attributes', 'target'])
   .argv
 
 ProductTypeGenerator = require('../main').ProductTypeGenerator
+
+options =
+  target: argv.target
 
 ###
 Reads a CSV file by given path and returns a promise for the result.
@@ -23,7 +26,7 @@ readCsvPromise = (path) ->
   deferred.promise
 
 Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes) ->
-  generator = new ProductTypeGenerator
+  generator = new ProductTypeGenerator options
   generator.run types, attributes, (success) ->
     process.exit 1 unless success
 .fail (error) ->
