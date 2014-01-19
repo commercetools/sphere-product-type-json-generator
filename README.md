@@ -1,7 +1,7 @@
 sphere-product-type-json-generator
 =================================
 
-[![Dependency Status](https://david-dm.org/svenmueller/sphere-product-type-json-generator.png)](https://david-dm.org/svenmueller/sphere-product-type-json-generator) [![Build Status](https://travis-ci.org/svenmueller/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/svenmueller/sphere-product-type-json-generator) [![Coverage Status](https://coveralls.io/repos/svenmueller/sphere-product-type-json-generator/badge.png)](https://coveralls.io/r/svenmueller/sphere-product-type-json-generator) [![NPM version](https://badge.fury.io/js/sphere-product-type-json-generator.png)](http://badge.fury.io/js/sphere-product-type-json-generator)
+[![Build Status](https://travis-ci.org/svenmueller/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/svenmueller/sphere-product-type-json-generator) [![Coverage Status](https://coveralls.io/repos/svenmueller/sphere-product-type-json-generator/badge.png)](https://coveralls.io/r/svenmueller/sphere-product-type-json-generator) [![Dependency Status](https://david-dm.org/svenmueller/sphere-product-type-json-generator.png?theme=shields.io)](https://david-dm.org/svenmueller/sphere-product-type-json-generator) [![devDependency Status](https://david-dm.org/svenmueller/sphere-product-type-json-generator/dev-status.png?theme=shields.io)](https://david-dm.org/svenmueller/sphere-product-type-json-generator#info=devDependencies)
 
 A command line for processing given _CSV_ files and generating a _JSON_ product type representation file for each product type. As input two _CSV_ files are required:
 * a _CSV_ file describing available attribute values (e.g. for atttributes of type _Enumeration_)
