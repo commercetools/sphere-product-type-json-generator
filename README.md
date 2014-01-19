@@ -21,6 +21,22 @@ grunt build
 
 ## How to run
 
+List available options and usage info.
+```bash
+node lib/run.js
+Usage: node ./lib/run.js --types [CSV] --attributes [CSV] --target [folder] --retailer [boolean]
+
+Options:
+  --types, -t       Path to product types CSV file.                                                                            [required]
+  --attributes, -a  Path to product type attributes CSV file.                                                                  [required]
+  --target, -t      Target folder for generated product types JSON files.                                                      [required]
+  --retailer, -r    Master/Retailer. Set "true" to generate another product type file, having an extra attribute "masterSKU".  [default: false]
+
+
+Missing required arguments: types, attributes, target
+```
+
+Example
 ```
 node lib/run.js --types data/sample-product-types.csv --attributes \
 	data/sample-product-types-attributes.csv --target ./
