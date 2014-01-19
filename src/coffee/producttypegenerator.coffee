@@ -1,6 +1,5 @@
 fs = require 'fs'
 Q = require 'q'
-moment = require 'moment'
 _ = require("underscore")._
 
 ###
@@ -149,7 +148,7 @@ class ProductTypeGenerator
 
     prettified = JSON.stringify productTypeDefinition, null, 4
 
-    fileName = "#{@_options.target}/product-type-#{productTypeDefinition[PRODUCT_TYPE_NAME]}-#{moment().format('YYYYMMDD-MMSSSSS')}.json"
+    fileName = "#{@_options.target}/product-type-#{productTypeDefinition[PRODUCT_TYPE_NAME]}.json"
     fs.writeFile fileName, prettified, (error) ->
       if error
         console.log "Error while writing file #{fileName}: #{error}"
