@@ -61,6 +61,32 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
+  it 'should return one attribute definition of type localized text', ->
+
+    attributeRow =
+      name: 'description'
+      type: 'ltext'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      inputHint: 'MultiLine'
+      'label.de': 'Beschreibung'
+      'label.en': 'Description'
+
+    expectedAttributeDefinition =
+      description:
+        name: 'description'
+        label:
+          de: 'Beschreibung'
+          en: 'Description'
+        type: 'ltext'
+        isVariant: 'false'
+        isRequired: 'false'
+        isSearchable: 'false'
+        inputHint: 'MultiLine'
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
 
   it 'should return one attribute definition of type enum', ->
 
