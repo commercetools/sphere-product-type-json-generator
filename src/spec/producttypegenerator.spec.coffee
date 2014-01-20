@@ -328,3 +328,17 @@ describe 'ProductTypeGenerator', ->
 
 
 
+  it 'should return attribute definition for attribute masterSKU', ->
+
+    expectedAttributeDefinition =
+      name: 'masterSKU'
+      label:
+        en: 'Master SKU'
+      type: 'text'
+      isVariant: 'false'
+      isRequired: 'true'
+      isSearchable: 'false'
+      inputHint: 'SingleLine'
+
+    expect(@generator._createAttributeDefinitionMasterSku()).toEqual expectedAttributeDefinition
+

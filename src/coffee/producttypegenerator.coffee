@@ -28,6 +28,8 @@ class ProductTypeGenerator
   ATTRIBUTE_INPUT_HINT = 'inputHint'
   ATTRIBUT_IS_SEARCHABLE = 'isSearchable'
 
+  ATTRIBUTE_NAME_MASTER_SKU = 'masterSKU'
+
   constructor: (options = {}) ->
     @_options = options
 
@@ -42,6 +44,9 @@ class ProductTypeGenerator
 
     # build object with all attribute defintions for later usage
     attributeDefinitions = @_createAttributeDefinitions attributes
+
+    # add default attribute definiion 'masterSKU'
+    attributeDefinitions[ATTRIBUTE_NAME_MASTER_SKU] = @_createAttributeDefinitionMasterSku
 
     # build product type definitions
     productTypeDefinitions = @_createProductTypesDefinitions types, attributeDefinitions
@@ -97,6 +102,21 @@ class ProductTypeGenerator
 
 
     attributeDefinitions
+
+  ###
+  Create an object containing product type definition for attribute 'masteSKU'.
+  @return Object with product type attribute definition
+  ###
+  _createAttributeDefinitionMasterSku: () ->
+    attributeDefinition =
+      name: ATTRIBUTE_NAME_MASTER_SKU
+      label:
+        en: 'Master SKU'
+      type: 'text'
+      isVariant: 'false'
+      isRequired: 'true'
+      isSearchable: 'false'
+      inputHint: 'SingleLine'
 
   ###
   Capitalize first letter if given word. Leave other letters unchanged.
