@@ -361,6 +361,107 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, masterSKU)).toEqual expectedProductTypeDefinitions
 
+  it 'should return an array with product type definitions with attributes', ->
+
+    productTypeDefinition1 =
+      name: 'ProductType1'
+      description: 'Description1'
+      information: 'x'
+
+    productTypeDefinition2 =
+      name: 'ProductType2'
+      description: 'Description2'
+      size: 'x'
+
+    productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
+
+    masterSKU =
+      name: 'masterSKU'
+      label:
+        en: 'Master SKU'
+      type: 'text'
+      isVariant: 'false'
+      isRequired: 'true'
+      isSearchable: 'false'
+      inputHint: 'SingleLine'
+
+    size =
+      name: 'size'
+      label:
+        de: 'Größe'
+        en: 'Size'
+      type: 'number'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      inputHint: 'SingleLine'
+
+    information =
+      name: 'information'
+      label:
+        de: 'Information'
+        en: 'Information'
+      type: 'text'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      inputHint: 'SingleLine'
+
+    attributeDefinitions =
+      size: size
+      information: information
+
+    expectedProductTypeDefinition1 =
+      name: 'ProductType1'
+      description: 'Description1'
+      attributes: [information, masterSKU]
+
+    expectedProductTypeDefinition2 =
+      name: 'ProductType2'
+      description: 'Description2'
+      attributes: [size, masterSKU]
+
+    expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
+
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, masterSKU)).toEqual expectedProductTypeDefinitions
+
+  it 'should skip product types with unkown product attributes', ->
+
+    productTypeDefinition1 =
+      name: 'ProductType1'
+      description: 'Description1'
+      unkownAttribute: 'x'
+
+    productTypeDefinition2 =
+      name: 'ProductType2'
+      description: 'Description2'
+      size: 'x'
+
+    productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
+
+    size =
+      name: 'size'
+      label:
+        de: 'Größe'
+        en: 'Size'
+      type: 'number'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      inputHint: 'SingleLine'
+
+    attributeDefinitions =
+      size: size
+
+    expectedProductTypeDefinition1 =
+      name: 'ProductType2'
+      description: 'Description2'
+      attributes: [size]
+
+    expectedProductTypeDefinitions = [expectedProductTypeDefinition1]
+
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).toEqual expectedProductTypeDefinitions
+
 
   it 'should return attribute definition for attribute masterSKU', ->
 

@@ -180,23 +180,27 @@ class ProductTypeGenerator
     productTypeDefinitions = []
 
     for row, rowIndex in types
-      productTypeDefinition =
-        name: row['name']
-        description: row['description']
+      try
+        productTypeDefinition =
+          name: row['name']
+          description: row['description']
 
-      for header, value of row
-        if value is 'x'
-          if attributeDefinitions[header]
-            productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), attributeDefinitions[header]
-          else
-            console.log "Product type '#{row['name']}': no attribute definition found with name '#{header}'. Please check your CSV files. Skipping attribute..."
+        for header, value of row
+          if value is 'x'
+            if attributeDefinitions[header]
+              productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), attributeDefinitions[header]
+            else
+              throw new Error("No attribute definition found with name '#{header}'.")
 
 
-      # add default attribute definition to attributes
-      if defaultAttributeDefinition
-        productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), defaultAttributeDefinition
+        # add default attribute definition to attributes
+        if defaultAttributeDefinition
+          productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), defaultAttributeDefinition
 
-      productTypeDefinitions.push productTypeDefinition
+        productTypeDefinitions.push productTypeDefinition
+      catch
+        console.log "Skipping invalid product type definition '#{row['name']}'. Continuing with next product type..."
+
 
     productTypeDefinitions
 
