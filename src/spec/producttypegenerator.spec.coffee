@@ -324,6 +324,48 @@ describe 'ProductTypeGenerator', ->
     expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).toEqual expectedProductTypeDefinitions
 
 
+  it 'should return an array with product type definitions with masterSKU', ->
+
+    productTypeDefinition1 =
+      name: 'ProductType1'
+      description: 'Description1'
+
+    productTypeDefinition2 =
+      name: 'ProductType2'
+      description: 'Description2'
+
+    productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
+
+    masterSKU =
+      name: 'masterSKU'
+      label:
+        en: 'Master SKU'
+      type: 'text'
+      isVariant: 'false'
+      isRequired: 'true'
+      isSearchable: 'false'
+      inputHint: 'SingleLine'
+
+    attributeDefinitions = []
+
+    expectedProductTypeDefinition1 =
+      name: 'ProductType1'
+      description: 'Description1'
+      attributes: [masterSKU]
+
+    expectedProductTypeDefinition2 =
+      name: 'ProductType2'
+      description: 'Description2'
+      attributes: [masterSKU]
+
+    expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
+
+
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, masterSKU)).toEqual expectedProductTypeDefinitions
+
+
+
+
 
   it 'should return attribute definition for attribute masterSKU', ->
 
