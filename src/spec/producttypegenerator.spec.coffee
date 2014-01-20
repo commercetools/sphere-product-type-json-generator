@@ -234,16 +234,40 @@ describe 'ProductTypeGenerator', ->
       isVariant: 'false'
       isRequired: 'false'
       isSearchable: 'false'
-      'label.de': 'Veröffentlichsdatum'
+      'label.de': 'Veröffentlichungsdatum'
       'label.en': 'Release date'
 
     expectedAttributeDefinition =
       releaseDate:
         name: 'releaseDate'
         label:
-          de: 'Veröffentlichsdatum'
+          de: 'Veröffentlichungsdatum'
           en: 'Release date'
         type: 'date'
+        isVariant: 'false'
+        isRequired: 'false'
+        isSearchable: 'false'
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+  it 'should return one attribute definition of type time', ->
+
+    attributeRow =
+      name: 'releaseTime'
+      type: 'time'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Veröffentlichungszeit'
+      'label.en': 'Release time'
+
+    expectedAttributeDefinition =
+      releaseTime:
+        name: 'releaseTime'
+        label:
+          de: 'Veröffentlichungszeit'
+          en: 'Release time'
+        type: 'time'
         isVariant: 'false'
         isRequired: 'false'
         isSearchable: 'false'
