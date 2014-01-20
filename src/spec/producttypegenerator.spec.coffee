@@ -177,6 +177,31 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
 
+  it 'should return one attribute definition of type number', ->
+
+    attributeRow =
+      name: 'size'
+      type: 'number'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Größe'
+      'label.en': 'Size'
+
+    expectedAttributeDefinition =
+      size:
+        name: 'size'
+        label:
+          de: 'Größe'
+          en: 'Size'
+        type: 'number'
+        isVariant: 'false'
+        isRequired: 'false'
+        isSearchable: 'false'
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+
   it 'should return an array with product type definitions', ->
 
     productTypeDefinition1 =
