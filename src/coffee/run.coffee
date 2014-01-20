@@ -17,9 +17,6 @@ argv = require('optimist')
 
 ProductTypeGenerator = require('../main').ProductTypeGenerator
 
-options =
-  target: argv.target
-
 ###
 Reads a CSV file by given path and returns a promise for the result.
 @param {string} path The path of the CSV file.
@@ -35,8 +32,8 @@ readCsvPromise = (path) ->
   deferred.promise
 
 Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes) ->
-  generator = new ProductTypeGenerator options
-  generator.run types, attributes, (success) ->
+  generator = new ProductTypeGenerator
+  generator.run types, attributes, argv.target, argv.retailer, (success) ->
     process.exit 1 unless success
 .fail (error) ->
   console.log "An error occured: #{error.message}"

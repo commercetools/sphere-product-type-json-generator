@@ -2,13 +2,10 @@ ProductTypeGenerator = require('../main').ProductTypeGenerator
 
 describe 'ProductTypeGenerator', ->
   beforeEach ->
-    @generator = new ProductTypeGenerator('foo')
+    @generator = new ProductTypeGenerator
 
   it 'should initialize', ->
     expect(@generator).toBeDefined()
-
-  it 'should initialize with options', ->
-    expect(@generator._options).toBe 'foo'
 
   it 'should return languages for localized property header', ->
     expect(@generator._languages('label', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).toEqual ['de', 'en']

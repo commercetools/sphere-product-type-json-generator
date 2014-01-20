@@ -30,23 +30,24 @@ class ProductTypeGenerator
 
   ATTRIBUTE_NAME_MASTER_SKU = 'masterSKU'
 
-  constructor: (options = {}) ->
-    @_options = options
+  constructor: () ->
 
   ###
   Creates sphere product type representation files using JSON format.
   @param {array} types Entire types CSV as an array of records.
   @param {array} attributes Entire attributes CSV as an array of records.
   @param {function} callback The callback function to be invoked when the method finished its work.
+  @param {string} target The target folder for the generated files.
+  @param {boolean} masterRetailerProject Set to true if product type files are used for a master/retailer projects, otherwise false.
   @return Result of the given callback
   ###
-  run: (types, attributes, callback) ->
+  run: (types, attributes, callback, target, masterRetailerProject) ->
 
     # build object with all attribute defintions for later usage
     attributeDefinitions = @_createAttributeDefinitions attributes
 
     # add default attribute definiion 'masterSKU'
-    attributeDefinitions[ATTRIBUTE_NAME_MASTER_SKU] = @_createAttributeDefinitionMasterSku
+    attributeDefinitions[ATTRIBUTE_NAME_MASTER_SKU] = @_createAttributeDefinitionMasterSku unless masterRetailerProject false
 
     # build product type definitions
     productTypeDefinitions = @_createProductTypesDefinitions types, attributeDefinitions
