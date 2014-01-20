@@ -4,3 +4,4 @@ build
 test
 lib
 coverage
+product-type-*.json
