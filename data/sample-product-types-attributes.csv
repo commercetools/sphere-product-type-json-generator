@@ -4,6 +4,6 @@ designer,enum,false,false,false,Designer,designer,HUG,Hugo Boss,,,
 gender,lenum,false,false,false,Geschlecht,gender,M,,male,männlich,
 ,,,,,,,W,,female,weiblich,
 ,,,,,,,U,,unisex,unisex,
-shortText,text,false,false,false,Kurzer Text,Short Text,,,,SingleLine
-longText,ltext,false,false,false,Langer Text,Long Text,,,,MultiLine
+shortText,text,false,false,false,Kurzer Text,Short Text,,,,,SingleLine
+longText,ltext,false,false,false,Langer Text,Long Text,,,,,MultiLine
 
