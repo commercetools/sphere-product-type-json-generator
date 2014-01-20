@@ -61,7 +61,7 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
-  it 'should return one attribute definition of type localized text', ->
+  it 'should return one attribute definition of type ltext', ->
 
     attributeRow =
       name: 'description'
@@ -88,7 +88,7 @@ describe 'ProductTypeGenerator', ->
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
 
-  it 'should return one attribute definition of type enum', ->
+  it 'should return one attribute definition of type lenum', ->
 
     attributeRow1 =
       name: 'gender'
