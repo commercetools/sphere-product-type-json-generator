@@ -5,5 +5,5 @@ gender,lenum,false,false,false,Geschlecht,gender,M,male,männlich
 designer,lenum,false,false,false,Designer,designer,HUG,Hugo Boss,Hugo Boss
 ,,,,,,,DUG,Dolce&Gabana,Dolce&Gabana
 shortText,text,false,false,false,Kurzer Text,Short Text,,,,SingleLine
-shortText,text,false,false,false,Langer Text,Long Text,,,,MultiLine
+longText,ltext,false,false,false,Langer Text,Long Text,,,,MultiLine
 
