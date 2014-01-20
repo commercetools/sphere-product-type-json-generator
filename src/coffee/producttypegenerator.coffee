@@ -211,7 +211,7 @@ class ProductTypeGenerator
     prettified = JSON.stringify productTypeDefinition, null, 4
 
     fileName = "#{target}/#{prefix}-#{productTypeDefinition[PRODUCT_TYPE_NAME]}.json"
-    fs.writeFile fileName, prettified, (error) ->
+    fs.writeFile fileName, prettified, 'utf8', (error) ->
       if error
         console.log "Error while writing file #{fileName}: #{error}"
 
