@@ -87,6 +87,43 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
+  it 'should return one attribute definition of type enum', ->
+
+    attributeRow1 =
+      name: 'brand'
+      type: 'enum'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Marke'
+      'label.en': 'Brand'
+      key: 'HUG'
+      enumlabel: 'Hugo Boss'
+
+    attributeRow2 =
+      name: ''
+      type: ''
+      isVariant: ''
+      isRequired: ''
+      sSearchable: ''
+      'label.de': ''
+      'label.en': ''
+      key: 'DUG'
+      'enumlabel': 'Dolce&Gabana'
+
+    expectedAttributeDefinition =
+      brand:
+        name: 'brand'
+        label:
+          de: 'Marke'
+          en: 'Brand'
+        type: 'enum'
+        isVariant: 'false'
+        isRequired: 'false'
+        isSearchable: 'false'
+        values:  [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
+
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
 
   it 'should return one attribute definition of type lenum', ->
 
