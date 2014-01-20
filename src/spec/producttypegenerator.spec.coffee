@@ -35,7 +35,34 @@ describe 'ProductTypeGenerator', ->
   it 'should return an object with no localized values', ->
     expect(@generator._i18n(['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'], 'name')).toEqual []
 
-  it 'should return JSON attribute definitions', ->
+  it 'should return one attribute definition of type text', ->
+
+    attributeRow =
+      name: 'description'
+      type: 'text'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      inputHint: 'MultiLine'
+      'label.de': 'Beschreibung'
+      'label.en': 'Description'
+
+    expectedAttributeDefinition =
+      description:
+        name: 'description'
+        label:
+          de: 'Beschreibung'
+          en: 'Description'
+        type: 'text'
+        isVariant: 'false'
+        isRequired: 'false'
+        isSearchable: 'false'
+        inputHint: 'MultiLine'
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+
+  it 'should return one attribute definition of type enum', ->
 
     attributeRow1 =
       name: 'gender'
@@ -82,7 +109,7 @@ describe 'ProductTypeGenerator', ->
         type: 'lenum'
         isVariant: 'false'
         isRequired: 'false'
-        inputHint: 'false'
+        isSearchable: 'false'
         values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
