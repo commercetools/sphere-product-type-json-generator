@@ -339,3 +339,7 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitionMasterSku()).toEqual expectedAttributeDefinition
 
+  it 'should capitalize first letter', ->
+
+    expect(@generator._capitalize('testString')).toBe 'TestString'
+
