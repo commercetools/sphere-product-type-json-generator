@@ -36,25 +36,33 @@ class ProductTypeGenerator
   Creates sphere product type representation files using JSON format.
   @param {array} types Entire types CSV as an array of records.
   @param {array} attributes Entire attributes CSV as an array of records.
-  @param {function} callback The callback function to be invoked when the method finished its work.
   @param {string} target The target folder for the generated files.
   @param {boolean} masterRetailerProject Set to true if product type files are used for a master/retailer projects, otherwise false.
+  @param {function} callback The callback function to be invoked when the method finished its work.
   @return Result of the given callback
   ###
-  run: (types, attributes, callback, target, masterRetailerProject) ->
+  run: (types, attributes, target, masterRetailerProject, callback) ->
 
     # build object with all attribute defintions for later usage
     attributeDefinitions = @_createAttributeDefinitions attributes
-
-    # add default attribute definiion 'masterSKU'
-    attributeDefinitions[ATTRIBUTE_NAME_MASTER_SKU] = @_createAttributeDefinitionMasterSku unless masterRetailerProject false
 
     # build product type definitions
     productTypeDefinitions = @_createProductTypesDefinitions types, attributeDefinitions
 
     # outpur product type files
     for productTypeDefinition in productTypeDefinitions
-      @_writeFile productTypeDefinition
+      @_writeFile productTypeDefinition, target
+
+    # handle master/retailer product types
+    if masterRetailerProject
+      # create attribute definition 'masterSKU'
+      attributeDefinitionMasterSku = @_createAttributeDefinitionMasterSku()
+      # build product type definitions used in retailer projects
+      productTypeDefinitionsRetailers = @_createProductTypesDefinitions types, attributeDefinitions, attributeDefinitionMasterSku
+
+      # outpur product type files
+      for productTypeDefinition in productTypeDefinitionsRetailers
+        @_writeFile productTypeDefinition, target, 'retailer-product-type'
 
     callback true
 
@@ -100,7 +108,6 @@ class ProductTypeGenerator
           attributeDefinition[ATTRIBUTE_ENUM_VALUES] = _.union (attributeDefinition[ATTRIBUTE_ENUM_VALUES] or []),
             key: row["enum#{@_capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
             label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{@_capitalize(ATTRIBUTE_LABEL)}"
-
 
     attributeDefinitions
 
@@ -165,9 +172,10 @@ class ProductTypeGenerator
   Returns an object containing a key/value pairs (language/value) for each language.
   @param {array} types Entire types CSV as an array of records.
   @param {object} attributeDefinitions The object containing all attribute definitions
+  @pearm {object} defaultAttributeDefinition If given, the default attribute will be added to all resulting product typ definitions.
   @return Array containing product type definition objects
   ###
-  _createProductTypesDefinitions: (types, attributeDefinitions) ->
+  _createProductTypesDefinitions: (types, attributeDefinitions, defaultAttributeDefinition) ->
 
     productTypeDefinitions = []
 
@@ -176,6 +184,18 @@ class ProductTypeGenerator
         name: row['name']
         description: row['description']
 
+      for header, value of row
+        if value is 'x'
+          if attributeDefinitions[header]
+            productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), attributeDefinitions[header]
+          else
+            console.log "Product type '#{row['name']}': no attribute definition found with name '#{header}'. Please check your CSV files. Skipping attribute..."
+
+
+      # add default attribute definition to attributes
+      if defaultAttributeDefinition
+        productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), defaultAttributeDefinition
+
       productTypeDefinitions.push productTypeDefinition
 
     productTypeDefinitions
@@ -183,12 +203,14 @@ class ProductTypeGenerator
   ###
   Outputs given product definition as a file in JSON format.
   @param {object} productTypeDefinition The object containing product type definition.
+  @param {string} target The target folder for the file.
+  @param {string} prefix The prefix will be added to the resulting file name.
   ###
-  _writeFile: (productTypeDefinition, path) ->
+  _writeFile: (productTypeDefinition, target, prefix = 'product-type') ->
 
     prettified = JSON.stringify productTypeDefinition, null, 4
 
-    fileName = "#{@_options.target}/product-type-#{productTypeDefinition[PRODUCT_TYPE_NAME]}.json"
+    fileName = "#{target}/#{prefix}-#{productTypeDefinition[PRODUCT_TYPE_NAME]}.json"
     fs.writeFile fileName, prettified, (error) ->
       if error
         console.log "Error while writing file #{fileName}: #{error}"
