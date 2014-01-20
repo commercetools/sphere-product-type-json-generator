@@ -274,6 +274,31 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
+  it 'should return one attribute definition of type dateTime', ->
+
+    attributeRow =
+      name: 'creationDateTime'
+      type: 'dateTime'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Herstellungszeit'
+      'label.en': 'Creation time'
+
+    expectedAttributeDefinition =
+      creationDateTime:
+        name: 'creationDateTime'
+        label:
+          de: 'Herstellungszeit'
+          en: 'Creation time'
+        type: 'dateTime'
+        isVariant: 'false'
+        isRequired: 'false'
+        isSearchable: 'false'
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+
   it 'should return an array with product type definitions', ->
 
     productTypeDefinition1 =
