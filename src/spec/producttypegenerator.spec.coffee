@@ -364,9 +364,6 @@ describe 'ProductTypeGenerator', ->
     expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, masterSKU)).toEqual expectedProductTypeDefinitions
 
 
-
-
-
   it 'should return attribute definition for attribute masterSKU', ->
 
     expectedAttributeDefinition =
