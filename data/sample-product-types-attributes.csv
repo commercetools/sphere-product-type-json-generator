@@ -1,9 +1,9 @@
 name,type,isVariant,isRequired,isSearchable,label.de,label.en,key,enumlabel.en,enumlabel.de,inputHint
-gender,lenum,false,false,false,Geschlecht,gender,M,male,männlich
-,,,,,,,W,female,weiblich
-,,,,,,,U,unisex,unisex
-designer,lenum,false,false,false,Designer,designer,HUG,Hugo Boss,Hugo Boss
-,,,,,,,DUG,Dolce&Gabana,Dolce&Gabana
+designer,enum,false,false,false,Designer,designer,HUG,Hugo Boss
+,,,,,,,DUG,Dolce&Gabana
+gender,lenum,false,false,false,Geschlecht,gender,M,,male,männlich
+,,,,,,,W,,female,weiblich
+,,,,,,,U,,unisex,unisex
 shortText,text,false,false,false,Kurzer Text,Short Text,,,,SingleLine
 longText,ltext,false,false,false,Langer Text,Long Text,,,,MultiLine
 
