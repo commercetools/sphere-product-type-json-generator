@@ -201,6 +201,30 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
+  it 'should return one attribute definition of type money', ->
+
+    attributeRow =
+      name: 'listPrice'
+      type: 'money'
+      isVariant: 'false'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Listenpreis'
+      'label.en': 'List price'
+
+    expectedAttributeDefinition =
+      listPrice:
+        name: 'listPrice'
+        label:
+          de: 'Listenpreis'
+          en: 'List price'
+        type: 'money'
+        isVariant: 'false'
+        isRequired: 'false'
+        isSearchable: 'false'
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
 
   it 'should return an array with product type definitions', ->
 
