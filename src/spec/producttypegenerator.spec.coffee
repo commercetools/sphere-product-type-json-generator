@@ -320,7 +320,6 @@ describe 'ProductTypeGenerator', ->
 
     expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
 
-
     expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).toEqual expectedProductTypeDefinitions
 
 
