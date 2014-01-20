@@ -26,9 +26,9 @@ describe 'ProductTypeGenerator', ->
       isSearchable: 'false'
       'label.de': 'Geschlecht'
       'label.en': 'gender'
-      key: 'M'
-      'enumlabel.en': 'male'
-      'enumlabel.de': 'männlich'
+      enumKey: 'M'
+      'enumLabel.en': 'male'
+      'enumLabel.de': 'männlich'
 
     expect(@generator._i18n(attributeRow, 'label')).toEqual {de: 'Geschlecht', en: 'gender'}
 
@@ -43,7 +43,7 @@ describe 'ProductTypeGenerator', ->
       isVariant: 'false'
       isRequired: 'false'
       isSearchable: 'false'
-      inputHint: 'MultiLine'
+      textInputHint: 'MultiLine'
       'label.de': 'Beschreibung'
       'label.en': 'Description'
 
@@ -69,7 +69,7 @@ describe 'ProductTypeGenerator', ->
       isVariant: 'false'
       isRequired: 'false'
       isSearchable: 'false'
-      inputHint: 'MultiLine'
+      textInputHint: 'MultiLine'
       'label.de': 'Beschreibung'
       'label.en': 'Description'
 
@@ -97,8 +97,8 @@ describe 'ProductTypeGenerator', ->
       isSearchable: 'false'
       'label.de': 'Marke'
       'label.en': 'Brand'
-      key: 'HUG'
-      enumlabel: 'Hugo Boss'
+      enumKey: 'HUG'
+      enumLabel: 'Hugo Boss'
 
     attributeRow2 =
       name: ''
@@ -108,8 +108,8 @@ describe 'ProductTypeGenerator', ->
       sSearchable: ''
       'label.de': ''
       'label.en': ''
-      key: 'DUG'
-      'enumlabel': 'Dolce&Gabana'
+      enumKey: 'DUG'
+      'enumLabel': 'Dolce&Gabana'
 
     expectedAttributeDefinition =
       brand:
@@ -135,9 +135,9 @@ describe 'ProductTypeGenerator', ->
       isSearchable: 'false'
       'label.de': 'Geschlecht'
       'label.en': 'gender'
-      key: 'M'
-      'enumlabel.en': 'male'
-      'enumlabel.de': 'männlich'
+      enumKey: 'M'
+      'enumLabel.en': 'male'
+      'enumLabel.de': 'männlich'
 
     attributeRow2 =
       name: ''
@@ -147,9 +147,9 @@ describe 'ProductTypeGenerator', ->
       sSearchable: ''
       'label.de': ''
       'label.en': ''
-      key: 'W'
-      'enumlabel.en': 'female'
-      'enumlabel.de': 'weiblich'
+      enumKey: 'W'
+      'enumLabel.en': 'female'
+      'enumLabel.de': 'weiblich'
 
     attributeRow3 =
       name: ''
@@ -159,9 +159,9 @@ describe 'ProductTypeGenerator', ->
       isSearchable: ''
       'label.de': ''
       'label.en': ''
-      key: 'U'
-      'enumlabel.en': 'unisex'
-      'enumlabel.de': 'unisex'
+      enumKey: 'U'
+      'enumLabel.en': 'unisex'
+      'enumLabel.de': 'unisex'
 
     expectedAttributeDefinition =
       gender:

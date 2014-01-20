@@ -1,4 +1,4 @@
-name,type,isVariant,isRequired,isSearchable,label.de,label.en,key,enumlabel.en,enumlabel.de,inputHint
+name,type,isVariant,isRequired,isSearchable,label.de,label.en,enumKey,enumLabel,enumLabel.en,enumLabel.de,textInputHint
 designer,enum,false,false,false,Designer,designer,HUG,Hugo Boss
 ,,,,,,,DUG,Dolce&Gabana
 gender,lenum,false,false,false,Geschlecht,gender,M,,male,männlich

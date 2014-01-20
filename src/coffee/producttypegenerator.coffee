@@ -85,19 +85,26 @@ class ProductTypeGenerator
 
       switch attributeDefinition[ATTRIBUTE_TYPE]
         when ATTRIBUTE_TYPE_TEXT, ATTRIBUTE_TYPE_LTEXT
-          attributeDefinition[ATTRIBUTE_INPUT_HINT] = row[ATTRIBUTE_INPUT_HINT]
+          attributeDefinition[ATTRIBUTE_INPUT_HINT] = row["text#{@_capitalize(ATTRIBUTE_INPUT_HINT)}"]
         when ATTRIBUTE_TYPE_ENUM
           attributeDefinition[ATTRIBUTE_ENUM_VALUES] = _.union (attributeDefinition[ATTRIBUTE_ENUM_VALUES] or []),
-            key: row[ATTRIBUTE_TYPE_ENUM_KEY]
-            label: row["#{ATTRIBUTE_TYPE_ENUM}#{ATTRIBUTE_LABEL}"]
+            key: row["enum#{@_capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
+            label: row["#{ATTRIBUTE_TYPE_ENUM}#{@_capitalize(ATTRIBUTE_LABEL)}"]
         when ATTRIBUTE_TYPE_LENUM
           attributeDefinition[ATTRIBUTE_ENUM_VALUES] = _.union (attributeDefinition[ATTRIBUTE_ENUM_VALUES] or []),
-            key: row[ATTRIBUTE_TYPE_ENUM_KEY]
-            label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{ATTRIBUTE_LABEL}"
+            key: row["enum#{@_capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
+            label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{@_capitalize(ATTRIBUTE_LABEL)}"
 
 
     attributeDefinitions
 
+  ###
+  Capitalize first letter if given word. Leave other letters unchanged.
+  @param {string} word The word to be capitalized.
+  @return The given word with first letter capitalized.
+  ###
+  _capitalize: (word) ->
+    word[0].toUpperCase() + word[1..-1]
 
   ###
   Returns a list of languages (for i18n) used for given attribute property header.
