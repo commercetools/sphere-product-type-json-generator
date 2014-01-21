@@ -371,7 +371,7 @@ describe 'ProductTypeGenerator', ->
     productTypeDefinition2 =
       name: 'ProductType2'
       description: 'Description2'
-      size: 'x'
+      size: 'X'
 
     productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
 
