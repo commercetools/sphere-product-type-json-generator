@@ -5,17 +5,13 @@ before_script:
 - npm install -g grunt-cli
 script:
 - npm test
-- node lib/run.js --types data/sample-product-types.csv --attributes data/sample-product-types-attributes.csv --target ./
-  data/sample-product-types-attributes.csv --retailer true
+- node lib/run.js --types data/sample-product-types.csv --attributes data/sample-product-types-attributes.csv --target . --retailer true
 notifications:
   hipchat:
     rooms:
-      secure: etWwsSqV4DaQA4yo2G2mqzUQqFEZUWHXBs2zTHToCGbUqyVVCLBBslLpkCXnd8vY+YGPaMcmfK7Jh+kSHlS2XTC0itzSky/dEYPpzhQbHdo1Stwei9CFardyJQn5X77o4MNcR5gdPqZ1Spql5DyKBjpdzkAVhWRUid39bywi9EM=
+      secure: Rr+FKIl09sYzFgbizfXnKEjQb1FUVa/UmoYpEFS7cND/+Pg19UHui6YZ4SJdNy18OUGDpC9UjGhh05iqjNv9k0mZcBXHE+Y2lpzugTEeQQ9YmjBAny2uhPznGklUS4Hz0BoGf0hwNdQBZXjyJrCeSetjZHcZF1WiK6z3Bn/GmAA=
     template:
-    - ! '%{repository}#%{build_number} (%{author}): %{message} (<a href="%{build_url}">Details</a>
-      <a href="%{compare_url}">Compare</a>)'
+    - '%{repository}#%{build_number} (%{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Compare</a>)'
     format: html
     on_success: change
     on_failure: change
-env:
-  global: 
