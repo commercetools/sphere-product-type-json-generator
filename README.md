@@ -29,7 +29,7 @@ Usage: node ./lib/run.js --types [CSV] --attributes [CSV] --target [folder] --re
 Options:
   --types, -t       Path to product types CSV file.                                                                            [required]
   --attributes, -a  Path to product type attributes CSV file.                                                                  [required]
-  --target, -t      Target folder for generated product types JSON files.                                                      [required]
+  --target, -td     Target directory for generated product types JSON files.                                                      [required]
   --retailer, -r    Master/Retailer. Set "true" to generate another product type file, having an extra attribute "masterSKU".  [default: false]
 
 
