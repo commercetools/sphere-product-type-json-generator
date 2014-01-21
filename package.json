@@ -43,6 +43,7 @@
     "csv": "  0.3.6",
     "optimist": "0.6.0",
     "underscore": "~1.5.2",
+    "underscore.string": "2.3.3", 
     "q": "~1.0.0"
   },
   "devDependencies": {
