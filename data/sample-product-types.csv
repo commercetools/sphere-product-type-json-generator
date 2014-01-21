@@ -1,4 +1,4 @@
 name,description,gender,designer
 base,Base Product Type,x,
-men,Men Product Type,x,x
-women,Woman Product Type,,x
+men,Men Product Type,sex,x
+women,Woman Product Type,,brand
