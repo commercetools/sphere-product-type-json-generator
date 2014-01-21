@@ -9,6 +9,7 @@ Class for generating JSON product type representations from CSV files.
 class ProductTypeGenerator
 
   PRODUCT_TYPE_NAME = 'name'
+  PRODUCT_TYPE_DESCRIPTION = 'description'
 
   ATTRIBUTE_TYPE_TEXT = 'text'
   ATTRIBUTE_TYPE_LTEXT = 'ltext'
@@ -173,13 +174,17 @@ class ProductTypeGenerator
     for row, rowIndex in types
       try
         productTypeDefinition =
-          name: row['name']
-          description: row['description']
+          name: row[PRODUCT_TYPE_NAME]
+          description: row[PRODUCT_TYPE_DESCRIPTION]
 
         for header, value of row
-          if value is 'x'
+          continue if header is PRODUCT_TYPE_NAME or header is PRODUCT_TYPE_DESCRIPTION
+
+          if _.isString(value) and value.length > 0
             if attributeDefinitions[header]
-              productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), attributeDefinitions[header]
+              attributeDefinition = attributeDefinitions[header]
+              attributeDefinition.name = value unless value.toLowerCase().trim() is 'x'
+              productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), attributeDefinition
             else
               throw new Error("No attribute definition found with name '#{header}'.")
 
