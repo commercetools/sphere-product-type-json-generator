@@ -31,8 +31,6 @@ class ProductTypeGenerator
 
   ATTRIBUTE_NAME_MASTER_SKU = 'masterSKU'
 
-  constructor: () ->
-
   ###
   Creates sphere product type representation files using JSON format.
   @param {array} types Entire types CSV as an array of records.
