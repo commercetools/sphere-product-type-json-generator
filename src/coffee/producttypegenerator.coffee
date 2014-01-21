@@ -30,7 +30,7 @@ class ProductTypeGenerator
   ATTRIBUTE_INPUT_HINT = 'inputHint'
   ATTRIBUT_IS_SEARCHABLE = 'isSearchable'
 
-  ATTRIBUTE_NAME_MASTER_SKU = 'masterSKU'
+  ATTRIBUTE_NAME_MASTER_SKU = 'mastersku'
 
   ###
   Creates sphere product type representation files using JSON format.
@@ -55,7 +55,7 @@ class ProductTypeGenerator
 
     # handle master/retailer product types
     if masterRetailerProject
-      # create attribute definition 'masterSKU'
+      # create attribute definition 'mastersku'
       attributeDefinitionMasterSku = @_createAttributeDefinitionMasterSku()
       # build product type definitions used in retailer projects
       productTypeDefinitionsRetailers = @_createProductTypesDefinitions types, attributeDefinitions, attributeDefinitionMasterSku
