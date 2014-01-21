@@ -183,7 +183,7 @@ class ProductTypeGenerator
           if _.isString(value) and value.length > 0
             if attributeDefinitions[header]
               attributeDefinition = attributeDefinitions[header]
-              attributeDefinition.name = value unless value.toLowerCase().trim() is 'x'
+              attributeDefinition.name = value unless value.toLowerCase() is 'x'
               productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), attributeDefinition
             else
               throw new Error("No attribute definition found with name '#{header}'.")
