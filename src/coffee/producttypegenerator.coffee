@@ -189,8 +189,8 @@ class ProductTypeGenerator
           productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), defaultAttributeDefinition
 
         productTypeDefinitions.push productTypeDefinition
-      catch
-        console.log "Skipping invalid product type definition '#{row['name']}'. Continuing with next product type..."
+      catch error
+        console.log "Skipping invalid product type definition '#{row['name']}' because: " + error
 
 
     productTypeDefinitions
