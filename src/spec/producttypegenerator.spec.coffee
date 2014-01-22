@@ -308,7 +308,7 @@ describe 'ProductTypeGenerator', ->
 
     productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
 
-    masterSKU =
+    mastersku =
       name: 'mastersku'
       label:
         en: 'Master SKU'
@@ -323,16 +323,16 @@ describe 'ProductTypeGenerator', ->
     expectedProductTypeDefinition1 =
       name: 'ProductType1'
       description: 'Description1'
-      attributes: [masterSKU]
+      attributes: [mastersku]
 
     expectedProductTypeDefinition2 =
       name: 'ProductType2'
       description: 'Description2'
-      attributes: [masterSKU]
+      attributes: [mastersku]
 
     expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
 
-    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, masterSKU)).toEqual expectedProductTypeDefinitions
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, mastersku)).toEqual expectedProductTypeDefinitions
 
   it 'should return an array with product type definitions with attributes', ->
 
@@ -348,7 +348,7 @@ describe 'ProductTypeGenerator', ->
 
     productTypeDefinitions = [productTypeDefinition1, productTypeDefinition2]
 
-    masterSKU =
+    mastersku =
       name: 'mastersku'
       label:
         en: 'Master SKU'
@@ -387,16 +387,16 @@ describe 'ProductTypeGenerator', ->
     expectedProductTypeDefinition1 =
       name: 'ProductType1'
       description: 'Description1'
-      attributes: [information, masterSKU]
+      attributes: [information, mastersku]
 
     expectedProductTypeDefinition2 =
       name: 'ProductType2'
       description: 'Description2'
-      attributes: [size, masterSKU]
+      attributes: [size, mastersku]
 
     expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
 
-    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, masterSKU)).toEqual expectedProductTypeDefinitions
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, mastersku)).toEqual expectedProductTypeDefinitions
 
   it 'should skip product types with unkown product attributes', ->
 
@@ -485,4 +485,4 @@ describe 'ProductTypeGenerator', ->
       isSearchable: false
       inputHint: 'SingleLine'
 
-    expect(@generator._createAttributeDefinitionMasterSku()).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitionMastersku()).toEqual expectedAttributeDefinition

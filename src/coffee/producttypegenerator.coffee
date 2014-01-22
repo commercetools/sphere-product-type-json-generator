@@ -56,9 +56,9 @@ class ProductTypeGenerator
     # handle master/retailer product types
     if masterRetailerProject
       # create attribute definition 'mastersku'
-      attributeDefinitionMasterSku = @_createAttributeDefinitionMasterSku()
+      attributeDefinitionMastersku = @_createAttributeDefinitionMastersku()
       # build product type definitions used in retailer projects
-      productTypeDefinitionsRetailers = @_createProductTypesDefinitions types, attributeDefinitions, attributeDefinitionMasterSku
+      productTypeDefinitionsRetailers = @_createProductTypesDefinitions types, attributeDefinitions, attributeDefinitionMastersku
 
       # outpur product type files
       for productTypeDefinition in productTypeDefinitionsRetailers
@@ -115,7 +115,7 @@ class ProductTypeGenerator
   Create an object containing product type definition for attribute 'masteSKU'.
   @return Object with product type attribute definition
   ###
-  _createAttributeDefinitionMasterSku: () ->
+  _createAttributeDefinitionMastersku: () ->
     attributeDefinition =
       name: ATTRIBUTE_NAME_MASTER_SKU
       label:
