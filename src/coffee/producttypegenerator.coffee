@@ -85,9 +85,9 @@ class ProductTypeGenerator
           name: row[ATTRIBUTE_NAME]
           label: @_i18n row, ATTRIBUTE_LABEL
           type: row[ATTRIBUTE_TYPE]
-          isVariant: row[ATTRIBUTE_IS_VARIANT]
-          isRequired: row[ATTRIBUTE_IS_REQUIRED]
-          isSearchable: row[ATTRIBUT_IS_SEARCHABLE]
+          isVariant: row[ATTRIBUTE_IS_VARIANT] is 'true'
+          isRequired: row[ATTRIBUTE_IS_REQUIRED] is 'true'
+          isSearchable: row[ATTRIBUT_IS_SEARCHABLE] is 'true'
 
         # store attribute definition using name as key for easy access
         attributeDefinitions[row[ATTRIBUTE_NAME]] = attributeDefinition
@@ -121,9 +121,9 @@ class ProductTypeGenerator
       label:
         en: 'Master SKU'
       type: 'text'
-      isVariant: 'false'
-      isRequired: 'true'
-      isSearchable: 'false'
+      isVariant: false
+      isRequired: true
+      isSearchable: false
       inputHint: 'SingleLine'
 
   ###

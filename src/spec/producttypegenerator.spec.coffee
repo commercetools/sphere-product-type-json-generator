@@ -51,9 +51,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Beschreibung'
           en: 'Description'
         type: 'text'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
         inputHint: 'MultiLine'
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
@@ -77,9 +77,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Beschreibung'
           en: 'Description'
         type: 'ltext'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
         inputHint: 'MultiLine'
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
@@ -115,9 +115,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Marke'
           en: 'Brand'
         type: 'enum'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
         values:  [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
@@ -167,9 +167,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Geschlecht'
           en: 'gender'
         type: 'lenum'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
         values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
@@ -192,9 +192,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Größe'
           en: 'Size'
         type: 'number'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -216,9 +216,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Listenpreis'
           en: 'List price'
         type: 'money'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -241,9 +241,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Veröffentlichungsdatum'
           en: 'Release date'
         type: 'date'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -265,9 +265,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Veröffentlichungszeit'
           en: 'Release time'
         type: 'time'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -289,9 +289,9 @@ describe 'ProductTypeGenerator', ->
           de: 'Herstellungszeit'
           en: 'Creation time'
         type: 'dateTime'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -313,9 +313,9 @@ describe 'ProductTypeGenerator', ->
       label:
         en: 'Master SKU'
       type: 'text'
-      isVariant: 'false'
-      isRequired: 'true'
-      isSearchable: 'false'
+      isVariant: false
+      isRequired: true
+      isSearchable: false
       inputHint: 'SingleLine'
 
     attributeDefinitions = []
@@ -353,9 +353,9 @@ describe 'ProductTypeGenerator', ->
       label:
         en: 'Master SKU'
       type: 'text'
-      isVariant: 'false'
-      isRequired: 'true'
-      isSearchable: 'false'
+      isVariant: false
+      isRequired: true
+      isSearchable: false
       inputHint: 'SingleLine'
 
     size =
@@ -364,9 +364,9 @@ describe 'ProductTypeGenerator', ->
         de: 'Größe'
         en: 'Size'
       type: 'number'
-      isVariant: 'false'
-      isRequired: 'false'
-      isSearchable: 'false'
+      isVariant: false
+      isRequired: false
+      isSearchable: false
       inputHint: 'SingleLine'
 
     information =
@@ -375,9 +375,9 @@ describe 'ProductTypeGenerator', ->
         de: 'Information'
         en: 'Information'
       type: 'text'
-      isVariant: 'false'
-      isRequired: 'false'
-      isSearchable: 'false'
+      isVariant: false
+      isRequired: false
+      isSearchable: false
       inputHint: 'SingleLine'
 
     attributeDefinitions =
@@ -418,9 +418,9 @@ describe 'ProductTypeGenerator', ->
         de: 'Größe'
         en: 'Size'
       type: 'number'
-      isVariant: 'false'
-      isRequired: 'false'
-      isSearchable: 'false'
+      isVariant: false
+      isRequired: false
+      isSearchable: false
       inputHint: 'SingleLine'
 
     attributeDefinitions =
@@ -448,9 +448,9 @@ describe 'ProductTypeGenerator', ->
         de: 'Größe'
         en: 'Size'
       type: 'number'
-      isVariant: 'false'
-      isRequired: 'false'
-      isSearchable: 'false'
+      isVariant: false
+      isRequired: false
+      isSearchable: false
       inputHint: 'SingleLine'
 
     attributeDefinitions =
@@ -465,24 +465,24 @@ describe 'ProductTypeGenerator', ->
           de: 'Größe'
           en: 'Size'
         type: 'number'
-        isVariant: 'false'
-        isRequired: 'false'
-        isSearchable: 'false'
+        isVariant: false
+        isRequired: false
+        isSearchable: false
         inputHint: 'SingleLine'
       ]
 
     expect(@generator._createProductTypesDefinitions([productTypeDefinition], attributeDefinitions)).toEqual [expectedProductTypeDefinition]
 
-  it 'should return attribute definition for attribute masterSKU', ->
+  it 'should return attribute definition for attribute mastersku', ->
 
     expectedAttributeDefinition =
       name: 'mastersku'
       label:
         en: 'Master SKU'
       type: 'text'
-      isVariant: 'false'
-      isRequired: 'true'
-      isSearchable: 'false'
+      isVariant: false
+      isRequired: true
+      isSearchable: false
       inputHint: 'SingleLine'
 
     expect(@generator._createAttributeDefinitionMasterSku()).toEqual expectedAttributeDefinition
