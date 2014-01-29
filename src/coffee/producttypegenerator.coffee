@@ -102,11 +102,13 @@ class ProductTypeGenerator
         when ATTRIBUTE_TYPE_TEXT, ATTRIBUTE_TYPE_LTEXT
           attributeDefinition[ATTRIBUTE_INPUT_HINT] = row["text#{_s.capitalize(ATTRIBUTE_INPUT_HINT)}"]
         when ATTRIBUTE_TYPE_ENUM
-          attributeDefinition[ATTRIBUTE_ENUM_VALUES] = _.union (attributeDefinition[ATTRIBUTE_ENUM_VALUES] or []),
+          values = attributeDefinition[ATTRIBUTE_TYPE][ATTRIBUTE_ENUM_VALUES]
+          attributeDefinition[ATTRIBUTE_TYPE][ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
             key: row["enum#{_s.capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
             label: row["#{ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(ATTRIBUTE_LABEL)}"]
         when ATTRIBUTE_TYPE_LENUM
-          attributeDefinition[ATTRIBUTE_ENUM_VALUES] = _.union (attributeDefinition[ATTRIBUTE_ENUM_VALUES] or []),
+          values = attributeDefinition[ATTRIBUTE_TYPE][ATTRIBUTE_ENUM_VALUES]
+          attributeDefinition[ATTRIBUTE_TYPE][ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
             key: row["enum#{_s.capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
             label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(ATTRIBUTE_LABEL)}"
 

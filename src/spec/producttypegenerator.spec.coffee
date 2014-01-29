@@ -118,10 +118,10 @@ describe 'ProductTypeGenerator', ->
           en: 'Brand'
         type:
           name: 'enum'
+          values:  [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
         attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
-        values:  [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
 
@@ -171,10 +171,10 @@ describe 'ProductTypeGenerator', ->
           en: 'gender'
         type:
           name: 'lenum'
+          values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
         attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
-        values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
 
