@@ -86,7 +86,7 @@ class ProductTypeGenerator
           label: @_i18n row, ATTRIBUTE_LABEL
           type:
             name: row[ATTRIBUTE_TYPE]
-          attributeConstraint: if row[ATTRIBUTE_CONSTRAINT] then row[ATTRIBUTE_CONSTRAINT] else 'None'
+          attributeConstraint: row[ATTRIBUTE_CONSTRAINT]
           isRequired: row[ATTRIBUTE_IS_REQUIRED] is 'true'
           isSearchable: row[ATTRIBUT_IS_SEARCHABLE] is 'true'
 
