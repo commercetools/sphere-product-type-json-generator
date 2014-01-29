@@ -25,7 +25,7 @@ class ProductTypeGenerator
   ATTRIBUTE_NAME = 'name'
   ATTRIBUTE_LABEL = 'label'
   ATTRIBUTE_TYPE = 'type'
-  ATTRIBUTE_IS_VARIANT = 'isVariant'
+  ATTRIBUTE_CONSTRAINT = 'attributeConstraint'
   ATTRIBUTE_IS_REQUIRED = 'isRequired'
   ATTRIBUTE_INPUT_HINT = 'inputHint'
   ATTRIBUT_IS_SEARCHABLE = 'isSearchable'
@@ -84,8 +84,9 @@ class ProductTypeGenerator
         attributeDefinition =
           name: row[ATTRIBUTE_NAME]
           label: @_i18n row, ATTRIBUTE_LABEL
-          type: row[ATTRIBUTE_TYPE]
-          isVariant: row[ATTRIBUTE_IS_VARIANT] is 'true'
+          type:
+            name: row[ATTRIBUTE_TYPE]
+          attributeConstraint: if row[ATTRIBUTE_CONSTRAINT] then row[ATTRIBUTE_CONSTRAINT] else 'None'
           isRequired: row[ATTRIBUTE_IS_REQUIRED] is 'true'
           isSearchable: row[ATTRIBUT_IS_SEARCHABLE] is 'true'
 
@@ -97,7 +98,7 @@ class ProductTypeGenerator
         # process additional attribute rows
         attributeDefinition = lastProcessedAttributeDefinition
 
-      switch attributeDefinition[ATTRIBUTE_TYPE]
+      switch attributeDefinition[ATTRIBUTE_TYPE].name
         when ATTRIBUTE_TYPE_TEXT, ATTRIBUTE_TYPE_LTEXT
           attributeDefinition[ATTRIBUTE_INPUT_HINT] = row["text#{_s.capitalize(ATTRIBUTE_INPUT_HINT)}"]
         when ATTRIBUTE_TYPE_ENUM
@@ -120,8 +121,9 @@ class ProductTypeGenerator
       name: ATTRIBUTE_NAME_MASTER_SKU
       label:
         en: 'Master SKU'
-      type: 'text'
-      isVariant: false
+      type:
+        name: 'text'
+      attributeConstraint: 'Unique'
       isRequired: true
       isSearchable: false
       inputHint: 'SingleLine'

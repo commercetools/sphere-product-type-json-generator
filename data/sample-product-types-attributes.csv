@@ -1,9 +1,8 @@
-name,type,isVariant,isRequired,isSearchable,label.de,label.en,enumKey,enumLabel,enumLabel.en,enumLabel.de,textInputHint
-designer,enum,false,false,false,Designer,designer,HUG,Hugo Boss,,,
+name,type,attributeConstraint,isRequired,isSearchable,label.de,label.en,enumKey,enumLabel,enumLabel.en,enumLabel.de,textInputHint
+designer,enum,None,false,false,Designer,designer,HUG,Hugo Boss,,,
 ,,,,,,,DUG,Dolce&Gabana,,,
-gender,lenum,false,false,false,Geschlecht,gender,M,,male,männlich,
+gender,lenum,Unique,false,false,Geschlecht,gender,M,,male,männlich,
 ,,,,,,,W,,female,weiblich,
 ,,,,,,,U,,unisex,unisex,
-shortText,text,false,false,false,Kurzer Text,Short Text,,,,,SingleLine
-longText,ltext,false,false,false,Langer Text,Long Text,,,,,MultiLine
-
+shortText,text,SameForAll,false,false,Kurzer Text,Short Text,,,,,SingleLine
+longText,ltext,SameForAll,false,false,Langer Text,Long Text,,,,,MultiLine

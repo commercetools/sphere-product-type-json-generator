@@ -18,7 +18,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'gender'
       type: 'lenum'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Geschlecht'
@@ -37,7 +37,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'description'
       type: 'text'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       textInputHint: 'MultiLine'
@@ -50,8 +50,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Beschreibung'
           en: 'Description'
-        type: 'text'
-        isVariant: false
+        type:
+          name: 'text'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
         inputHint: 'MultiLine'
@@ -63,7 +64,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'description'
       type: 'ltext'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       textInputHint: 'MultiLine'
@@ -76,8 +77,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Beschreibung'
           en: 'Description'
-        type: 'ltext'
-        isVariant: false
+        type:
+          name: 'ltext'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
         inputHint: 'MultiLine'
@@ -89,7 +91,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow1 =
       name: 'brand'
       type: 'enum'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Marke'
@@ -100,7 +102,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow2 =
       name: ''
       type: ''
-      isVariant: ''
+      attributeConstraint: ''
       isRequired: ''
       sSearchable: ''
       'label.de': ''
@@ -114,8 +116,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Marke'
           en: 'Brand'
-        type: 'enum'
-        isVariant: false
+        type:
+          name: 'enum'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
         values:  [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
@@ -127,7 +130,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow1 =
       name: 'gender'
       type: 'lenum'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Geschlecht'
@@ -139,7 +142,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow2 =
       name: ''
       type: ''
-      isVariant: ''
+      attributeConstraint: ''
       isRequired: ''
       sSearchable: ''
       'label.de': ''
@@ -151,7 +154,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow3 =
       name: ''
       type: ''
-      isVariant: ''
+      attributeConstraint: ''
       isRequired: ''
       isSearchable: ''
       'label.de': ''
@@ -166,8 +169,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Geschlecht'
           en: 'gender'
-        type: 'lenum'
-        isVariant: false
+        type:
+          name: 'lenum'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
         values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
@@ -179,7 +183,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'size'
       type: 'number'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Größe'
@@ -191,8 +195,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Größe'
           en: 'Size'
-        type: 'number'
-        isVariant: false
+        type:
+          name: 'number'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
 
@@ -203,7 +208,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'listPrice'
       type: 'money'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Listenpreis'
@@ -215,8 +220,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Listenpreis'
           en: 'List price'
-        type: 'money'
-        isVariant: false
+        type:
+          name: 'money'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
 
@@ -228,7 +234,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'releaseDate'
       type: 'date'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Veröffentlichungsdatum'
@@ -240,8 +246,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Veröffentlichungsdatum'
           en: 'Release date'
-        type: 'date'
-        isVariant: false
+        type:
+          name: 'date'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
 
@@ -252,7 +259,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'releaseTime'
       type: 'time'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Veröffentlichungszeit'
@@ -264,8 +271,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Veröffentlichungszeit'
           en: 'Release time'
-        type: 'time'
-        isVariant: false
+        type:
+          name: 'time'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
 
@@ -276,7 +284,7 @@ describe 'ProductTypeGenerator', ->
     attributeRow =
       name: 'creationDateTime'
       type: 'dateTime'
-      isVariant: 'false'
+      attributeConstraint: 'None'
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Herstellungszeit'
@@ -288,8 +296,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Herstellungszeit'
           en: 'Creation time'
-        type: 'dateTime'
-        isVariant: false
+        type:
+          name: 'dateTime'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
 
@@ -312,8 +321,9 @@ describe 'ProductTypeGenerator', ->
       name: 'mastersku'
       label:
         en: 'Master SKU'
-      type: 'text'
-      isVariant: false
+      type:
+        name: 'text'
+      attributeConstraint: 'None'
       isRequired: true
       isSearchable: false
       inputHint: 'SingleLine'
@@ -352,8 +362,9 @@ describe 'ProductTypeGenerator', ->
       name: 'mastersku'
       label:
         en: 'Master SKU'
-      type: 'text'
-      isVariant: false
+      type:
+        name: 'text'
+      attributeConstraint: 'None'
       isRequired: true
       isSearchable: false
       inputHint: 'SingleLine'
@@ -363,8 +374,9 @@ describe 'ProductTypeGenerator', ->
       label:
         de: 'Größe'
         en: 'Size'
-      type: 'number'
-      isVariant: false
+      type:
+        name: 'number'
+      attributeConstraint: 'None'
       isRequired: false
       isSearchable: false
       inputHint: 'SingleLine'
@@ -374,8 +386,9 @@ describe 'ProductTypeGenerator', ->
       label:
         de: 'Information'
         en: 'Information'
-      type: 'text'
-      isVariant: false
+      type:
+        name: 'text'
+      attributeConstraint: 'None'
       isRequired: false
       isSearchable: false
       inputHint: 'SingleLine'
@@ -417,8 +430,9 @@ describe 'ProductTypeGenerator', ->
       label:
         de: 'Größe'
         en: 'Size'
-      type: 'number'
-      isVariant: false
+      type:
+        name: 'number'
+      attributeConstraint: 'None'
       isRequired: false
       isSearchable: false
       inputHint: 'SingleLine'
@@ -447,8 +461,9 @@ describe 'ProductTypeGenerator', ->
       label:
         de: 'Größe'
         en: 'Size'
-      type: 'number'
-      isVariant: false
+      type:
+        name: 'number'
+      attributeConstraint: 'None'
       isRequired: false
       isSearchable: false
       inputHint: 'SingleLine'
@@ -464,8 +479,9 @@ describe 'ProductTypeGenerator', ->
         label:
           de: 'Größe'
           en: 'Size'
-        type: 'number'
-        isVariant: false
+        type:
+          name: 'number'
+        attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
         inputHint: 'SingleLine'
@@ -479,8 +495,9 @@ describe 'ProductTypeGenerator', ->
       name: 'mastersku'
       label:
         en: 'Master SKU'
-      type: 'text'
-      isVariant: false
+      type:
+        name: 'text'
+      attributeConstraint: 'Unique'
       isRequired: true
       isSearchable: false
       inputHint: 'SingleLine'
