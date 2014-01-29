@@ -15,6 +15,7 @@ class ProductTypeGenerator
   ATTRIBUTE_TYPE_LTEXT = 'ltext'
   ATTRIBUTE_TYPE_ENUM = 'enum'
   ATTRIBUTE_TYPE_LENUM = 'lenum'
+  ATTRIBUTE_TYPE_SET = 'set'
 
 
   ATTRIBUTE_TYPE_ENUM_KEY = 'key'
@@ -85,7 +86,7 @@ class ProductTypeGenerator
           name: row[ATTRIBUTE_NAME]
           label: @_i18n row, ATTRIBUTE_LABEL
           type:
-            name: row[ATTRIBUTE_TYPE]
+            name: @_type row[ATTRIBUTE_TYPE]
           attributeConstraint: row[ATTRIBUTE_CONSTRAINT]
           isRequired: row[ATTRIBUTE_IS_REQUIRED] is 'true'
           isSearchable: row[ATTRIBUT_IS_SEARCHABLE] is 'true'
@@ -98,21 +99,59 @@ class ProductTypeGenerator
         # process additional attribute rows
         attributeDefinition = lastProcessedAttributeDefinition
 
-      switch attributeDefinition[ATTRIBUTE_TYPE].name
-        when ATTRIBUTE_TYPE_TEXT, ATTRIBUTE_TYPE_LTEXT
-          attributeDefinition[ATTRIBUTE_INPUT_HINT] = row["text#{_s.capitalize(ATTRIBUTE_INPUT_HINT)}"]
-        when ATTRIBUTE_TYPE_ENUM
-          values = attributeDefinition[ATTRIBUTE_TYPE][ATTRIBUTE_ENUM_VALUES]
-          attributeDefinition[ATTRIBUTE_TYPE][ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
-            key: row["enum#{_s.capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
-            label: row["#{ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(ATTRIBUTE_LABEL)}"]
-        when ATTRIBUTE_TYPE_LENUM
-          values = attributeDefinition[ATTRIBUTE_TYPE][ATTRIBUTE_ENUM_VALUES]
-          attributeDefinition[ATTRIBUTE_TYPE][ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
-            key: row["enum#{_s.capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
-            label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(ATTRIBUTE_LABEL)}"
+      @_attributeDefinition row, attributeDefinition, attributeDefinition[ATTRIBUTE_TYPE], row[ATTRIBUTE_TYPE]
 
     attributeDefinitions
+
+  ###
+  Builds an attribute definition instance (called recoursivly for each part in given raw type name ('set:<type>').
+  @param {object} row The row object containing key/value pairs (header/value).
+  @param {object} attributeDefinition The object containing attribute definition
+  @param {object} type The attribute type instance.
+  @param {string} rawTypeName The raw attribute type name (e.g. 'set:text')
+  ###
+  _attributeDefinition: (row, attributeDefinition, type, rawTypeName) ->
+
+    switch type.name
+      when ATTRIBUTE_TYPE_TEXT, ATTRIBUTE_TYPE_LTEXT
+        attributeDefinition[ATTRIBUTE_INPUT_HINT] = row["text#{_s.capitalize(ATTRIBUTE_INPUT_HINT)}"]
+      when ATTRIBUTE_TYPE_ENUM
+        values = type[ATTRIBUTE_ENUM_VALUES]
+        type[ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
+          key: row["enum#{_s.capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
+          label: row["#{ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(ATTRIBUTE_LABEL)}"]
+      when ATTRIBUTE_TYPE_LENUM
+        values = type[ATTRIBUTE_ENUM_VALUES]
+        type[ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
+          key: row["enum#{_s.capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
+          label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(ATTRIBUTE_LABEL)}"
+      when ATTRIBUTE_TYPE_SET
+        delete attributeDefinition[ATTRIBUTE_IS_REQUIRED]
+        delete attributeDefinition[ATTRIBUT_IS_SEARCHABLE]
+
+        if row[ATTRIBUTE_TYPE]
+          type['elementType'] =
+            name: @_type(@_typeOrElementType(rawTypeName))
+
+        @_attributeDefinition row, attributeDefinition, type['elementType'], @_typeOrElementType rawTypeName
+
+  ###
+  Splits the raw attribute type (e.g. 'set:set:type' => 'set:type', 'set:type' => 'type', 'text' => 'text') and returns the attribute element type or the type itself.
+  @param {string} rawAttributeType The raw attribute type (e.g. 'text' or 'set:text')
+  @return Attribute type
+  ###
+  _typeOrElementType: (rawAttributeType) ->
+    parts = rawAttributeType.split(':')
+    parts = parts[1..] unless parts.length == 1
+    parts.join(':')
+
+  ###
+  Splits the raw attribute type (e.g. 'set:type' => 'set', 'text' => 'text') and returns the attribute type itself.
+  @param {string} rawAttributeType The raw attribute type (e.g. 'text' or 'set:text')
+  @return Attribute type
+  ###
+  _type: (rawAttributeType) ->
+    _.first rawAttributeType.split ':'
 
   ###
   Create an object containing product type definition for attribute 'masteSKU'.

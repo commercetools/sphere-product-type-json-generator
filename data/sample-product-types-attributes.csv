@@ -4,5 +4,12 @@ designer,enum,None,false,false,Designer,designer,HUG,Hugo Boss,,,
 gender,lenum,Unique,false,false,Geschlecht,gender,M,,male,männlich,
 ,,,,,,,W,,female,weiblich,
 ,,,,,,,U,,unisex,unisex,
-shortText,text,SameForAll,false,false,Kurzer Text,Short Text,,,,,SingleLine
-longText,ltext,SameForAll,false,false,Langer Text,Long Text,,,,,MultiLine
+shorttext,text,SameForAll,false,false,Kurzer Text,Short Text,,,,,SingleLine
+longtext,ltext,SameForAll,false,false,Langer Text,Long Text,,,,,MultiLine
+set_longtext,set:text,None,,,Langer Text,Long Text,,,,,MultiLine
+set_gender,set:lenum,Unique,,,Geschlecht,gender,M,,male,männlich,
+,,,,,,,W,,female,weiblich,
+,,,,,,,U,,unisex,unisex,
+set_set_gender,set:set:lenum,Unique,,,Geschlecht,gender,M,,male,männlich,
+,,,,,,,W,,female,weiblich,
+,,,,,,,U,,unisex,unisex,

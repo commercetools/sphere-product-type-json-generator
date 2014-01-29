@@ -304,6 +304,112 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
+  it 'should return one attribute definition of type set (elementtype text)', ->
+
+    attributeRow =
+      name: 'infoLines'
+      type: 'set:text'
+      attributeConstraint: 'None'
+      isRequired: ''
+      isSearchable: ''
+      'label.de': 'Info Zeilen'
+      'label.en': 'Info Lines'
+      textInputHint: 'MultiLine'
+
+    expectedAttributeDefinition =
+      infoLines:
+        name: 'infoLines'
+        label:
+          de: 'Info Zeilen'
+          en: 'Info Lines'
+        type:
+          name: 'set'
+          elementType:
+            name: 'text'
+        attributeConstraint: 'None'
+        inputHint: 'MultiLine'
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+  it 'should return one attribute definition of type set (elementtype enum)', ->
+
+    attributeRow1 =
+      name: 'brand'
+      type: 'set:enum'
+      attributeConstraint: 'None'
+      isRequired: ''
+      isSearchable: ''
+      'label.de': 'Marke'
+      'label.en': 'Brand'
+      enumKey: 'HUG'
+      enumLabel: 'Hugo Boss'
+
+    attributeRow2 =
+      name: ''
+      type: ''
+      attributeConstraint: ''
+      isRequired: ''
+      sSearchable: ''
+      'label.de': ''
+      'label.en': ''
+      enumKey: 'DUG'
+      'enumLabel': 'Dolce&Gabana'
+
+    expectedAttributeDefinition =
+      brand:
+        name: 'brand'
+        label:
+          de: 'Marke'
+          en: 'Brand'
+        type:
+          name: 'set'
+          elementType:
+            name: 'enum'
+            values: [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
+        attributeConstraint: 'None'
+
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
+
+  it 'should return one attribute definition of type set (elementtype set with elementtype enum)', ->
+
+    attributeRow1 =
+      name: 'brand'
+      type: 'set:set:enum'
+      attributeConstraint: 'None'
+      isRequired: ''
+      isSearchable: ''
+      'label.de': 'Marke'
+      'label.en': 'Brand'
+      enumKey: 'HUG'
+      enumLabel: 'Hugo Boss'
+
+    attributeRow2 =
+      name: ''
+      type: ''
+      attributeConstraint: ''
+      isRequired: ''
+      sSearchable: ''
+      'label.de': ''
+      'label.en': ''
+      enumKey: 'DUG'
+      'enumLabel': 'Dolce&Gabana'
+
+    expectedAttributeDefinition =
+      brand:
+        name: 'brand'
+        label:
+          de: 'Marke'
+          en: 'Brand'
+        type:
+          name: 'set'
+          elementType:
+            name: 'set'
+            elementType:
+              name: 'enum'
+              values: [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
+        attributeConstraint: 'None'
+
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
 
   it 'should return an array with product type definitions with mastersku', ->
 
@@ -503,3 +609,15 @@ describe 'ProductTypeGenerator', ->
       inputHint: 'SingleLine'
 
     expect(@generator._createAttributeDefinitionMastersku()).toEqual expectedAttributeDefinition
+
+  it 'should split and return attribute element type or ettribute type', ->
+
+    expect(@generator._typeOrElementType('set:set:type')).toBe 'set:type'
+    expect(@generator._typeOrElementType('set:type')).toBe 'type'
+    expect(@generator._typeOrElementType('type')).toBe 'type'
+
+  it 'should split and return attribute type', ->
+
+    expect(@generator._type('set:set:type')).toBe 'set'
+    expect(@generator._type('set:type')).toBe 'set'
+    expect(@generator._type('type')).toBe 'type'
