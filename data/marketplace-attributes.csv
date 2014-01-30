@@ -1,20 +1,20 @@
-name,type,isVariant,isRequired,isSearchable,label.de,label.en,enumKey,enumLabel,enumLabel.en,enumLabel.de,textInputHint
-gender,lenum,false,false,false,Geschlecht,gender,m,,male,männlich,
+name,type,attributeConstraint,isRequired,isSearchable,label.de,label.en,enumKey,enumLabel,enumLabel.en,enumLabel.de,textInputHint
+gender,lenum,SameForAll,false,false,Geschlecht,gender,m,,male,männlich,
 ,,,,,,,w,,female,weiblich,
 ,,,,,,,u,,unisex,unisex,
-brand,enum,false,false,false,Marke,brand,artemBluseUndHemd,ARTEM Bluse und Hemd,,,
+brand,enum,SameForAll,false,false,Marke,brand,artemBluseUndHemd,ARTEM Bluse und Hemd,,,
 ,,,,,,,hugoBoss,Hugo Boss,,,
-designer,text,false,false,false,Designer,designer,,,,,SingleLine
-primaryColor,lenum,false,false,false,Farbe,color,white,,white,Weiß,
+designer,text,SameForAll,false,false,Designer,designer,,,,,SingleLine
+primaryColor,lenum,CombinationUnique,false,false,Farbe,color,white,,white,Weiß,
 ,,,,,,,black,,black,Schwarz,
-sleeveLength,number,false,false,false,Sleeve Length (in cm),Ärmellänge,,,,,
-heelType,lenum,false,false,false,Heel,Absatz,high,,High,Hoch,
+sleeveLength,number,CombinationUnique,false,false,Sleeve Length (in cm),Ärmellänge,,,,,
+heelType,lenum,CombinationUnique,false,false,Heel,Absatz,high,,High,Hoch,
 ,,,,,,,medium,,Medium,Mittel,
 ,,,,,,,low,,Low,Klein,
-sizeTops,enum,false,false,false,Größe,Size,s,S,,,
+sizeTops,enum,Unique,false,false,Größe,Size,s,S,,,
 ,,,,,,,m,M,,,
 ,,,,,,,l,L,,,
-sizeShoes,enum,false,false,false,Größe,Size,34,34,,,
+sizeShoes,enum,Unique,false,false,Größe,Size,34,34,,,
 ,,,,,,,42,42,,,
 ,,,,,,,47,47,,,
-materialComposition,ltext,false,false,false,Zusammensetzung Material,material composition,,,,,MultiLine
+materialComposition,ltext,None,false,false,Zusammensetzung Material,material composition,,,,,MultiLine
