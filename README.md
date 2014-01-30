@@ -3,9 +3,19 @@ sphere-product-type-json-generator
 
 [![Build Status](https://travis-ci.org/sphereio/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/sphereio/sphere-product-type-json-generator) [![Coverage Status](https://coveralls.io/repos/sphereio/sphere-product-type-json-generator/badge.png)](https://coveralls.io/r/sphereio/sphere-product-type-json-generator) [![Dependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator) [![devDependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator/dev-status.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator#info=devDependencies)
 
-A command line for processing given _CSV_ files and generating a _JSON_ product type representation file for each product type. As input two _CSV_ files are required:
+# Summary
+
+This repository contains a command line tool for processing given _CSV_ files to generate SPHERE.IOs _JSON_ representations in a file for each product type.
+As input two _CSV_ files are required:
 * a _CSV_ file describing available attribute values (e.g. for atttributes of type _Enumeration_)
 * a _CSV_ file describing available product types
+
+Please find some example CSV files in the folder `data` folder.
+
+White the resulting JSON files you can simply run the following curl command to create the product type in your SPHERE.IO project.
+```bash
+curl -H "Authorization: Bearer XyZ" -X POST -d @product-type-<name>.json https://api.sphere.io/<your-project-key>/product-types
+```
 
 ## How to develop
 
