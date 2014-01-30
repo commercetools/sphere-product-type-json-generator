@@ -1,8 +1,8 @@
 {
   "name": "sphere-product-type-json-generator",
-  "description": "A command line for processing given CSV files and generating a JSON product type representation file for each product type.",
+  "description": "A command line tool for processing given CSV files to generate SPHERE.IOs JSON representations for each product type.",
   "version": "0.0.1",
-  "homepage": "https://github.com/svenmueller/sphere-product-type-json-generator",
+  "homepage": "https://github.com/sphereio/sphere-product-type-json-generator",
   "keywords": [
     "sphere",
     "product type",
@@ -21,15 +21,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/svenmueller/sphere-product-type-json-generator.git"
+    "url": "https://github.com/sphereio/sphere-product-type-json-generator.git"
   },
   "bugs": {
-    "url": "https://github.com/svenmueller/sphere-product-type-json-generator/issues"
+    "url": "https://github.com/sphereio/sphere-product-type-json-generator/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/svenmueller/sphere-product-type-json-generator/blob/master/LICENSE-MIT"
+      "url": "https://github.com/sphereio/sphere-product-type-json-generator/blob/master/LICENSE-MIT"
     }
   ],
   "main": "main.js",
@@ -40,10 +40,10 @@
     "test": "grunt coverage"
   },
   "dependencies": {
-    "csv": "  0.3.6",
-    "optimist": "0.6.0",
+    "csv": "~0.3.6",
+    "optimist": "~0.6.0",
     "underscore": "~1.5.2",
-    "underscore.string": "2.3.3", 
+    "underscore.string": "~2.3.3",
     "q": "~1.0.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 sphere-product-type-json-generator
 =================================
 
-[![Build Status](https://travis-ci.org/svenmueller/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/svenmueller/sphere-product-type-json-generator) [![Coverage Status](https://coveralls.io/repos/svenmueller/sphere-product-type-json-generator/badge.png)](https://coveralls.io/r/svenmueller/sphere-product-type-json-generator) [![Dependency Status](https://david-dm.org/svenmueller/sphere-product-type-json-generator.png?theme=shields.io)](https://david-dm.org/svenmueller/sphere-product-type-json-generator) [![devDependency Status](https://david-dm.org/svenmueller/sphere-product-type-json-generator/dev-status.png?theme=shields.io)](https://david-dm.org/svenmueller/sphere-product-type-json-generator#info=devDependencies)
+[![Build Status](https://travis-ci.org/sphereio/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/sphereio/sphere-product-type-json-generator) [![Coverage Status](https://coveralls.io/repos/sphereio/sphere-product-type-json-generator/badge.png)](https://coveralls.io/r/sphereio/sphere-product-type-json-generator) [![Dependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator) [![devDependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator/dev-status.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator#info=devDependencies)
 
 A command line for processing given _CSV_ files and generating a _JSON_ product type representation file for each product type. As input two _CSV_ files are required:
 * a _CSV_ file describing available attribute values (e.g. for atttributes of type _Enumeration_)
@@ -29,7 +29,7 @@ Usage: node ./lib/run.js --types [CSV] --attributes [CSV] --target [folder] --re
 Options:
   --types, -t       Path to product types CSV file.                                                                            [required]
   --attributes, -a  Path to product type attributes CSV file.                                                                  [required]
-  --target, -td     Target directory for generated product types JSON files.                                                      [required]
+  --target, -td     Target directory for generated product types JSON files.                                                   [required]
   --retailer, -r    Master/Retailer. Set "true" to generate another product type file, having an extra attribute "masterSKU".  [default: false]
 
 
@@ -37,7 +37,7 @@ Missing required arguments: types, attributes, target
 ```
 
 Example
-```
+```bash
 node lib/run.js --types data/sample-product-types.csv --attributes \
 	data/sample-product-types-attributes.csv --target ./
 ```
