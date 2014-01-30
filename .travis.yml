@@ -9,7 +9,7 @@ script:
 notifications:
   hipchat:
     rooms:
-      secure: Rr+FKIl09sYzFgbizfXnKEjQb1FUVa/UmoYpEFS7cND/+Pg19UHui6YZ4SJdNy18OUGDpC9UjGhh05iqjNv9k0mZcBXHE+Y2lpzugTEeQQ9YmjBAny2uhPznGklUS4Hz0BoGf0hwNdQBZXjyJrCeSetjZHcZF1WiK6z3Bn/GmAA=
+      secure: BbMUlILTPGhOX0ZBNqyCq0LpqwRNTOmuqv8gsg83LiDPy4SI/YsjAOQLlrbnoXLECAQMfRBwnED1XVJnskgJbj/VFL+q0hAa0GWfp8gLj7PAv40TYM7+pj6KDxJMWh3ZMWrQ2ixNRAjbuGnP2AfL0Gn6hj6NaxFwyIGQrb7sHKo=
     template:
     - '%{repository}#%{build_number} (%{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Compare</a>)'
     format: html
