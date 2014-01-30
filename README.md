@@ -12,7 +12,7 @@ As input two _CSV_ files are required:
 
 Please find some example CSV files in the folder `data` folder.
 
-White the resulting JSON files you can simply run the following curl command to create the product type in your SPHERE.IO project.
+The resulting JSON files can be used to run the curl command to create the product type(s) in your SPHERE.IO project.
 ```bash
 curl -H "Authorization: Bearer XyZ" -X POST -d @product-type-<name>.json https://api.sphere.io/<your-project-key>/product-types
 ```
