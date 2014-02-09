@@ -1,7 +1,7 @@
 sphere-product-type-json-generator
 =================================
 
-[![Build Status](https://travis-ci.org/sphereio/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/sphereio/sphere-product-type-json-generator) [![Coverage Status](https://coveralls.io/repos/sphereio/sphere-product-type-json-generator/badge.png)](https://coveralls.io/r/sphereio/sphere-product-type-json-generator) [![Dependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator) [![devDependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator/dev-status.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator#info=devDependencies)
+[![Build Status](https://travis-ci.org/sphereio/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/sphereio/sphere-product-type-json-generator) [![Coverage Status](https://coveralls.io/repos/sphereio/sphere-product-type-json-generator/badge.png)](https://coveralls.io/r/sphereio/sphere-product-type-json-generator) [![Dependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator) [![devDependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator/dev-status.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator#info=devDependencies) [![Code Climate](https://codeclimate.com/github/sphereio/sphere-product-type-json-generator.png)](https://codeclimate.com/github/sphereio/sphere-product-type-json-generator)
 
 # Summary
 
