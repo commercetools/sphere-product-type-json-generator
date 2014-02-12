@@ -118,7 +118,7 @@ describe 'ProductTypeGenerator', ->
           en: 'Brand'
         type:
           name: 'enum'
-          values:  [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
+          values: [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
         attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
@@ -171,7 +171,7 @@ describe 'ProductTypeGenerator', ->
           en: 'gender'
         type:
           name: 'lenum'
-          values:  [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
+          values: [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
         attributeConstraint: 'None'
         isRequired: false
         isSearchable: false

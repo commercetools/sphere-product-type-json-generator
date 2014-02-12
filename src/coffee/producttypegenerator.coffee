@@ -157,7 +157,7 @@ class ProductTypeGenerator
   Create an object containing product type definition for attribute 'masteSKU'.
   @return Object with product type attribute definition
   ###
-  _createAttributeDefinitionMastersku: () ->
+  _createAttributeDefinitionMastersku: ->
     attributeDefinition =
       name: ATTRIBUTE_NAME_MASTER_SKU
       label:
