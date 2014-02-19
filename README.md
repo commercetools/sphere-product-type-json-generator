@@ -17,6 +17,18 @@ The resulting JSON files can be used to run the curl command to create the produ
 curl -H "Authorization: Bearer XyZ" -X POST -d @product-type-<name>.json https://api.sphere.io/<your-project-key>/product-types
 ```
 
+If you have several product types you may want to use the little helper script:
+```bash
+./upload-product-types.sh
+
+upload-product-types.sh - Upload several product types
+
+Arguments:
+-p <project-key> - Your SPHERE.IO project key.
+-t <token> - Your SPHERE.IO API access token.
+-d <dir> - the directory, where the JSON files are located.
+```
+
 ## How to develop
 
 Install the required dependencies
