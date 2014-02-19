@@ -12,8 +12,9 @@ usage() {
 }
 
 upload() {
-  for pt in "${JSON_DIR}"/product-type-*.json; do
-    curl -H "Authorization: Bearer ${ACCESS_TOKEN}" -X POST -d @"${pt}.json" "https://api.sphere.io/${PROJECT_KEY}/product-types"
+  for pt in "${JSON_DIR}/"product-type-*.json; do
+    echo "Uploading product type from file ${pt} ..."
+    curl -H "Authorization: Bearer ${ACCESS_TOKEN}" -X POST -d @"${pt}" "https://api.sphere.io/${PROJECT_KEY}/product-types"
   done
 }
 
@@ -31,10 +32,9 @@ while getopts "p:t:d:" OPT; do
   esac
 done
 
-if [ -z ${PROJECT_KEY} -o -z ${ACCESS_TOKEN} -o -z ${JSON_DIR}]; then
+if [ -z "${PROJECT_KEY}" -o -z "${ACCESS_TOKEN}" -o -z "${JSON_DIR}" ]; then
   usage
   exit 1
 fi
 
 upload
-echo "Product types uploaded."
