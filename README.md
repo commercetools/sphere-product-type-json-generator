@@ -29,14 +29,13 @@ Arguments:
 -d <dir> - the directory, where the JSON files are located.
 ```
 
-## How to develop
+## Setup
 
-Install the required dependencies
+Install required dependencies
 ```bash
 npm install
 ```
-
-All source files are written in `coffeescript`. [Grunt](http://gruntjs.com/) is used as build tool. The generated source files are located in `/lib`.
+Compile coffeescript sources
 ```bash
 grunt build
 ```
@@ -62,6 +61,13 @@ Example
 ```bash
 node lib/run.js --types data/sample-product-types.csv --attributes \
 	data/sample-product-types-attributes.csv --target ./
+```
+
+## How to develop
+
+All source files are written in `coffeescript`. [Grunt](http://gruntjs.com/) is used as build tool. Generated source files are located in `/lib` folder. Before running the application compile your changes with:
+```bash
+grunt build
 ```
 
 ### How to test
