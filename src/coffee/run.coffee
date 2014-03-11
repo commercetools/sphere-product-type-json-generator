@@ -11,7 +11,7 @@ argv = require('optimist')
   .describe('types', 'Path to product types CSV file.')
   .describe('attributes', 'Path to product type attributes CSV file.')
   .describe('target', 'Target directory for generated product types JSON files.')
-  .describe('retailer', 'Master/Retailer. Set "true" to generate another product type file, having an extra attribute "masterSKU".')
+  .describe('retailer', 'Master/Retailer. Set "true" to generate another product type file, having an extra attribute "mastersku".')
   .demand(['types', 'attributes', 'target'])
   .argv
 
