@@ -1,5 +1,4 @@
 fs = require 'fs'
-Q = require 'q'
 _ = require 'underscore'
 _s = require 'underscore.string'
 
@@ -35,10 +34,8 @@ class ProductTypeGenerator
   @param {array} attributes Entire attributes CSV as an array of records.
   @param {string} target The target folder for the generated files.
   @param {boolean} masterRetailerProject Set to true if product type files are used for a master/retailer projects, otherwise false.
-  @param {function} callback The callback function to be invoked when the method finished its work.
-  @return Result of the given callback
   ###
-  run: (types, attributes, target, masterRetailerProject, callback) ->
+  run: (types, attributes, target, masterRetailerProject) ->
 
     # build object with all attribute defintions for later usage
     attributeDefinitions = @_createAttributeDefinitions attributes
@@ -61,7 +58,8 @@ class ProductTypeGenerator
       for productTypeDefinition in productTypeDefinitionsRetailers
         @_writeFile productTypeDefinition, target, 'retailer-product-type'
 
-    callback true
+    return
+
 
   ###
   Returns an object containing all attribute definitions from given attribute CSV.
@@ -225,7 +223,7 @@ class ProductTypeGenerator
               attributeDefinition.name = value unless value.toLowerCase() is 'x'
               productTypeDefinition['attributes'] = _.union (productTypeDefinition['attributes'] or []), attributeDefinition
             else
-              throw new Error("No attribute definition found with name '#{header}'.")
+              throw new Error("No attribute definition found with name '#{header}'")
 
 
         # add default attribute definition to attributes
@@ -234,7 +232,7 @@ class ProductTypeGenerator
 
         productTypeDefinitions.push productTypeDefinition
       catch error
-        console.log "Skipping invalid product type definition '#{row['name']}' because: " + error
+        console.error "Skipping invalid product type definition '#{row.name}' because: #{error}"
 
 
     productTypeDefinitions
@@ -252,6 +250,6 @@ class ProductTypeGenerator
     fileName = "#{target}/#{prefix}-#{productTypeDefinition[@PRODUCT_TYPE_NAME]}.json"
     fs.writeFile fileName, prettified, 'utf8', (error) ->
       if error
-        console.log "Error while writing file #{fileName}: #{error}"
+        console.error "Error while writing file #{fileName}: #{error}"
 
 module.exports = ProductTypeGenerator

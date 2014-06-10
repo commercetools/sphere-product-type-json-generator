@@ -33,6 +33,7 @@ readCsvPromise = (path) ->
 
 Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes) ->
   generator = new ProductTypeGenerator
-  generator.run types, attributes, argv.target, argv.retailer, (success) -> process.exit 1 unless success
+  generator.run types, attributes, argv.target, argv.retailer
 .fail (error) ->
   console.error "Oops, something went wrong: #{error.message}"
+  process.exit 1
