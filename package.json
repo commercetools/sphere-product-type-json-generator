@@ -17,6 +17,10 @@
     {
       "name": "Hajo Eichler",
       "email": "hajo.eichler@commercetools.de"
+    },
+    {
+      "name": "Nicola Molinari",
+      "email": "nicola.molinari@commercetools.de"
     }
   ],
   "repository": {
@@ -40,25 +44,24 @@
     "test": "grunt coverage"
   },
   "dependencies": {
-    "csv": "~0.3.6",
-    "optimist": "~0.6.0",
-    "underscore": "~1.5.2",
-    "underscore.string": "~2.3.3",
-    "q": "~1.0.0"
+    "csv": "0.4.0",
+    "optimist": "0.6.x",
+    "underscore": "1.6.x",
+    "underscore.string": "2.3.x",
+    "q": "1.0.1"
   },
   "devDependencies": {
-    "coveralls": "~2.7.0",
-    "grunt": "~0.4.1",
-    "grunt-bump": "~0.0.11",
-    "grunt-cli": "~0.1.9",
-    "grunt-coffeelint": "~0.0.7",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-coffee": "~0.9.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt-shell": "~0.6.2",
-    "istanbul": "~0.2.3",
-    "jasmine-node": "~1.13.0",
+    "coveralls": "2.10.0",
+    "grunt": "0.4.5",
+    "grunt-bump": "0.0.14",
+    "grunt-coffeelint": "0.0.8",
+    "grunt-contrib-clean": "0.5.0",
+    "grunt-contrib-coffee": "0.10.1",
+    "grunt-contrib-concat": "0.4.0",
+    "grunt-contrib-watch": "0.6.1",
+    "grunt-shell": "0.7.0",
+    "istanbul": "0.2.11",
+    "jasmine-node": "1.14.3",
     "sphere-coffeelint": "git://github.com/sphereio/sphere-coffeelint.git#master"
   }
 }
