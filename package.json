@@ -36,6 +36,9 @@
       "url": "https://github.com/sphereio/sphere-product-type-json-generator/blob/master/LICENSE-MIT"
     }
   ],
+  "bin": {
+    "product-type-generator": "bin/product-type-generator"
+  },
   "main": "main.js",
   "engines": {
     "node": ">= 0.8.0"
