@@ -3,6 +3,7 @@
   "description": "A command line tool for processing given CSV files to generate SPHERE.IOs JSON representations for each product type.",
   "version": "0.0.5",
   "homepage": "https://github.com/sphereio/sphere-product-type-json-generator",
+  "private": false,
   "keywords": [
     "sphere",
     "product type",

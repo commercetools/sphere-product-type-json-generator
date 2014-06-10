@@ -1,9 +1,12 @@
 .DS_Store
 node_modules
-build
+*.log
 test
 lib
-coverage
 product-type-*.json
 retailer-product-type-*.json
 .sphere
+tmp
+.coveralls.yml
+coverage
+package

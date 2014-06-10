@@ -1,0 +1,14 @@
+node_modules
+*.log
+src
+test
+tmp
+coverage
+.travis.yml
+.coveralls.yml
+*.coffee
+release-as-zip.sh
+package
+.sphere
+product-type-*.json
+retailer-product-type-*.json
