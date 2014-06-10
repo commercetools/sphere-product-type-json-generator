@@ -1,37 +1,33 @@
 fs = require 'fs'
 Q = require 'q'
-_ = require("underscore")._
-_s = require('underscore.string')
+_ = require 'underscore'
+_s = require 'underscore.string'
 
 ###
 Class for generating JSON product type representations from CSV files.
 ###
 class ProductTypeGenerator
 
-  PRODUCT_TYPE_NAME = 'name'
-  PRODUCT_TYPE_DESCRIPTION = 'description'
+  PRODUCT_TYPE_NAME: 'name'
+  PRODUCT_TYPE_DESCRIPTION: 'description'
 
-  ATTRIBUTE_TYPE_TEXT = 'text'
-  ATTRIBUTE_TYPE_LTEXT = 'ltext'
-  ATTRIBUTE_TYPE_ENUM = 'enum'
-  ATTRIBUTE_TYPE_LENUM = 'lenum'
-  ATTRIBUTE_TYPE_SET = 'set'
+  ATTRIBUTE_TYPE_TEXT: 'text'
+  ATTRIBUTE_TYPE_LTEXT: 'ltext'
+  ATTRIBUTE_TYPE_ENUM: 'enum'
+  ATTRIBUTE_TYPE_LENUM: 'lenum'
+  ATTRIBUTE_TYPE_SET: 'set'
 
+  ATTRIBUTE_TYPE_ENUM_KEY: 'key'
+  ATTRIBUTE_ENUM_VALUES: 'values'
+  ATTRIBUTE_NAME: 'name'
+  ATTRIBUTE_LABEL: 'label'
+  ATTRIBUTE_TYPE: 'type'
+  ATTRIBUTE_CONSTRAINT: 'attributeConstraint'
+  ATTRIBUTE_IS_REQUIRED: 'isRequired'
+  ATTRIBUTE_INPUT_HINT: 'inputHint'
+  ATTRIBUT_IS_SEARCHABLE: 'isSearchable'
 
-  ATTRIBUTE_TYPE_ENUM_KEY = 'key'
-  ATTRIBUTE_TYPE_TEXT = 'text'
-  ATTRIBUTE_TYPES = {ATTRIBUTE_TYPE_ENUM, ATTRIBUTE_TYPE_TEXT}
-  ATTRIBUTE_ENUM_VALUES = 'values'
-
-  ATTRIBUTE_NAME = 'name'
-  ATTRIBUTE_LABEL = 'label'
-  ATTRIBUTE_TYPE = 'type'
-  ATTRIBUTE_CONSTRAINT = 'attributeConstraint'
-  ATTRIBUTE_IS_REQUIRED = 'isRequired'
-  ATTRIBUTE_INPUT_HINT = 'inputHint'
-  ATTRIBUT_IS_SEARCHABLE = 'isSearchable'
-
-  ATTRIBUTE_NAME_MASTER_SKU = 'mastersku'
+  ATTRIBUTE_NAME_MASTER_SKU: 'mastersku'
 
   ###
   Creates sphere product type representation files using JSON format.
@@ -81,25 +77,25 @@ class ProductTypeGenerator
     for row, rowIndex in attributes
 
       # check if attribute name is empty
-      if !!row[ATTRIBUTE_NAME]
+      if !!row[@ATTRIBUTE_NAME]
         attributeDefinition =
-          name: row[ATTRIBUTE_NAME]
-          label: @_i18n row, ATTRIBUTE_LABEL
+          name: row[@ATTRIBUTE_NAME]
+          label: @_i18n row, @ATTRIBUTE_LABEL
           type:
-            name: @_type row[ATTRIBUTE_TYPE]
-          attributeConstraint: row[ATTRIBUTE_CONSTRAINT]
-          isRequired: row[ATTRIBUTE_IS_REQUIRED] is 'true'
-          isSearchable: row[ATTRIBUT_IS_SEARCHABLE] is 'true'
+            name: @_type row[@ATTRIBUTE_TYPE]
+          attributeConstraint: row[@ATTRIBUTE_CONSTRAINT]
+          isRequired: row[@ATTRIBUTE_IS_REQUIRED] is 'true'
+          isSearchable: row[@ATTRIBUT_IS_SEARCHABLE] is 'true'
 
         # store attribute definition using name as key for easy access
-        attributeDefinitions[row[ATTRIBUTE_NAME]] = attributeDefinition
+        attributeDefinitions[row[@ATTRIBUTE_NAME]] = attributeDefinition
         # store last processed attribute for further usage (reading next rows)
         lastProcessedAttributeDefinition = attributeDefinition
       else
         # process additional attribute rows
         attributeDefinition = lastProcessedAttributeDefinition
 
-      @_attributeDefinition row, attributeDefinition, attributeDefinition[ATTRIBUTE_TYPE], row[ATTRIBUTE_TYPE]
+      @_attributeDefinition row, attributeDefinition, attributeDefinition[@ATTRIBUTE_TYPE], row[@ATTRIBUTE_TYPE]
 
     attributeDefinitions
 
@@ -113,23 +109,23 @@ class ProductTypeGenerator
   _attributeDefinition: (row, attributeDefinition, type, rawTypeName) ->
 
     switch type.name
-      when ATTRIBUTE_TYPE_TEXT, ATTRIBUTE_TYPE_LTEXT
-        attributeDefinition[ATTRIBUTE_INPUT_HINT] = row["text#{_s.capitalize(ATTRIBUTE_INPUT_HINT)}"]
-      when ATTRIBUTE_TYPE_ENUM
-        values = type[ATTRIBUTE_ENUM_VALUES]
-        type[ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
-          key: row["enum#{_s.capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
-          label: row["#{ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(ATTRIBUTE_LABEL)}"]
-      when ATTRIBUTE_TYPE_LENUM
-        values = type[ATTRIBUTE_ENUM_VALUES]
-        type[ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
-          key: row["enum#{_s.capitalize(ATTRIBUTE_TYPE_ENUM_KEY)}"]
-          label: @_i18n row, "#{ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(ATTRIBUTE_LABEL)}"
-      when ATTRIBUTE_TYPE_SET
-        delete attributeDefinition[ATTRIBUTE_IS_REQUIRED]
-        delete attributeDefinition[ATTRIBUT_IS_SEARCHABLE]
+      when @ATTRIBUTE_TYPE_TEXT, @ATTRIBUTE_TYPE_LTEXT
+        attributeDefinition[@ATTRIBUTE_INPUT_HINT] = row["text#{_s.capitalize(@ATTRIBUTE_INPUT_HINT)}"]
+      when @ATTRIBUTE_TYPE_ENUM
+        values = type[@ATTRIBUTE_ENUM_VALUES]
+        type[@ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
+          key: row["enum#{_s.capitalize(@ATTRIBUTE_TYPE_ENUM_KEY)}"]
+          label: row["#{@ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(@ATTRIBUTE_LABEL)}"]
+      when @ATTRIBUTE_TYPE_LENUM
+        values = type[@ATTRIBUTE_ENUM_VALUES]
+        type[@ATTRIBUTE_ENUM_VALUES] = _.union (values or []),
+          key: row["enum#{_s.capitalize(@ATTRIBUTE_TYPE_ENUM_KEY)}"]
+          label: @_i18n row, "#{@ATTRIBUTE_TYPE_ENUM}#{_s.capitalize(@ATTRIBUTE_LABEL)}"
+      when @ATTRIBUTE_TYPE_SET
+        delete attributeDefinition[@ATTRIBUTE_IS_REQUIRED]
+        delete attributeDefinition[@ATTRIBUT_IS_SEARCHABLE]
 
-        if row[ATTRIBUTE_TYPE]
+        if row[@ATTRIBUTE_TYPE]
           type['elementType'] =
             name: @_type(@_typeOrElementType(rawTypeName))
 
@@ -159,7 +155,7 @@ class ProductTypeGenerator
   ###
   _createAttributeDefinitionMastersku: ->
     attributeDefinition =
-      name: ATTRIBUTE_NAME_MASTER_SKU
+      name: @ATTRIBUTE_NAME_MASTER_SKU
       label:
         en: 'Master SKU'
       type:
@@ -217,11 +213,11 @@ class ProductTypeGenerator
     for row, rowIndex in types
       try
         productTypeDefinition =
-          name: row[PRODUCT_TYPE_NAME]
-          description: row[PRODUCT_TYPE_DESCRIPTION]
+          name: row[@PRODUCT_TYPE_NAME]
+          description: row[@PRODUCT_TYPE_DESCRIPTION]
 
         for header, value of row
-          continue if header is PRODUCT_TYPE_NAME or header is PRODUCT_TYPE_DESCRIPTION
+          continue if header is @PRODUCT_TYPE_NAME or header is @PRODUCT_TYPE_DESCRIPTION
 
           if _.isString(value) and value.length > 0
             if attributeDefinitions[header]
@@ -253,7 +249,7 @@ class ProductTypeGenerator
 
     prettified = JSON.stringify productTypeDefinition, null, 4
 
-    fileName = "#{target}/#{prefix}-#{productTypeDefinition[PRODUCT_TYPE_NAME]}.json"
+    fileName = "#{target}/#{prefix}-#{productTypeDefinition[@PRODUCT_TYPE_NAME]}.json"
     fs.writeFile fileName, prettified, 'utf8', (error) ->
       if error
         console.log "Error while writing file #{fileName}: #{error}"

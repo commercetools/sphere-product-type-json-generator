@@ -1,5 +1,6 @@
-CSV = require('csv')
-Q = require('q')
+Q = require 'q'
+CSV = require 'csv'
+{ProductTypeGenerator} = require '../main'
 
 argv = require('optimist')
   .usage('Usage: $0 --types [CSV] --attributes [CSV] --target [folder] --retailer [boolean]')
@@ -15,7 +16,6 @@ argv = require('optimist')
   .demand(['types', 'attributes', 'target'])
   .argv
 
-ProductTypeGenerator = require('../main').ProductTypeGenerator
 
 ###
 Reads a CSV file by given path and returns a promise for the result.
@@ -33,7 +33,6 @@ readCsvPromise = (path) ->
 
 Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes) ->
   generator = new ProductTypeGenerator
-  generator.run types, attributes, argv.target, argv.retailer, (success) ->
-    process.exit 1 unless success
+  generator.run types, attributes, argv.target, argv.retailer, (success) -> process.exit 1 unless success
 .fail (error) ->
-  console.log "An error occured: #{error.message}"
+  console.error "Oops, something went wrong: #{error.message}"

@@ -1,6 +1,7 @@
-ProductTypeGenerator = require('../main').ProductTypeGenerator
+{ProductTypeGenerator} = require '../main'
 
 describe 'ProductTypeGenerator', ->
+
   beforeEach ->
     @generator = new ProductTypeGenerator
 
