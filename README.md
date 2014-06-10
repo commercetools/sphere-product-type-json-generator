@@ -22,6 +22,7 @@ curl -H "Authorization: Bearer {ACCESS_TOKEN}" -X POST -d @product-type-{NAME}.j
 ```
 
 > If you have several Product Types, you may want to use the little helper script to upload them all:
+
 ```bash
 ./upload-product-types.sh
 
