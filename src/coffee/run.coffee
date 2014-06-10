@@ -1,5 +1,7 @@
+fs = require 'fs'
 Q = require 'q'
 CSV = require 'csv'
+JSZip = require 'jszip'
 {ProductTypeGenerator} = require '../main'
 
 argv = require('optimist')
@@ -9,10 +11,14 @@ argv = require('optimist')
   .alias('target', 'td')
   .alias('retailer', 'r')
   .default('retailer', false)
+  .default('zip', false)
+  .default('zipFileName', 'generated-product-types')
   .describe('types', 'Path to product types CSV file.')
   .describe('attributes', 'Path to product type attributes CSV file.')
   .describe('target', 'Target directory for generated product types JSON files.')
   .describe('retailer', 'Master/Retailer. Set "true" to generate another product type file, having an extra attribute "mastersku".')
+  .describe('zip', 'Whether to archive all generated files into a zipped file or not.')
+  .describe('zipFileName', 'The zipped file name (without extension).')
   .demand(['types', 'attributes', 'target'])
   .argv
 
@@ -31,9 +37,20 @@ readCsvPromise = (path) ->
     deferred.reject(new Error(error))
   deferred.promise
 
+zipFiles = (path, filename) ->
+  zip = new JSZip()
+  zip.folder('product-type-json')
+  generatedFiles = fs.readdirSync(path)
+  for file in generatedFiles
+    # TODO: filter only *.json files
+    zip.file("product-type-json/#{file}", fs.readFileSync(file))
+  buffer = zip.generate type: 'nodebuffer'
+  fs.writeFileSync "#{path}/#{filename}.zip", buffer
+
 Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes) ->
   generator = new ProductTypeGenerator
   generator.run types, attributes, argv.target, argv.retailer
+  zipFiles(argv.target, argv.zipFileName) if argv.zip
 .fail (error) ->
   console.error "Oops, something went wrong: #{error.message}"
   process.exit 1

@@ -49,6 +49,7 @@
   },
   "dependencies": {
     "csv": "0.3.7",
+    "jszip": "2.2.2",
     "optimist": "0.6.x",
     "underscore": "1.6.x",
     "underscore.string": "2.3.x",
