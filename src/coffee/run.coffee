@@ -43,7 +43,7 @@ zipFiles = (path, filename) ->
   generatedFiles = fs.readdirSync(path)
   for file in generatedFiles
     # TODO: filter only *.json files
-    zip.file("product-type-json/#{file}", fs.readFileSync(file))
+    zip.file("product-type-json/#{file}", fs.readFileSync("#{path}/#{file}"))
   buffer = zip.generate type: 'nodebuffer'
   fs.writeFileSync "#{path}/#{filename}.zip", buffer
 
