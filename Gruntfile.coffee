@@ -10,7 +10,7 @@ module.exports = (grunt) ->
       banner: "/* ===========================================================\n" +
         "# <%= pkg.name %> - v<%= pkg.version %>\n" +
         "# ==============================================================\n" +
-        "# Copyright (C) 2014 <%= pkg.author.name %>\n" +
+        "# Copyright (c) 2014 <%= pkg.author.name %>\n" +
         "# Licensed under the MIT license.\n" +
         "*/\n"
 
@@ -26,19 +26,21 @@ module.exports = (grunt) ->
       options:
         bare: true
       default:
-        expand: true
-        flatten: true
-        cwd: "src/coffee"
-        src: ["*.coffee"]
-        dest: "lib"
-        ext: ".js"
+        files: grunt.file.expandMapping(['**/*.coffee'], 'lib/',
+          flatten: false
+          cwd: 'src/coffee'
+          ext: '.js'
+          rename: (dest, matchedSrcPath) ->
+            dest + matchedSrcPath
+          )
       test:
-        expand: true
-        flatten: true
-        cwd: "src/spec"
-        src: ["*.spec.coffee"]
-        dest: "test"
-        ext: ".spec.js"
+        files: grunt.file.expandMapping(['**/*.spec.coffee'], 'test/',
+          flatten: false
+          cwd: 'src/spec'
+          ext: '.spec.js'
+          rename: (dest, matchedSrcPath) ->
+            dest + matchedSrcPath
+          )
 
     concat:
       options:
