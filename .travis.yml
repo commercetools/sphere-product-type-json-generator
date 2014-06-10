@@ -5,7 +5,7 @@ before_script:
   - npm install -g grunt-cli
 script:
   - npm test
-  - ./bin/product-type-generator --types data/sample-product-types.csv --attributes data/sample-product-types-attributes.csv --target ./tmp --retailer true --zip true
+  - mkdir -p tmp && ./bin/product-type-generator --types data/sample-product-types.csv --attributes data/sample-product-types-attributes.csv --target ./tmp --retailer true --zip true
 notifications:
   hipchat:
     rooms:
