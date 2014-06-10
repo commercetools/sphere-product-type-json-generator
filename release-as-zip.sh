@@ -2,41 +2,58 @@
 
 set -e
 
-BRANCH_NAME='latest'
-
-set +e
-git branch -D ${BRANCH_NAME}
-set -e
-
-rm -rf lib
-rm -rf node_modules
-
-npm version patch
-git branch ${BRANCH_NAME}
-git checkout ${BRANCH_NAME}
-
-npm install
-grunt build
-rm -rf node_modules
-npm install --production
-git add -f lib/
-git add -f node_modules/
-git commit -m "Update generated code and runtime dependencies."
-git push --force origin ${BRANCH_NAME}
-
-git checkout master
-
 VERSION=$(cat package.json | jq --raw-output .version)
-git push origin "v${VERSION}"
-npm version patch
-npm install
+PKG_NAME=$(cat package.json | jq --raw-output .name)
+LATEST_BRANCH_NAME='latest'
 
-if [ -e tmp ]; then
-    rm -rf tmp
-fi
-mkdir tmp
+echo "About to release ${PKG_NAME} - v${VERSION} to ${LATEST_BRANCH_NAME} branch!"
+
+cleanup() {
+  set +e
+  echo "Cleaning up"
+  rm -rf package
+  rm "${PKG_NAME}"-*
+  rm -rf tmp
+  set -e
+}
+
+# cleanup
+cleanup
+
+# install all deps
+echo "Installing all deps"
+npm install &>/dev/null
+echo "Building sources"
+grunt build &>/dev/null
+
+# package npm and extract it
+echo "Packaging locally"
+npm pack
+tar -xzf "${PKG_NAME}-${VERSION}.tgz"
+
+cd package
+# install production deps (no devDeps)
+echo "Installing only production deps"
+npm install --production &>/dev/null
+# push everything inside package to 'latest' branch
+git init
+git remote add origin git@github.com:sphereio/sphere-product-type-json-generator.git
+git add -A &>/dev/null
+git commit -m "Release packaged version ${VERSION} to ${LATEST_BRANCH_NAME} branch" &>/dev/null
+echo "About to push to ${LATEST_BRANCH_NAME} branch"
+git push --force origin master:${LATEST_BRANCH_NAME}
+
+# test that zipped package works
+echo "About to download and test released package"
+cd ..
+mkdir -p tmp
 cd tmp
 curl -L https://github.com/sphereio/sphere-product-type-json-generator/archive/latest.zip -o latest.zip
-unzip latest.zip
+unzip -q latest.zip
 cd sphere-product-type-json-generator-latest/
 node lib/run
+
+# cleanup package / tmp folder
+cleanup
+
+echo "Congratulations, the latest package has been successfully released"
