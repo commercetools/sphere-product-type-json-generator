@@ -248,8 +248,6 @@ class ProductTypeGenerator
     prettified = JSON.stringify productTypeDefinition, null, 4
 
     fileName = "#{target}/#{prefix}-#{productTypeDefinition[@PRODUCT_TYPE_NAME]}.json"
-    fs.writeFile fileName, prettified, 'utf8', (error) ->
-      if error
-        console.error "Error while writing file #{fileName}: #{error}"
+    fs.writeFileSync fileName, prettified, 'utf8'
 
 module.exports = ProductTypeGenerator

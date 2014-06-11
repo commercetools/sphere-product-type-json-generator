@@ -40,15 +40,15 @@ readCsvPromise = (path) ->
 zipFiles = (path, filename) ->
   zip = new JSZip()
   zip.folder('product-type-json')
-  generatedFiles = fs.readdirSync(path)
+  generatedFiles = fs.readdirSync(path).filter (file) -> file.match(/\.json/)
   for file in generatedFiles
-    # TODO: filter only *.json files
-    zip.file("product-type-json/#{file}", fs.readFileSync("#{path}/#{file}"))
+    zip.file("product-type-json/#{file}", fs.readFileSync("#{path}/#{file}", 'utf8'))
   buffer = zip.generate type: 'nodebuffer'
-  fs.writeFileSync "#{path}/#{filename}.zip", buffer
+  fs.writeFileSync "#{path}/#{filename}.zip", buffer, 'utf8'
 
 Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes) ->
   generator = new ProductTypeGenerator
+  # make sure everything runs syncronous, otherwise zipped files will be empty (they will be not there)
   generator.run types, attributes, argv.target, argv.retailer
   zipFiles(argv.target, argv.zipFileName) if argv.zip
 .fail (error) ->
