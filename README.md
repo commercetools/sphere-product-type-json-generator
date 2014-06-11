@@ -52,6 +52,8 @@ Options:
   --attributes, -a  Path to product type attributes CSV file.                                                                  [required]
   --target, --td    Target directory for generated product types JSON files.                                                   [required]
   --retailer, -r    Master/Retailer. Set "true" to generate another product type file, having an extra attribute "mastersku".  [default: false]
+  --zip             Whether to archive all generated files into a zipped file or not.                                          [default: false]
+  --zipFileName     The zipped file name (without extension).                                                                  [default: "generated-product-types"]
 
 Missing required arguments: types, attributes, target
 ```
