@@ -5,13 +5,13 @@ JSZip = require 'jszip'
 {ProductTypeGenerator} = require '../main'
 
 argv = require('optimist')
-  .usage('Usage: $0 --types [CSV] --attributes [CSV] --target [folder] --retailer [boolean]')
+  .usage('Usage: $0 --types [CSV] --attributes [CSV] --target [folder] --retailer --zip --zipFileName [name]')
   .alias('types', 't')
   .alias('attributes', 'a')
   .alias('target', 'td')
   .alias('retailer', 'r')
-  .default('retailer', false)
-  .default('zip', false)
+  .boolean('retailer')
+  .boolean('zip')
   .default('zipFileName', 'generated-product-types')
   .describe('types', 'Path to product types CSV file.')
   .describe('attributes', 'Path to product type attributes CSV file.')
