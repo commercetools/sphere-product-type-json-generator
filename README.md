@@ -40,7 +40,7 @@ Arguments:
 npm install sphere-product-type-json-generator
 ```
 
-## How to run
+## General Usage
 List available options and usage info.
 
 ```bash
