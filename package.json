@@ -32,7 +32,8 @@
     }
   ],
   "bin": {
-    "product-type-generator": "bin/product-type-generator"
+    "product-type-generator": "bin/product-type-generator",
+    "product-type-update": "bin/product-type-update"
   },
   "main": "main.js",
   "engines": {

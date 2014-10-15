@@ -108,12 +108,3 @@ Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
   console.error "Could not read CSV files: #{e.message}"
   process.exit 1
 .done()
-
-# Q.spread [readCsvPromise(argv.types), readCsvPromise(argv.attributes)], (types, attributes) ->
-#   generator = new ProductTypeGenerator
-#   # make sure everything runs syncronous, otherwise zipped files will be empty (they will be not there)
-#   generator.run types, attributes, argv.target, argv.retailer
-#   zipFiles(argv.target, argv.zipFileName) if argv.zip
-# .fail (error) ->
-#   console.error "Oops, something went wrong: #{error.message}"
-#   process.exit 1
