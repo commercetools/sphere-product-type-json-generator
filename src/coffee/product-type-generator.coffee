@@ -58,7 +58,6 @@ class ProductTypeGenerator
     attributeDefinitions = {}
     lastProcessedAttributeDefinition = null
 
-    console.log 'creating attribute definitions'
     for row in attributes
       # check if attribute name is empty
       attrName = row['name']

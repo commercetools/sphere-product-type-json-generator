@@ -1,11 +1,9 @@
-{ProductTypeGenerator} = require '../main'
+ProductTypeGenerator = require '../lib/product-type-generator'
 
 describe 'ProductTypeGenerator', ->
 
   beforeEach ->
     @generator = new ProductTypeGenerator
-
-  it 'should initialize', ->
     expect(@generator).toBeDefined()
 
   it 'should return languages for localized property header', ->
@@ -547,12 +545,18 @@ describe 'ProductTypeGenerator', ->
     attributeDefinitions =
       size: size
 
-    expectedProductTypeDefinition1 =
-      name: 'ProductType2'
-      description: 'Description2'
-      attributes: [size]
-
-    expectedProductTypeDefinitions = [expectedProductTypeDefinition1]
+    expectedProductTypeDefinitions = [
+      {
+        name: 'ProductType1'
+        description: 'Description1'
+        attributes: []
+      },
+      {
+        name: 'ProductType2'
+        description: 'Description2'
+        attributes: [size]
+      }
+    ]
 
     expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).toEqual expectedProductTypeDefinitions
 

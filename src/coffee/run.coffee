@@ -94,15 +94,14 @@ Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
               zipFiles argv.target, argv.zipFileName
             else
               Promise.resolve()
+        .catch (e) ->
+          console.error "Oops, there was an error reading the files in target folder #{argv.target}: #{e.message}"
+          process.exit 1
       .then ->
         console.log 'Execution successfully finished'
         process.exit 0
   .catch (e) ->
     console.error "Oops, something went wrong: #{e.message}"
-    process.exit 1
-
-  .catch (e) ->
-    console.error "Oops, there was an error reading the files in target folder #{argv.target}: #{e.message}"
     process.exit 1
 .catch (e) ->
   console.error "Could not read CSV files: #{e.message}"
