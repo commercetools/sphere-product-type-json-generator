@@ -60,7 +60,7 @@ Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
   console.log 'Running generator...'
   generator = new ProductTypeGenerator
   # TODO: make it async
-  generator.run types, attributes, argv.target, argv.retailer
+  generator.run types, attributes, argv.target, argv.withRetailer
   .then (result) ->
     console.log 'About to write files...'
     if _.isEmpty result.productTypes
@@ -85,10 +85,11 @@ Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
         console.log "Finished generating files, checking results in target folder: #{argv.target}"
         fs.readdirAsync argv.target
         .then (files) ->
-          if _.isEmpty files
+          jsonFiles = _.filter files, (file) -> file.match(/\.json/)
+          if _.isEmpty jsonFiles
             Promise.reject "No files were written in target folder #{argv.target}"
           else
-            console.log "Found #{_.size files} files in target folder #{argv.target}"
+            console.log "Found #{_.size jsonFiles} files in target folder #{argv.target}"
             if argv.zip
               console.log "Zipping files as #{argv.zipFileName} name"
               zipFiles argv.target, argv.zipFileName
