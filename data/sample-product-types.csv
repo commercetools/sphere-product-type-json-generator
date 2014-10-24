@@ -1,4 +1,4 @@
-name,description,gender,designer,set_longtext,set_gender,set_set_gender
+name,description,gender,designer,set_longtext,set_gender,set_gender
 base,Base Product Type,x,,,,
 men,Men Product Type,sex,x,x,,
 women,Woman Product Type,,brand,,x,x

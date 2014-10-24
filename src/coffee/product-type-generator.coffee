@@ -106,6 +106,10 @@ class ProductTypeGenerator
           label: @_i18n row, "#{ATTRIBUTE_TYPES.enum}Label"
         ]
       when ATTRIBUTE_TYPES.set
+        # TODO: ensure set is correctly build
+        # e.g.: it will generate a wrong attribute definition for
+        #   name,description,set_set_gender
+        #   women,Woman Product Type,x
         delete attributeDefinition['isRequired']
         delete attributeDefinition['isSearchable']
 
