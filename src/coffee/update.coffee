@@ -39,7 +39,9 @@ fs.exists argv.source, (exists) ->
         .then (files) ->
           jsonFiles = _.filter files, (file) -> file.match(/\.json/)
           console.log "Processing #{_.size jsonFiles} files in directory #{argv.source}"
-          Promise.map jsonFiles, (file) -> processFile "#{argv.source}/#{file}"
+          Promise.map jsonFiles, (file) ->
+            processFile "#{argv.source}/#{file}"
+          , {concurrency: 1}
       else
         Promise.reject "Given path is not a file nor a directory #{argv.source}"
     .then ->
