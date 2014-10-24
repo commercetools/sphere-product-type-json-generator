@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "bluebird": "2.3.x",
-    "csv": "0.3.7",
+    "csv": "0.3.x",
     "jszip": "2.4.0",
     "optimist": "0.6.1",
     "underscore": "1.7.0",

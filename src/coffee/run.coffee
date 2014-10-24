@@ -33,7 +33,7 @@ Reads a CSV file by given path and returns a promise for the result.
 ###
 readCsvAsync = (path) ->
   new Promise (resolve, reject) ->
-    Csv().from.path(path, {columns: true})
+    Csv().from.path(path, {columns: true, trim: true})
     .to.array (data, count) -> resolve data
     .on 'error', (error) -> reject error
 

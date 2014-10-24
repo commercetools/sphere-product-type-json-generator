@@ -97,12 +97,12 @@ class ProductTypeGenerator
         attributeDefinition['inputHint'] = row['textInputHint']
       when ATTRIBUTE_TYPES.enum
         type['values'] = (type['values'] or []).concat [
-          key: row['enumKey']
-          label: row["#{ATTRIBUTE_TYPES.enum}Label"]
+          key: row['enumKey'].trim()
+          label: row["#{ATTRIBUTE_TYPES.enum}Label"].trim()
         ]
       when ATTRIBUTE_TYPES.lenum
         type['values'] = (type['values'] or []).concat [
-          key: row['enumKey']
+          key: row['enumKey'].trim()
           label: @_i18n row, "#{ATTRIBUTE_TYPES.enum}Label"
         ]
       when ATTRIBUTE_TYPES.set
@@ -182,7 +182,7 @@ class ProductTypeGenerator
     i18n = {}
     languages = @_languages header, _.keys row
     for language in languages
-      i18n[language] = row["#{header}.#{language}"]
+      i18n[language] = row["#{header}.#{language}"].trim()
     i18n
 
   ###*
