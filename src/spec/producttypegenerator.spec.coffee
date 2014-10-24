@@ -615,6 +615,32 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitionMastersku()).toEqual expectedAttributeDefinition
 
+  it 'should return an attribute definition of type reference', ->
+
+    attributeRow =
+      name: 'zone_reference'
+      type: 'reference:zone'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Zone (de)'
+      'label.en': 'Zone (en)'
+
+    expectedAttributeDefinition =
+      zone_reference:
+        name: 'zone_reference'
+        label:
+          de: 'Zone (de)'
+          en: 'Zone (en)'
+        type:
+          name: 'reference'
+          referenceTypeId: 'zone'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
   it 'should split and return attribute element type or ettribute type', ->
 
     expect(@generator._typeOrElementType('set:set:type')).toBe 'set:type'

@@ -10,6 +10,7 @@ ATTRIBUTE_TYPES =
   enum: 'enum'
   lenum: 'lenum'
   set: 'set'
+  reference: 'reference'
 
 MASTER_SKU_NAME = 'mastersku'
 
@@ -105,6 +106,9 @@ class ProductTypeGenerator
           key: row['enumKey'].trim()
           label: @_i18n row, "#{ATTRIBUTE_TYPES.enum}Label"
         ]
+      when ATTRIBUTE_TYPES.reference
+        if row['type']
+          type['referenceTypeId'] = @_type(@_typeOrElementType(rawTypeName))
       when ATTRIBUTE_TYPES.set
         # TODO: ensure set is correctly build
         # e.g.: it will generate a wrong attribute definition for
