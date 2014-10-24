@@ -47,6 +47,7 @@
     "csv": "0.3.x",
     "jszip": "2.4.0",
     "optimist": "0.6.1",
+    "sphere-node-sdk": "1.0.0-rc5",
     "underscore": "1.7.0",
     "underscore.string": "2.3.x"
   },
