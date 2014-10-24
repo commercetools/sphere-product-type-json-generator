@@ -278,6 +278,83 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
+  it 'should return one attribute definition of type datetime', ->
+
+    attributeRow =
+      name: 'releaseTime'
+      type: 'datetime'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Veröffentlichungszeit'
+      'label.en': 'Release time'
+
+    expectedAttributeDefinition =
+      releaseTime:
+        name: 'releaseTime'
+        label:
+          de: 'Veröffentlichungszeit'
+          en: 'Release time'
+        type:
+          name: 'datetime'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+
+  it 'should return one attribute definition of type time', ->
+
+    attributeRow =
+      name: 'releaseTime'
+      type: 'time'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Veröffentlichungszeit'
+      'label.en': 'Release time'
+
+    expectedAttributeDefinition =
+      releaseTime:
+        name: 'releaseTime'
+        label:
+          de: 'Veröffentlichungszeit'
+          en: 'Release time'
+        type:
+          name: 'time'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
+
+  it 'should return one attribute definition of type boolean', ->
+
+    attributeRow =
+      name: 'isSupported'
+      type: 'boolean'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Unterstützt'
+      'label.en': 'Supported'
+
+    expectedAttributeDefinition =
+      isSupported:
+        name: 'isSupported'
+        label:
+          de: 'Unterstützt'
+          en: 'Supported'
+        type:
+          name: 'boolean'
+        attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+
   it 'should return one attribute definition of type dateTime', ->
 
     attributeRow =
