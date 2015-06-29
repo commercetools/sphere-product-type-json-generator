@@ -114,8 +114,8 @@ class ProductTypeGenerator
         # e.g.: it will generate a wrong attribute definition for
         #   name,description,set_set_gender
         #   women,Woman Product Type,x
-        delete attributeDefinition['isRequired']
-        delete attributeDefinition['isSearchable']
+        attributeDefinition['isRequired'] = false
+        attributeDefinition['isSearchable'] = false
 
         if row['type']
           type['elementType'] = {name: @_type(@_typeOrElementType(rawTypeName))}

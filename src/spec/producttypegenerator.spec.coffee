@@ -404,6 +404,8 @@ describe 'ProductTypeGenerator', ->
             name: 'text'
         attributeConstraint: 'None'
         inputHint: 'MultiLine'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
 
@@ -443,6 +445,8 @@ describe 'ProductTypeGenerator', ->
             name: 'enum'
             values: [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
         attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
 
@@ -484,6 +488,8 @@ describe 'ProductTypeGenerator', ->
               name: 'enum'
               values: [{ key: 'HUG', label: 'Hugo Boss' }, { key: 'DUG', label: 'Dolce&Gabana' }]
         attributeConstraint: 'None'
+        isRequired: false
+        isSearchable: false
 
     expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
 
