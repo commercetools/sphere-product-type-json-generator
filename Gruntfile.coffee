@@ -98,6 +98,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-bump'
 
   # register tasks
+  grunt.registerTask 'default', ['build']
   grunt.registerTask 'build', ['clean', 'coffeelint', 'coffee', 'concat']
   grunt.registerTask 'coverage', ['build', 'shell:coverage']
   grunt.registerTask 'test', ['build', 'shell:jasmine']
