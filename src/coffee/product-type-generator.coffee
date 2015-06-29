@@ -85,7 +85,7 @@ class ProductTypeGenerator
     attributeDefinitions
 
   ###
-  Builds an attribute definition instance (called recoursivly for each part in given raw type name ('set:<type>').
+  Builds an attribute definition instance (called recursivly for each part in given raw type name ('set:<type>').
   @param {object} row The row object containing key/value pairs (header/value).
   @param {object} attributeDefinition The object containing attribute definition
   @param {object} type The attribute type instance.
