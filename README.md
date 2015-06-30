@@ -39,7 +39,7 @@ Simply pass the credentials and the `--source` of your file to be imported. If y
 
 ## Docker
 
-[![Docker build](http://dockeri.co/image/sphereio/graphite-feeder)](https://registry.hub.docker.com/u/sphereio/graphite-feeder/)
+[![Docker build](http://dockeri.co/image/sphereio/product-type-json-generator)](https://registry.hub.docker.com/u/sphereio/product-type-json-generator/)
 
 There is also a docker container for easy setup/execution.
 
