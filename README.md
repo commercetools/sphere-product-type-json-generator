@@ -39,6 +39,8 @@ Simply pass the credentials and the `--source` of your file to be imported. If y
 
 ## Docker
 
+[![Docker build](http://dockeri.co/image/sphereio/graphite-feeder)](https://registry.hub.docker.com/u/sphereio/graphite-feeder/)
+
 There is also a docker container for easy setup/execution.
 
 Run docker container:
