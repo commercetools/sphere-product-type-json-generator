@@ -50,7 +50,7 @@ docker run -v /path/to/files/:/files sphereio/product-type-generator
 
 Set an alias for repeated calls:
 ```bash
-alias feeder='docker run -v /path/to/files/:/files sphereio/product-type-generator'
+alias product-type='docker run -v /path/to/files/:/files sphereio/product-type-generator'
 ```
 
 ## Contributing
