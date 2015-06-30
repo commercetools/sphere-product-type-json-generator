@@ -37,6 +37,21 @@ $ product-type-update
 
 Simply pass the credentials and the `--source` of your file to be imported. If you provide a **directory**, all `*.json` files inside that directory will be posted.
 
+## Docker
+
+[![Docker build](http://dockeri.co/image/sphereio/graphite-feeder)](https://registry.hub.docker.com/u/sphereio/graphite-feeder/)
+
+There is also a docker container for easy setup/execution.
+
+Run docker container:
+```bash
+docker run -v /path/to/files/:/files sphereio/product-type-generator
+```
+
+Set an alias for repeated calls:
+```bash
+alias product-type='docker run -v /path/to/files/:/files sphereio/product-type-generator'
+```
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
