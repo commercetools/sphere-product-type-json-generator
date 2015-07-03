@@ -12,7 +12,11 @@ This component allows you to process given _CSV_ files in order to generate SPHE
 
 ```bash
 $ npm install -g sphere-product-type-json-generator
-
+```
+* build javascript sources
+```bash
+$ grunt build
+```
 # output help screen
 $ product-type-generator
 ```
