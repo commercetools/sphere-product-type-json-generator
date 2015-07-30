@@ -5,6 +5,7 @@ node_js:
 before_script:
   - npm install -g grunt-cli
   - gem install cucumber aruba
+  - ./create_config.sh
 script:
   - npm test
   - cucumber -t ~@wip
