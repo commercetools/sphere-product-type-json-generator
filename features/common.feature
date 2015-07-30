@@ -27,10 +27,6 @@ Feature: Show common information for tooling
     Then a file named "product-type-all.json" should exist
     And the file "product-type-all.json" should contain:
     """
-    {
-      "name": "all",
-      "description": "The One And Only",
-      "attributes": [
         {
           "name": "LocTextCFF",
           "label": {
@@ -45,6 +41,4 @@ Feature: Show common information for tooling
           "isSearchable": false,
           "inputHint": ""
         }
-      ]
-    }
     """
