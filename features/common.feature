@@ -42,3 +42,5 @@ Feature: Show common information for tooling
           "inputHint": ""
         }
     """
+    When I run `product-type-update --projectKey import-101-64 --source product-type-all.json`
+    Then the exit status should be 0
