@@ -53,7 +53,8 @@ ProjectCredentialsConfig.create()
         console.log 'Product Types successfully posted to SPHERE.IO'
         process.exit 0
       .catch (e) ->
-        console.error "Oops, something went wrong: #{e.message}"
+        console.error "Oops, something went wrong: #{e}"
+        console.error("Body: %j", e.body) if e.body
         process.exit 1
     else
       console.error "Could not find #{argv.source} path"

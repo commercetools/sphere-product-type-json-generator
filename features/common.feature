@@ -19,13 +19,13 @@ Feature: Show common information for tooling
     And the output should contain:
     """
     About to write files...
-    Generated 1 files for normal product-types
+    Generated 8 files for normal product-types
     Finished generating files, checking results in target folder: .
-    Found 1 files in target folder .
+    Found 8 files in target folder .
     Execution successfully finished
     """
-    Then a file named "product-type-all.json" should exist
-    And the file "product-type-all.json" should contain:
+    Then a file named "product-type-boo-txt-num.json" should exist
+    And the file "product-type-boo-txt-num.json" should contain:
     """
         {
           "name": "LocTextCFF",
@@ -42,5 +42,9 @@ Feature: Show common information for tooling
           "inputHint": ""
         }
     """
-    When I run `product-type-update --projectKey import-101-64 --source product-type-all.json`
-    Then the exit status should be 0
+    When I run `product-type-update --projectKey import-101-64 --source product-type-boo-txt-num.json`
+    #Then the exit status should be 0
+    And the output should contain:
+    """
+    Product Types successfully posted to SPHERE.IO
+    """
