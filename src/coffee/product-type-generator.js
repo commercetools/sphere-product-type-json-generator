@@ -29,7 +29,9 @@
    */
 
   ProductTypeGenerator = (function() {
-    function ProductTypeGenerator() {}
+    function ProductTypeGenerator(client1) {
+      this.client = client1;
+    }
 
 
     /**
@@ -216,7 +218,7 @@
      */
 
     ProductTypeGenerator.prototype._languages = function(name, headers) {
-      var header, i, languages, len, regexp, results1;
+      var header, i, languages, len, regexp, results;
       regexp = new RegExp("^" + name + "\.[a-zA-Z]{2}", 'i');
       languages = function(header) {
         var matched;
@@ -225,14 +227,14 @@
           return _.last(matched[0].split("."));
         }
       };
-      results1 = [];
+      results = [];
       for (i = 0, len = headers.length; i < len; i++) {
         header = headers[i];
         if (header.match(regexp)) {
-          results1.push(languages(header));
+          results.push(languages(header));
         }
       }
-      return results1;
+      return results;
     };
 
 
@@ -302,15 +304,15 @@
       console.log("trying to find product type with name " + typeName);
       return new Promise((function(_this) {
         return function(resolve, reject) {
-          return _this.client.productTypes.where("name=" + typeName).fetch().then(results)(function() {
-            console.log("got result: " + results);
-            if (results.body.count === 0) {
+          return _this.client.productTypes.where("name=" + typeName).fetch().then(result)(function() {
+            console.log("got result: " + result);
+            if (result.body.count === 0) {
               return reject("Didn't find any matching productType for name (" + typeName + ")");
             } else {
-              if (_.size(results.body.results) > 1) {
+              if (_.size(result.body.results) > 1) {
                 console.log("Found more than 1 " + typeName + ", will use the first one I found");
               }
-              return resolve(results.body.results[0].id);
+              return resolve(result.body.results[0].id);
             }
           });
         };

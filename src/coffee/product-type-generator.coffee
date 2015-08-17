@@ -24,7 +24,7 @@ MASTER_SKU_NAME = 'mastersku'
  * @class ProductTypeGenerator
 ###
 class ProductTypeGenerator
-
+  constructor: (@client) ->
 
   ###*
    * Main exposed function that runs the program
@@ -244,14 +244,14 @@ class ProductTypeGenerator
   _findProductTypeId: (typeName) ->
     console.log "trying to find product type with name #{typeName}"
     new Promise (resolve, reject) =>
-      @client.productTypes.where("name=#{typeName}").fetch().then(results) =>
-        console.log "got result: #{results}"
-        if results.body.count is 0
+      @client.productTypes.where("name=#{typeName}").fetch().then(result) =>
+        console.log "got result: #{result}"
+        if result.body.count is 0
           reject "Didn't find any matching productType for name (#{typeName})"
         else
-          if _.size(results.body.results) > 1
+          if _.size(result.body.results) > 1
             console.log  "Found more than 1 #{typeName}, will use the first one I found"
-          resolve(results.body.results[0].id)
+          resolve(result.body.results[0].id)
 
 
 module.exports = ProductTypeGenerator

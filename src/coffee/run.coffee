@@ -72,6 +72,7 @@ console.log 'About to read CSV files...'
 Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
 .spread (types, attributes) ->
   console.log 'Running generator...'
+  generator = new ProductTypeGenerator client
   # TODO: make it async
   generator.run types, attributes, argv.target, argv.withRetailer, client
   .then (result) ->

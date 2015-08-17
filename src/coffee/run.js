@@ -83,7 +83,9 @@
   console.log('About to read CSV files...');
 
   Promise.all([readCsvAsync(argv.types), readCsvAsync(argv.attributes)]).spread(function(types, attributes) {
+    var generator;
     console.log('Running generator...');
+    generator = new ProductTypeGenerator(client);
     return generator.run(types, attributes, argv.target, argv.withRetailer, client).then(function(result) {
       console.log('About to write files...');
       if (_.isEmpty(result.productTypes)) {
