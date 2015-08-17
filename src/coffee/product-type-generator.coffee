@@ -11,14 +11,20 @@ ATTRIBUTE_TYPES =
   lenum: 'lenum'
   set: 'set'
   reference: 'reference'
+  nested: 'nested'
 
 MASTER_SKU_NAME = 'mastersku'
+
+
+
+
 
 ###*
  * Class for generating JSON product-type representations from CSV files
  * @class ProductTypeGenerator
 ###
 class ProductTypeGenerator
+
 
   ###*
    * Main exposed function that runs the program
@@ -28,8 +34,10 @@ class ProductTypeGenerator
    * @param  {Boolean} withRetailer Wheter to generate extra files for master<->retailer support
    * @return {Promise} A promise resolved with summary report
   ###
-  run: (types, attributes, target, withRetailer) ->
+  run: (types, attributes, target, withRetailer, client) ->
+    @client = client
     new Promise (resolve, reject) =>
+
       try
         # build object with all attribute defintions for later usage
         attributeDefinitions = @_createAttributeDefinitions attributes
@@ -121,6 +129,11 @@ class ProductTypeGenerator
           type['elementType'] = {name: @_type(@_typeOrElementType(rawTypeName))}
 
         @_attributeDefinition row, attributeDefinition, type['elementType'], @_typeOrElementType rawTypeName
+      when ATTRIBUTE_TYPES.nested
+        # trying to find product type by name
+        @_findProductTypeId(@_typeOrElementType(rawTypeName)).then(result) ->
+          type['typeReference'] = {id: result ,typeId: "product-type" }
+
 
   ###*
    * Split the raw attribute type and return the attribute element type or the type itself
@@ -227,5 +240,18 @@ class ProductTypeGenerator
 
       productTypeDefinitions.push productTypeDefinition
     productTypeDefinitions
+
+  _findProductTypeId: (typeName) ->
+    console.log "trying to find product type with name #{typeName}"
+    new Promise (resolve, reject) =>
+      @client.productTypes.where("name=#{typeName}").fetch().then(results) =>
+        console.log "got result: #{results}"
+        if results.body.count is 0
+          reject "Didn't find any matching productType for name (#{typeName})"
+        else
+          if _.size(results.body.results) > 1
+            console.log  "Found more than 1 #{typeName}, will use the first one I found"
+          resolve(results.body.results[0].id)
+
 
 module.exports = ProductTypeGenerator

@@ -1,3 +1,3 @@
-name,description,gender,brand,designer,primaryColor,sleeveLength,heelType,sizeShoes,sizeTops,materialComposition
-top_and_shirts,Tops & Shirts,x,x,x,x,x,,,size,x
-shoes,Shoes,x,x,x,x,,x,size,,x
+name,description,nutrientTypeCode,quantityContained,taste,nutrients
+food,food,,,x,x
+nutrient-information,nutrients,x,x,,
