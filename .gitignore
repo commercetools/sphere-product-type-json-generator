@@ -10,3 +10,5 @@ tmp
 .coveralls.yml
 coverage
 package
+.idea
+.~lock

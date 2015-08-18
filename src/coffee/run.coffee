@@ -4,15 +4,20 @@ fs = Promise.promisifyAll require('fs')
 Csv = require 'csv'
 JSZip = require 'jszip'
 ProductTypeGenerator = require './product-type-generator'
+{SphereClient} = require 'sphere-node-sdk'
+package_json = require '../package.json'
 
 argv = require('optimist')
-  .usage('Usage: $0 --types [CSV] --attributes [CSV] --target [folder] --retailer --zip --zipFileName [name]')
+  .usage('Usage: $0 --types [CSV] --attributes [CSV] --target [folder] --retailer --zip --zipFileName [name] --projectKey [key] --clientId [id] --clientSecret [secret]')
   .describe('types', 'path to CSV file describing product-type general info')
   .describe('attributes', 'path to CSV file describing product-type attributes info')
   .describe('target', 'target directory for generated product types JSON files')
   .describe('withRetailer', 'whether to generate an extra file for master<->retailer support with a "mastersku" attribute or not')
   .describe('zip', 'whether to zip the target folder or not')
   .describe('zipFileName', 'the zipped file name (without extension)')
+  .describe('projectKey', 'your SPHERE.IO project-key')
+  .describe('clientId', 'your OAuth client id for the SPHERE.IO API')
+  .describe('clientSecret', 'your OAuth client secret for the SPHERE.IO API')
   .default('retailer', false)
   .default('zip', false)
   .default('zipFileName', 'generated-product-types')
@@ -24,6 +29,13 @@ argv = require('optimist')
   .boolean('zip')
   .demand(['types', 'attributes', 'target'])
   .argv
+
+client = new SphereClient
+  config:
+    client_id: argv.clientId
+    client_secret: argv.clientSecret
+    project_key: argv.projectKey
+  user_agent: "#{package_json.name} - #{package_json.version}"
 
 
 ###
@@ -55,19 +67,23 @@ zipFiles = (path, filename) ->
       fs.writeFileAsync "#{path}/#{filename}.zip", buffer, 'utf8'
 
 console.log 'About to read CSV files...'
+
+
 Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
 .spread (types, attributes) ->
   console.log 'Running generator...'
-  generator = new ProductTypeGenerator
+  generator = new ProductTypeGenerator client
   # TODO: make it async
-  generator.run types, attributes, argv.target, argv.withRetailer
+  generator.run types, attributes, argv.target, argv.withRetailer, client
   .then (result) ->
     console.log 'About to write files...'
     if _.isEmpty result.productTypes
       Promise.reject new Error('We couldn\'t generate any file based on the given data. Please check your CSVs.')
     else
       Promise.map result.productTypes, (productType) ->
+        console.log "lalala"
         writeFileAsync productType, argv.target
+
       .then ->
         console.log "Generated #{_.size result.productTypes} files for normal product-types"
         if argv.withRetailer
@@ -103,8 +119,8 @@ Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
         process.exit 0
   .catch (e) ->
     console.error "Oops, something went wrong: #{e.message}"
-    process.exit 1
+
 .catch (e) ->
   console.error "Could not read CSV files: #{e.message}"
-  process.exit 1
+
 .done()

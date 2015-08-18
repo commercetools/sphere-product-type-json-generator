@@ -1,0 +1,5 @@
+name,type,attributeConstraint,isRequired,isSearchable,label.de,label.en,enumKey,enumLabel,enumLabel.en,enumLabel.de,textInputHint
+nutrientTypeCode,text,None,false,false,Inhaltsstofcode,Nutrient Type Code,,,,,
+quantityContained,number,None,false,false,Menge enthalten,Quantity Contained,,,,,
+taste,text,None,FALSE,FALSE,Geschmack,Taste,,,,,
+nutrients,set:nested:nutrient-information,None,FALSE,FALSE,Inhaltsstoffe,Nutrients ,,,,,

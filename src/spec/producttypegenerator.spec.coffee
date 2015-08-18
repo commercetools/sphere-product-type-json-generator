@@ -735,3 +735,31 @@ describe 'ProductTypeGenerator', ->
     expect(@generator._type('set:set:type')).toBe 'set'
     expect(@generator._type('set:type')).toBe 'set'
     expect(@generator._type('type')).toBe 'type'
+
+  it 'should return one attribute definition of type nested (elementtype nestedType)', ->
+
+    attributeRow =
+      name: 'nestedTest'
+      type: 'nested:nestedType'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Info Zeilen'
+      'label.en': 'Info Lines'
+
+    expectedAttributeDefinition =
+      infoLines:
+        name: 'nestedTest'
+        label:
+          de: 'Info Zeilen'
+          en: 'Info Lines'
+        type:
+          name: 'set'
+          elementType:
+            name: 'text'
+        attributeConstraint: 'None'
+        inputHint: 'MultiLine'
+        isRequired: false
+        isSearchable: false
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
