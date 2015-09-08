@@ -167,7 +167,7 @@ class ProductTypeGenerator
    * @return {Array} The mapped list of languages
   ###
   _languages: (name, headers) ->
-    regexp = new RegExp("^#{name}\.[a-zA-Z]{2}", 'i')
+    regexp = new RegExp("^#{name}\.([a-zA-Z]{2})(-[a-zA-Z]{2})?", 'i')
     languages = (header) ->
       # `match` will return null if there is no match, otherwise it returns an array with the matched group
       # In this case it will output this
