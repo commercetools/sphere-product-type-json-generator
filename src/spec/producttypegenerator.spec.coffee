@@ -12,6 +12,15 @@ describe 'ProductTypeGenerator', ->
   it 'should return no languages for not localized property header', ->
     expect(@generator._languages('name', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).toEqual []
 
+  it 'should return full locale codes for localized property header', ->
+    expect(@generator._languages('label', ['name', 'label.de-DE', 'label.en-US', 'enumlabel.de-DE', 'enumlabel.en-US', 'enumlabel.it-IT'])).toEqual ['de-DE', 'en-US']
+
+
+  it 'should return full locale codes and languages for localized property header', ->
+    expect(@generator._languages('label', ['name', 'label.de', 'label.en-US', 'enumlabel.de', 'enumlabel.en-US', 'enumlabel.it-IT'])).toEqual ['de', 'en-US']
+
+
+
   it 'should return an object with localized values', ->
 
     attributeRow =
@@ -28,6 +37,23 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._i18n(attributeRow, 'label')).toEqual {de: 'Geschlecht', en: 'gender'}
 
+
+  it 'should return an object with localized values using full locales and languages', ->
+
+    attributeRow =
+      name: 'gender'
+      type: 'lenum'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de-DE': 'Geschlecht'
+      'label.en': 'gender'
+      enumKey: 'M'
+      'enumLabel.en': 'male'
+      'enumLabel.de-DE': 'männlich'
+
+    expect(@generator._i18n(attributeRow, 'label')).toEqual {"de-DE": 'Geschlecht', en: 'gender'}
+
   it 'should return an object with no localized values', ->
     expect(@generator._i18n(['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'], 'name')).toEqual []
 
@@ -40,14 +66,14 @@ describe 'ProductTypeGenerator', ->
       isRequired: 'false'
       isSearchable: 'false'
       textInputHint: 'MultiLine'
-      'label.de': 'Beschreibung'
+      'label.de-DE': 'Beschreibung'
       'label.en': 'Description'
 
     expectedAttributeDefinition =
       description:
         name: 'description'
         label:
-          de: 'Beschreibung'
+          'de-DE': 'Beschreibung'
           en: 'Description'
         type:
           name: 'text'
@@ -67,14 +93,14 @@ describe 'ProductTypeGenerator', ->
       isRequired: 'false'
       isSearchable: 'false'
       textInputHint: 'MultiLine'
-      'label.de': 'Beschreibung'
+      'label.de-DE': 'Beschreibung'
       'label.en': 'Description'
 
     expectedAttributeDefinition =
       description:
         name: 'description'
         label:
-          de: 'Beschreibung'
+          'de-DE': 'Beschreibung'
           en: 'Description'
         type:
           name: 'ltext'
@@ -133,9 +159,9 @@ describe 'ProductTypeGenerator', ->
       isRequired: 'false'
       isSearchable: 'false'
       'label.de': 'Geschlecht'
-      'label.en': 'gender'
+      'label.en-US': 'gender'
       enumKey: 'M'
-      'enumLabel.en': 'male'
+      'enumLabel.en-US': 'male'
       'enumLabel.de': 'männlich'
 
     attributeRow2 =
@@ -145,9 +171,9 @@ describe 'ProductTypeGenerator', ->
       isRequired: ''
       sSearchable: ''
       'label.de': ''
-      'label.en': ''
+      'label.en-US': ''
       enumKey: 'W'
-      'enumLabel.en': 'female'
+      'enumLabel.en-US': 'female'
       'enumLabel.de': 'weiblich'
 
     attributeRow3 =
@@ -157,9 +183,9 @@ describe 'ProductTypeGenerator', ->
       isRequired: ''
       isSearchable: ''
       'label.de': ''
-      'label.en': ''
+      'label.en-US': ''
       enumKey: 'U'
-      'enumLabel.en': 'unisex'
+      'enumLabel.en-US': 'unisex'
       'enumLabel.de': 'unisex'
 
     expectedAttributeDefinition =
@@ -167,10 +193,10 @@ describe 'ProductTypeGenerator', ->
         name: 'gender'
         label:
           de: 'Geschlecht'
-          en: 'gender'
+          'en-US': 'gender'
         type:
           name: 'lenum'
-          values: [{ key: 'M', label: de: 'männlich', en: 'male' }, { key: 'W', label: de: 'weiblich', en: 'female' }, { key: 'U', label: de: 'unisex', en: 'unisex' }]
+          values: [{ key: 'M', label: de: 'männlich', 'en-US': 'male' }, { key: 'W', label: de: 'weiblich', 'en-US': 'female' }, { key: 'U', label: de: 'unisex', 'en-US': 'unisex' }]
         attributeConstraint: 'None'
         isRequired: false
         isSearchable: false
