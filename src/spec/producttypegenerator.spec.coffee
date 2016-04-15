@@ -37,6 +37,24 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._i18n(attributeRow, 'label')).toEqual {de: 'Geschlecht', en: 'gender'}
 
+  it 'should return an object with localized inputTip values', ->
+
+    attributeRow =
+      name: 'gender'
+      type: 'lenum'
+      attributeConstraint: 'None'
+      isRequired: 'false'
+      isSearchable: 'false'
+      'label.de': 'Geschlecht'
+      'label.en': 'gender'
+      'inputTip.de': 'tip de'
+      'inputTip.en': 'tip en'
+      enumKey: 'M'
+      'enumLabel.en': 'male'
+      'enumLabel.de': 'männlich'
+
+    expect(@generator._i18n(attributeRow, 'inputTip')).toEqual {de: 'tip de', en: 'tip en'}
+
 
   it 'should return an object with localized values using full locales and languages', ->
 

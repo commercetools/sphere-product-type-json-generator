@@ -72,6 +72,10 @@ class ProductTypeGenerator
           isRequired: row['isRequired'] is 'true'
           isSearchable: row['isSearchable'] is 'true'
 
+        inputTip = @_i18n row, 'inputTip'
+        if _.keys(inputTip).length > 0
+          attributeDefinition.inputTip = inputTip
+
         # store attribute definition using name as key for easy access
         attributeDefinitions[attrName] = attributeDefinition
         # store last processed attribute for further usage (reading next rows)
@@ -190,7 +194,8 @@ class ProductTypeGenerator
     i18n = {}
     languages = @_languages header, _.keys row
     for language in languages
-      i18n[language] = row["#{header}.#{language}"].trim()
+      if row["#{header}.#{language}"].trim() isnt ''
+        i18n[language] = row["#{header}.#{language}"].trim()
     i18n
 
   ###*
