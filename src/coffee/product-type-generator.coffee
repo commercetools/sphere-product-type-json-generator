@@ -108,7 +108,7 @@ class ProductTypeGenerator
         ]
       when ATTRIBUTE_TYPES.reference
         if row['type']
-          type['referenceTypeId'] = row['referenceTypeId']
+          type['referenceTypeId'] = @_type(@_typeOrElementType(rawTypeName))
       when ATTRIBUTE_TYPES.set
         # TODO: ensure set is correctly build
         # e.g.: it will generate a wrong attribute definition for
