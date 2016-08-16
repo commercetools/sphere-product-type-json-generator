@@ -6,14 +6,14 @@ JSZip = require 'jszip'
 ProductTypeGenerator = require './product-type-generator'
 
 argv = require('optimist')
-  .usage('Usage: $0 --types [CSV] --attributes [CSV] --target [folder] --retailer --zip --zipFileName [name]')
+  .usage('Usage: $0 --types [CSV] --attributes [CSV] --target [folder] --withRetailer --zip --zipFileName [name]')
   .describe('types', 'path to CSV file describing product-type general info')
   .describe('attributes', 'path to CSV file describing product-type attributes info')
   .describe('target', 'target directory for generated product types JSON files')
   .describe('withRetailer', 'whether to generate an extra file for master<->retailer support with a "mastersku" attribute or not')
   .describe('zip', 'whether to zip the target folder or not')
   .describe('zipFileName', 'the zipped file name (without extension)')
-  .default('retailer', false)
+  .default('withRetailer', false)
   .default('zip', false)
   .default('zipFileName', 'generated-product-types')
   .alias('types', 't')
