@@ -10,6 +10,16 @@ argv =
   projectKey: process.env.SPHERE_PROJECT_KEY
   logSilent: true
 
+sphereConfig =
+  config:
+    'client_id': argv.clientId
+    'client_secret': argv.clientSecret
+    'project_key': argv.projectKey
+  stats:
+    includeHeaders: true
+    maskSensitiveHeaderData: true
+  timeout: 360000
+
 testProductType = {
   "name": "top_and_shirts",
   "description": "Tops & Shirts",
@@ -54,17 +64,7 @@ describe 'ProductTypeImporter', ->
     expect(argv.clientSecret).toBeDefined errMissingCredentials
     expect(argv.projectKey).toBeDefined errMissingCredentials
 
-    config =
-      config:
-        'client_id': argv.clientId
-        'client_secret': argv.clientSecret
-        'project_key': argv.projectKey
-      stats:
-        includeHeaders: true
-        maskSensitiveHeaderData: true
-    timeout: 360000
-
-    sphereClient = new SphereClient config
+    sphereClient = new SphereClient sphereConfig
     importer = new ProductTypeImporter
     importer.init(argv)
     .then ->
@@ -76,6 +76,20 @@ describe 'ProductTypeImporter', ->
           .delete(productType.version)
         .then ->
           done()
+    .catch (e) ->
+      done(e)
+
+
+  afterEach (done) ->
+    sphereClient = new SphereClient config
+    sphereClient.productTypes.fetch()
+    .then (res) ->
+      console.log "Deleting old product types", res.body.results.length
+      Promise.map res.body.results, (productType) ->
+        sphereClient.productTypes.byId(productType.id)
+        .delete(productType.version)
+      .then ->
+        done()
     .catch (e) ->
       done(e)
 
