@@ -99,16 +99,16 @@ saveProductTypes = (result) ->
       console.log "Finished generating files, checking results in target folder: #{argv.target}"
       fs.readdirAsync argv.target
       .then (files) ->
-        if not argv.zip
-          Promise.resolve()
+        jsonFiles = _.filter files, (file) -> file.match(/\.json/)
+        if _.isEmpty jsonFiles
+          Promise.reject "No files were written in target folder #{argv.target}"
         else
-          jsonFiles = _.filter files, (file) -> file.match(/\.json/)
-          if _.isEmpty jsonFiles
-            Promise.reject "No files were written in target folder #{argv.target}"
-          else
-            console.log "Found #{_.size jsonFiles} files in target folder #{argv.target}"
+          console.log "Found #{_.size jsonFiles} files in target folder #{argv.target}"
+          if argv.zip
             console.log "Zipping files as #{argv.zipFileName} name"
             zipFiles argv.target, argv.zipFileName
+          else
+            Promise.resolve()
       .catch (e) ->
         console.error "Oops, there was an error reading the files in target folder #{argv.target}: #{e.message}"
         process.exit 1
