@@ -17,9 +17,9 @@ argv = require('optimist')
 ProjectCredentialsConfig.create()
 .then (config) ->
   credentials = config.enrichCredentials
-    project_key: argv.projectKey
-    client_id: argv.clientId
-    client_secret: argv.clientSecret
+    project_key: argv.projectKey || process.env.SPHERE_PROJECT_KEY
+    client_id: argv.clientId || process.env.SPHERE_CLIENT_ID
+    client_secret: argv.clientSecret || process.env.SPHERE_CLIENT_SECRET
 
   client = new SphereClient
     config: credentials

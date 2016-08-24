@@ -7,7 +7,6 @@ before_script:
 - gem install cucumber aruba
 - "./create_config.sh"
 script:
-- env
 - npm test
 - cucumber -t ~@wip
 - mkdir -p tmp && ./bin/product-type-generator --types data/sample-product-types.csv
