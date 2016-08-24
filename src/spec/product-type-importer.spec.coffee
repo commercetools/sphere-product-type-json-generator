@@ -81,7 +81,7 @@ describe 'ProductTypeImporter', ->
 
 
   afterEach (done) ->
-    sphereClient = new SphereClient config
+    sphereClient = new SphereClient sphereConfig
     sphereClient.productTypes.fetch()
     .then (res) ->
       console.log "Deleting old product types", res.body.results.length
