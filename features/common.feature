@@ -42,7 +42,7 @@ Feature: Show common information for tooling
           "inputHint": ""
         }
     """
-    When I run `product-type-update --projectKey import-101-64 --source product-type-boo-txt-num.json`
+    When I run `product-type-update --projectKey nicola --source product-type-boo-txt-num.json`
     #Then the exit status should be 0
     And the output should contain:
     """
