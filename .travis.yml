@@ -1,28 +1,35 @@
 language: node_js
 node_js:
-  - '0.10'
-  - '0.12'
+- '0.10'
+- '0.12'
 before_script:
-  - npm install -g grunt-cli
-  - gem install cucumber aruba
-  - ./create_config.sh
+- npm install -g grunt-cli
+- gem install cucumber aruba
+- "./create_config.sh"
 script:
-  - npm test
-  - cucumber -t ~@wip
-  - 'mkdir -p tmp && ./bin/product-type-generator --types data/sample-product-types.csv --attributes data/sample-product-types-attributes.csv --target ./tmp --zip'
-  - 'mkdir -p tmp && ./bin/product-type-generator --types data/marketplace-types.csv --attributes data/marketplace-attributes.csv --target ./tmp --withRetailer --zip'
-  - './bin/product-type-update --projectKey ${SPHERE_PROJECT_KEY} --clientId ${SPHERE_CLIENT_ID} --clientSecret ${SPHERE_CLIENT_SECRET} --source ./tmp'
+- npm test
+- cucumber -t ~@wip
+- mkdir -p tmp && ./bin/product-type-generator --types data/sample-product-types.csv
+  --attributes data/sample-product-types-attributes.csv --target ./tmp --zip
+- mkdir -p tmp && ./bin/product-type-generator --types data/marketplace-types.csv
+  --attributes data/marketplace-attributes.csv --target ./tmp --withRetailer --zip
+- "./bin/product-type-update --projectKey ${SPHERE_PROJECT_KEY} --clientId ${SPHERE_CLIENT_ID}
+  --clientSecret ${SPHERE_CLIENT_SECRET} --source ./tmp"
 notifications:
   hipchat:
     rooms:
-      - secure: BbMUlILTPGhOX0ZBNqyCq0LpqwRNTOmuqv8gsg83LiDPy4SI/YsjAOQLlrbnoXLECAQMfRBwnED1XVJnskgJbj/VFL+q0hAa0GWfp8gLj7PAv40TYM7+pj6KDxJMWh3ZMWrQ2ixNRAjbuGnP2AfL0Gn6hj6NaxFwyIGQrb7sHKo=
+    - secure: BbMUlILTPGhOX0ZBNqyCq0LpqwRNTOmuqv8gsg83LiDPy4SI/YsjAOQLlrbnoXLECAQMfRBwnED1XVJnskgJbj/VFL+q0hAa0GWfp8gLj7PAv40TYM7+pj6KDxJMWh3ZMWrQ2ixNRAjbuGnP2AfL0Gn6hj6NaxFwyIGQrb7sHKo=
     template:
-      - '%{repository}#%{build_number} (%{author}): %{message} (<a href="%{build_url}">Details</a>/<a href="%{compare_url}">Compare</a>)'
+    - '%{repository}#%{build_number} (%{author}): %{message} (<a href="%{build_url}">Details</a>/<a
+      href="%{compare_url}">Compare</a>)'
     format: html
     on_success: change
     on_failure: change
 env:
   global:
-    - secure: iytO3AZ1pOvuZ8Mb6F6WqNjFnbxWw5yfadrnN5z43jK+23/YKS04bvcExJJ095L7t9IX9Jes2YfH1nbUm/f0oys3l1K40MDTDP7JvG39AfTHxLezUTrNKLryCI/FbuvIcA3BX1x2KH9FuRO1kmz5zaDQ0paNnn8z1MHU2PqizR0=
-    - secure: 04u05uQP06WQX0BvFY2RISY/9/Z63c+Tjono6Z4habOvLYtYsfE0rmxEcQkp3PGgRnWlDtYek/2S5XMKAG1Vlhlmv/kRpmp4h9t+SsPwLuYlUu8VI0/ADcOn9nLurFVc95jAtLjXSWTtwq5A92Lqj8Ujzpucr8m3pF9XWRnhLg0=
-    - secure: dF44muD7/0sSF6D0JV1KaVcgjPp/P/q8Yd2CzC/okP+xYNo5DcZhJGjNoPEtdOleE5/Osj+XWPQZfhQaWfoe1tptdXppEYJlkHvkHgJh7k3OIBKxCWr+1onssxkUIYuWZEKtwF4koxtoUNw1EFsHkfSOEWGpb644wL6aeddDv+k=
+  - secure: iytO3AZ1pOvuZ8Mb6F6WqNjFnbxWw5yfadrnN5z43jK+23/YKS04bvcExJJ095L7t9IX9Jes2YfH1nbUm/f0oys3l1K40MDTDP7JvG39AfTHxLezUTrNKLryCI/FbuvIcA3BX1x2KH9FuRO1kmz5zaDQ0paNnn8z1MHU2PqizR0=
+  - secure: 04u05uQP06WQX0BvFY2RISY/9/Z63c+Tjono6Z4habOvLYtYsfE0rmxEcQkp3PGgRnWlDtYek/2S5XMKAG1Vlhlmv/kRpmp4h9t+SsPwLuYlUu8VI0/ADcOn9nLurFVc95jAtLjXSWTtwq5A92Lqj8Ujzpucr8m3pF9XWRnhLg0=
+  - secure: dF44muD7/0sSF6D0JV1KaVcgjPp/P/q8Yd2CzC/okP+xYNo5DcZhJGjNoPEtdOleE5/Osj+XWPQZfhQaWfoe1tptdXppEYJlkHvkHgJh7k3OIBKxCWr+1onssxkUIYuWZEKtwF4koxtoUNw1EFsHkfSOEWGpb644wL6aeddDv+k=
+  - secure: d+pIVVu8rg2u0l6Rl1gtAD512sWHK4w2rkDz6dzf9nBPLES4MEQSmjUGa0ZoWMDpqKuiS3MeSuQrOMv9Ejjx2VpgzG6uJvPGnxH9O5ryxiMW6FVpjvxb106WRs/lk/s3Qvbk1fN6/TahJwM1iD0n0atk98HS/LcylMBi972WDHo=
+  - secure: R2y9EZEW4cfSUeRAwWa/TLL8rFDtS5HhUhALM6fR1ZUOCe2q8sYugbOWiIJfH/4XdHrnCkqDABk0ZcEoO5eBYgsqDXIdWhVRZXLQb/BgIiUnlB0wjoLDuqzn7pLI1ixn5O1kvONfTOBbk/dMQasXMegmhBzzdtddyvYrieAf2bU=
+  - secure: eRQWePBjJQHNgkSl9s+iqrwT7ScuMsP6GuwLUucl4oxG1fUjJKO822VCr5wzqOgj8fZ277ywOGSaZbheZ7s6rHSE/eUB9+5iSLEqaXeJ3RaViWgnydVVa2YVPME1waP41BiQx7yXn5fsmHpmjWBQCnN0hqCzcBHDKiB5EVxu5EI=
