@@ -68,7 +68,7 @@ module.exports = (grunt) ->
         stderr: true
         failOnError: true
       coverage:
-        command: './node_modules/.bin/istanbul cover jasmine-node --captureExceptions test && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf ./coverage'
+        command: 'istanbul cover jasmine-node --captureExceptions test && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf ./coverage'
       jasmine:
         command: './node_modules/.bin/jasmine-node --captureExceptions test'
       publish:
