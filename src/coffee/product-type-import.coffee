@@ -10,13 +10,12 @@ class ProductTypeImporter
   Prepare for importing, initialize used modules
   ###
   init: (argv) ->
-    @argv = argv
     @logOptions =
       name: "#{package_json.name}-#{package_json.version}"
       silent: !! argv.logSilent
       streams: [
         { level: 'error', stream: process.stderr }
-        { level: argv.logLevel || 'info', path: (argv.logDir || '.') + "/#{package_json.name}.log" }
+        { level: argv.logLevel || 'info', path: "#{argv.logDir || '.'}/#{package_json.name}.log" }
       ]
 
     @logger = new ExtendedLogger
@@ -27,9 +26,9 @@ class ProductTypeImporter
       @logger.bunyanLogger.trace = -> # noop
       @logger.bunyanLogger.debug = -> # noop
 
-    @_ensureProductTypeImporter @argv, @logger
-    .then (sphereImporter) ->
-      @sphereImporter = sphereImporter
+    @_ensureCredentials argv
+    .then (credentials) ->
+      @sphereImporter = new ProductTypeImport.default(@logger, credentials)
       Promise.resolve @
 
   ###
@@ -66,14 +65,6 @@ class ProductTypeImporter
       sphereClientConfig: options
 
   ###
-  Create sphere product import class
-  ###
-  _ensureProductTypeImporter: (argv, logger) ->
-    @_ensureCredentials argv
-    .then (credentials) =>
-      @sphereImporter = new ProductTypeImport.default(logger, credentials)
-
-  ###
   Import product types using sphere product import tool
   ###
   import: (data) ->
@@ -86,5 +77,5 @@ class ProductTypeImporter
       .catch (e) ->
         console.error "Oops, something went wrong when importing product type #{productType.name} to sphere"
         Promise.reject e
-    
+    , concurrency: 5
 module.exports = ProductTypeImporter

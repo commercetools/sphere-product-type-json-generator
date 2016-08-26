@@ -24,12 +24,12 @@ argv = require('optimist')
   .describe('sphereProtocol', 'SPHERE.IO API protocol to connect to')
   .describe('sphereAuthHost', 'SPHERE.IO OAuth host to connect to')
   .describe('sphereAuthProtocol', 'SPHERE.IO OAuth protocol to connect to')
-  .describe('sphereImport', 'import product types to SPHERE.IO')
+  .describe('import', 'import product types to SPHERE.IO')
   .describe('logSilent', 'use console to print messages')
   .describe('logDir', 'directory to store logs')
   .describe('logLevel', 'log level for file logging')
   .default('projectKey', false)
-  .default('sphereImport', false)
+  .default('import', false)
   .default('logSilent', false)
   .default('logDir', '.')
   .default('logLevel', 'info')
@@ -42,7 +42,7 @@ argv = require('optimist')
   .alias('target', 'td')
   .alias('withRetailer', 'r')
   .boolean('withRetailer')
-  .boolean('sphereImport')
+  .boolean('import')
   .boolean('zip')
   .demand(['types', 'attributes', 'target'])
   .argv
@@ -127,7 +127,7 @@ Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
   # TODO: make it async
   generator.run types, attributes, argv.target, argv.withRetailer
   .then (result) ->
-    if argv.sphereImport
+    if argv.import
       importSphereProductTypes result
       .catch (e) ->
         console.error "Ending with an error: #{e.message}"
