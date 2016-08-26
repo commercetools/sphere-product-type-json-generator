@@ -107,4 +107,7 @@ describe 'ProductTypeImporter', ->
     .then ->
       done "Importer wrong product type"
     .catch ->
-      done()
+      sphereClient.productTypes.fetch()
+      .then (res) ->
+        expect(res.body.results.length).toEqual 0
+        done()

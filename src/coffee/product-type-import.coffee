@@ -46,11 +46,10 @@ class ProductTypeImporter
     else
       credentialsPromise = ProjectCredentialsConfig.create()
       .then (credentials) ->
-        Promise.resolve
-          config: credentials.enrichCredentials
-            project_key: argv.projectKey
-            client_id: argv.clientId
-            client_secret: argv.clientSecret
+        config: credentials.enrichCredentials
+          project_key: argv.projectKey
+          client_id: argv.clientId
+          client_secret: argv.clientSecret
 
     credentialsPromise.then (credentials) ->
       options = _.extend credentials,
@@ -64,18 +63,15 @@ class ProductTypeImporter
         options.rejectUnauthorized = false
       options.oauth_protocol = argv.sphereAuthProtocol if argv.sphereAuthProtocol
 
-      config =
-        sphereClientConfig: options
-
-      Promise.resolve config
+      sphereClientConfig: options
 
   ###
   Create sphere product import class
   ###
   _ensureProductTypeImporter: (argv, logger) ->
     @_ensureCredentials argv
-    .then (credentials) ->
-      new ProductTypeImport.default(logger, credentials)
+    .then (credentials) =>
+      @sphereImporter = new ProductTypeImport.default(logger, credentials)
 
   ###
   Import product types using sphere product import tool
