@@ -39,8 +39,8 @@ Feature: Show common information for tooling
           "attributeConstraint": "CombinationUnique",
           "isRequired": false,
           "isSearchable": false,
-          "inputHint": ""
-        }
+          "inputHint": "SingleLine"
+        },
     """
     When I run `product-type-update --projectKey nicola --source product-type-boo-txt-num.json`
     #Then the exit status should be 0
