@@ -5,8 +5,6 @@ ProductTypeImporter = require '../lib/product-type-import'
 errMissingCredentials = 'Missing configuration in env variables'
 
 argv =
-  clientId: process.env.SPHERE_CLIENT_ID
-  clientSecret: process.env.SPHERE_CLIENT_SECRET
   projectKey: process.env.SPHERE_PROJECT_KEY
   logSilent: true
 
