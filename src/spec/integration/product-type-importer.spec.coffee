@@ -60,7 +60,7 @@ describe 'ProductTypeImporter', ->
       config =
         projectKey: sphereCredentials.project_key,
         clientId: sphereCredentials.client_id,
-        clietSecret: sphereCredentials.client_secret
+        clientSecret: sphereCredentials.client_secret
 
       importer = new ProductTypeImporter
       importer.init config
@@ -70,7 +70,6 @@ describe 'ProductTypeImporter', ->
       sphereClient = new SphereClient options
 
   beforeEach ->
-
     sphereClient.productTypes.fetch()
     .then (res) ->
       console.log "Deleting old product types", res.body.results.length
