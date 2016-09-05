@@ -1,6 +1,8 @@
+{expect} = require 'chai'
 Promise = require 'bluebird'
-ProductTypeImporter = require '../lib/product-type-import'
+ProductTypeImporter = require '../../lib/product-type-import'
 {SphereClient} = require 'sphere-node-sdk'
+{ProjectCredentialsConfig} = require 'sphere-node-utils'
 
 errMissingCredentials = 'Missing configuration in env variables'
 
@@ -47,58 +49,53 @@ describe 'ProductTypeImporter', ->
   importer = null
   sphereClient = null
 
-  beforeEach (done) ->
-    expect(argv.clientId).toBeDefined errMissingCredentials
-    expect(argv.clientSecret).toBeDefined errMissingCredentials
-    expect(argv.projectKey).toBeDefined errMissingCredentials
+  before ->
+    expect(argv.projectKey).to.be.a 'string', errMissingCredentials
 
-    config =
-      config:
-        'client_id': argv.clientId
-        'client_secret': argv.clientSecret
-        'project_key': argv.projectKey
-      stats:
-        includeHeaders: true
-        maskSensitiveHeaderData: true
-    timeout: 360000
+    ProjectCredentialsConfig.create()
+    .then (credentials) ->
+      sphereCredentials = credentials.enrichCredentials
+        project_key: argv.projectKey
 
-    sphereClient = new SphereClient config
-    importer = new ProductTypeImporter
-    importer.init(argv)
-    .then ->
-      sphereClient.productTypes.fetch()
-      .then (res) ->
-        console.log "Deleting old product types", res.body.results.length
-        Promise.map res.body.results, (productType) ->
-          sphereClient.productTypes.byId(productType.id)
-          .delete(productType.version)
-        .then ->
-          done()
-    .catch (e) ->
-      done(e)
+      config =
+        projectKey: sphereCredentials.project_key,
+        clientId: sphereCredentials.client_id,
+        clietSecret: sphereCredentials.client_secret
 
-  it 'should import product type', (done) ->
-    expect(importer).toBeDefined()
-    expect(sphereClient).toBeDefined()
+      importer = new ProductTypeImporter
+      importer.init config
+
+      options =
+        config: sphereCredentials
+      sphereClient = new SphereClient options
+
+  beforeEach ->
 
     sphereClient.productTypes.fetch()
     .then (res) ->
-      expect(res.body.results.length).toEqual 0
+      console.log "Deleting old product types", res.body.results.length
+      Promise.map res.body.results, (productType) ->
+        sphereClient.productTypes.byId(productType.id)
+        .delete(productType.version)
+
+  it 'should import product type', ->
+    expect(importer).to.be.an 'object'
+    expect(sphereClient).to.be.an 'object'
+
+    sphereClient.productTypes.fetch()
+    .then (res) ->
+      expect(res.body.results.length).to.equal 0
       console.log "Importing product type using importer"
       importer.import {productTypes: [testProductType]}
     .then ->
       console.log "Product type imported - verifiing result"
       sphereClient.productTypes.fetch()
     .then (res) ->
-      expect(res.body.results.length).toEqual 1
-
-      done()
-    .catch (e) ->
-      done(e)
+      expect(res.body.results.length).to.equal 1
 
   it 'should not import wrong product type', (done) ->
-    expect(importer).toBeDefined()
-    expect(sphereClient).toBeDefined()
+    expect(importer).to.be.an 'object'
+    expect(sphereClient).to.be.an 'object'
 
     delete testProductType.name
     importer.import {productTypes: [testProductType]}
@@ -107,5 +104,6 @@ describe 'ProductTypeImporter', ->
     .catch ->
       sphereClient.productTypes.fetch()
       .then (res) ->
-        expect(res.body.results.length).toEqual 0
+        expect(res.body.results.length).to.equal 0
         done()
+    return 0 # do not return promise

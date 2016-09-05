@@ -45,10 +45,15 @@ class ProductTypeImporter
     else
       credentialsPromise = ProjectCredentialsConfig.create()
       .then (credentials) ->
-        config: credentials.enrichCredentials
+        config = credentials.enrichCredentials
           project_key: argv.projectKey
-          client_id: argv.clientId
-          client_secret: argv.clientSecret
+
+        if(argv.clientId)
+          config.client_id = argv.clientId
+
+        if(argv.clientSecret)
+          config.client_secret = argv.clientSecret
+        config: config
 
     credentialsPromise.then (credentials) ->
       options = _.extend credentials,
@@ -61,7 +66,6 @@ class ProductTypeImporter
         options.oauth_host = argv.sphereAuthHost
         options.rejectUnauthorized = false
       options.oauth_protocol = argv.sphereAuthProtocol if argv.sphereAuthProtocol
-
       sphereClientConfig: options
 
   ###
