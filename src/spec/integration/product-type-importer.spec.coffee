@@ -78,9 +78,6 @@ describe 'ProductTypeImporter', ->
         .delete(productType.version)
 
   it 'should import product type', ->
-    expect(importer).to.be.an 'object'
-    expect(sphereClient).to.be.an 'object'
-
     sphereClient.productTypes.fetch()
     .then (res) ->
       expect(res.body.results.length).to.equal 0
@@ -93,14 +90,12 @@ describe 'ProductTypeImporter', ->
       expect(res.body.results.length).to.equal 1
 
   it 'should not import wrong product type', (done) ->
-    expect(importer).to.be.an 'object'
-    expect(sphereClient).to.be.an 'object'
-
     delete testProductType.name
     importer.import {productTypes: [testProductType]}
     .then ->
       done "Importer wrong product type"
-    .catch ->
+    .catch (err) ->
+      expect(err.toString()).to.equal "TypeError: Cannot read property 'name' of undefined"
       sphereClient.productTypes.fetch()
       .then (res) ->
         expect(res.body.results.length).to.equal 0
