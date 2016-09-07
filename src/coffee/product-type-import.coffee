@@ -1,4 +1,5 @@
 _ = require 'underscore'
+path = require 'path'
 Promise = require 'bluebird'
 ProductTypeImport = require 'sphere-product-type-import'
 {ExtendedLogger, ProjectCredentialsConfig} = require 'sphere-node-utils'
@@ -10,12 +11,13 @@ class ProductTypeImporter
   Prepare for importing, initialize used modules
   ###
   init: (argv) ->
+    logPath = path.join(argv.logDir || '.', package_json.name + ".log")
     @logOptions =
       name: "#{package_json.name}-#{package_json.version}"
       silent: !! argv.logSilent
       streams: [
         { level: 'error', stream: process.stderr }
-        { level: argv.logLevel || 'info', path: "#{argv.logDir || '.'}/#{package_json.name}.log" }
+        { level: argv.logLevel || 'info', path: logPath }
       ]
 
     @logger = new ExtendedLogger
