@@ -84,7 +84,6 @@ describe 'ProductTypeImporter', ->
       console.log "Importing product type using importer"
       importer.import {productTypes: [testProductType]}
     .then ->
-      console.log "Product type imported - verifiing result"
       sphereClient.productTypes.fetch()
     .then (res) ->
       expect(res.body.results.length).to.equal 1
