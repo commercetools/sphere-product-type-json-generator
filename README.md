@@ -60,16 +60,31 @@ alias product-type='docker run -v /path/to/files/:/files sphereio/product-type-g
 * Clone this repository and change into the directory
 * Install all necessary dependencies with
 
-  ```bash
-  npm install
-  ```
+```bash
+    npm install
+```
 
-* To run the test do:
+* To run tests you have to set up credentials for sphere project first:
+  For setting credentials you can create file in your home folder `~/.sphere-project-credentials.json` with content:
+  
+```
+{
+    "{PROJECT_ID}": {
+        "client_id": "{CLIENT_ID}",
+        "client_secret": "{CLIENT_SECRET}"
+    }
+}
+```
 
-  ```bash
+ Than you can do:
+
+```bash
+  export SPHERE_PROJECT_KEY={PROJECT_ID}
   npm test
-  ```
+```
 
+ This will start tests under sphere project `{PROJECT_ID}`.
+  
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 More info [here](CONTRIBUTING.md)
