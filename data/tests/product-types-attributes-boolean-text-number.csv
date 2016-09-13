@@ -15,38 +15,38 @@ booleanSFF,boolean,SameForAll,false,false,Boolsch,Boolean,,,,,
 booleanSTF,boolean,SameForAll,true,false,Boolsch,Boolean,,,,,
 booleanSFT,boolean,SameForAll,false,true,Boolsch,Boolean,,,,,
 booleanSTT,boolean,SameForAll,true,true,Boolsch,Boolean,,,,,
-textNFF,text,None,false,false,Text,Text,,,,,
-textNTF,text,None,true,false,Text,Text,,,,,
-textNFT,text,None,false,true,Text,Text,,,,,
-textNTT,text,None,true,true,Text,Text,,,,,
-textUFF,text,Unique,false,false,Text,Text,,,,,
-textUTF,text,Unique,true,false,Text,Text,,,,,
-textUFT,text,Unique,false,true,Text,Text,,,,,
-textUTT,text,Unique,true,true,Text,Text,,,,,
-textCFF,text,CombinationUnique,false,false,Text,Text,,,,,
-textCTF,text,CombinationUnique,true,false,Text,Text,,,,,
-textCFT,text,CombinationUnique,false,true,Text,Text,,,,,
-textCTT,text,CombinationUnique,true,true,Text,Text,,,,,
-textSFF,text,SameForAll,false,false,Text,Text,,,,,
-textSTF,text,SameForAll,true,false,Text,Text,,,,,
-textSFT,text,SameForAll,false,true,Text,Text,,,,,
-textSTT,text,SameForAll,true,true,Text,Text,,,,,
-LocTextNFF,ltext,None,false,false,Lokalisierter Text,Localizable Text,,,,,
-LocTextNTF,ltext,None,true,false,Lokalisierter Text,Localizable Text,,,,,
-LocTextNFT,ltext,None,false,true,Lokalisierter Text,Localizable Text,,,,,
-LocTextNTT,ltext,None,true,true,Lokalisierter Text,Localizable Text,,,,,
-LocTextUFF,ltext,Unique,false,false,Lokalisierter Text,Localizable Text,,,,,
-LocTextUTF,ltext,Unique,true,false,Lokalisierter Text,Localizable Text,,,,,
-LocTextUFT,ltext,Unique,false,true,Lokalisierter Text,Localizable Text,,,,,
-LocTextUTT,ltext,Unique,true,true,Lokalisierter Text,Localizable Text,,,,,
-LocTextCFF,ltext,CombinationUnique,false,false,Lokalisierter Text,Localizable Text,,,,,
-LocTextCTF,ltext,CombinationUnique,true,false,Lokalisierter Text,Localizable Text,,,,,
-LocTextCFT,ltext,CombinationUnique,false,true,Lokalisierter Text,Localizable Text,,,,,
-LocTextCTT,ltext,CombinationUnique,true,true,Lokalisierter Text,Localizable Text,,,,,
-LocTextSFF,ltext,SameForAll,false,false,Lokalisierter Text,Localizable Text,,,,,
-LocTextSTF,ltext,SameForAll,true,false,Lokalisierter Text,Localizable Text,,,,,
-LocTextSFT,ltext,SameForAll,false,true,Lokalisierter Text,Localizable Text,,,,,
-LocTextSTT,ltext,SameForAll,true,true,Lokalisierter Text,Localizable Text,,,,,
+textNFF,text,None,false,false,Text,Text,,,,,SingleLine
+textNTF,text,None,true,false,Text,Text,,,,,SingleLine
+textNFT,text,None,false,true,Text,Text,,,,,SingleLine
+textNTT,text,None,true,true,Text,Text,,,,,SingleLine
+textUFF,text,Unique,false,false,Text,Text,,,,,SingleLine
+textUTF,text,Unique,true,false,Text,Text,,,,,SingleLine
+textUFT,text,Unique,false,true,Text,Text,,,,,SingleLine
+textUTT,text,Unique,true,true,Text,Text,,,,,SingleLine
+textCFF,text,CombinationUnique,false,false,Text,Text,,,,,SingleLine
+textCTF,text,CombinationUnique,true,false,Text,Text,,,,,SingleLine
+textCFT,text,CombinationUnique,false,true,Text,Text,,,,,SingleLine
+textCTT,text,CombinationUnique,true,true,Text,Text,,,,,SingleLine
+textSFF,text,SameForAll,false,false,Text,Text,,,,,SingleLine
+textSTF,text,SameForAll,true,false,Text,Text,,,,,SingleLine
+textSFT,text,SameForAll,false,true,Text,Text,,,,,SingleLine
+textSTT,text,SameForAll,true,true,Text,Text,,,,,SingleLine
+LocTextNFF,ltext,None,false,false,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextNTF,ltext,None,true,false,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextNFT,ltext,None,false,true,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextNTT,ltext,None,true,true,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextUFF,ltext,Unique,false,false,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextUTF,ltext,Unique,true,false,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextUFT,ltext,Unique,false,true,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextUTT,ltext,Unique,true,true,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextCFF,ltext,CombinationUnique,false,false,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextCTF,ltext,CombinationUnique,true,false,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextCFT,ltext,CombinationUnique,false,true,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextCTT,ltext,CombinationUnique,true,true,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextSFF,ltext,SameForAll,false,false,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextSTF,ltext,SameForAll,true,false,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextSFT,ltext,SameForAll,false,true,Lokalisierter Text,Localizable Text,,,,,SingleLine
+LocTextSTT,ltext,SameForAll,true,true,Lokalisierter Text,Localizable Text,,,,,SingleLine
 numberNFF,number,None,false,false,Nummer,Number,,,,,
 numberNTF,number,None,true,false,Nummer,Number,,,,,
 numberNFT,number,None,false,true,Nummer,Number,,,,,

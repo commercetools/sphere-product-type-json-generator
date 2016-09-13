@@ -1,23 +1,24 @@
-ProductTypeGenerator = require '../lib/product-type-generator'
+ProductTypeGenerator = require '../../lib/product-type-generator'
+{expect} = require 'chai'
 
 describe 'ProductTypeGenerator', ->
 
   beforeEach ->
     @generator = new ProductTypeGenerator
-    expect(@generator).toBeDefined()
+    expect(@generator).to.be.an 'object'
 
   it 'should return languages for localized property header', ->
-    expect(@generator._languages('label', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).toEqual ['de', 'en']
+    expect(@generator._languages('label', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).to.deep.equal ['de', 'en']
 
   it 'should return no languages for not localized property header', ->
-    expect(@generator._languages('name', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).toEqual []
+    expect(@generator._languages('name', ['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'])).to.deep.equal []
 
   it 'should return full locale codes for localized property header', ->
-    expect(@generator._languages('label', ['name', 'label.de-DE', 'label.en-US', 'enumlabel.de-DE', 'enumlabel.en-US', 'enumlabel.it-IT'])).toEqual ['de-DE', 'en-US']
+    expect(@generator._languages('label', ['name', 'label.de-DE', 'label.en-US', 'enumlabel.de-DE', 'enumlabel.en-US', 'enumlabel.it-IT'])).to.deep.equal ['de-DE', 'en-US']
 
 
   it 'should return full locale codes and languages for localized property header', ->
-    expect(@generator._languages('label', ['name', 'label.de', 'label.en-US', 'enumlabel.de', 'enumlabel.en-US', 'enumlabel.it-IT'])).toEqual ['de', 'en-US']
+    expect(@generator._languages('label', ['name', 'label.de', 'label.en-US', 'enumlabel.de', 'enumlabel.en-US', 'enumlabel.it-IT'])).to.deep.equal ['de', 'en-US']
 
 
 
@@ -35,7 +36,7 @@ describe 'ProductTypeGenerator', ->
       'enumLabel.en': 'male'
       'enumLabel.de': 'männlich'
 
-    expect(@generator._i18n(attributeRow, 'label')).toEqual {de: 'Geschlecht', en: 'gender'}
+    expect(@generator._i18n(attributeRow, 'label')).to.deep.equal {de: 'Geschlecht', en: 'gender'}
 
   it 'should return an object with localized inputTip values', ->
 
@@ -53,7 +54,7 @@ describe 'ProductTypeGenerator', ->
       'enumLabel.en': 'male'
       'enumLabel.de': 'männlich'
 
-    expect(@generator._i18n(attributeRow, 'inputTip')).toEqual {de: 'tip de', en: 'tip en'}
+    expect(@generator._i18n(attributeRow, 'inputTip')).to.deep.equal {de: 'tip de', en: 'tip en'}
 
 
   it 'should return an object with localized values using full locales and languages', ->
@@ -70,10 +71,10 @@ describe 'ProductTypeGenerator', ->
       'enumLabel.en': 'male'
       'enumLabel.de-DE': 'männlich'
 
-    expect(@generator._i18n(attributeRow, 'label')).toEqual {"de-DE": 'Geschlecht', en: 'gender'}
+    expect(@generator._i18n(attributeRow, 'label')).to.deep.equal {"de-DE": 'Geschlecht', en: 'gender'}
 
   it 'should return an object with no localized values', ->
-    expect(@generator._i18n(['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'], 'name')).toEqual []
+    expect(@generator._i18n(['name', 'label.de', 'label.en', 'enumlabel.de', 'enumlabel.en', 'enumlabel.it'], 'name')).to.deep.equal {}
 
   it 'should return one attribute definition of type text', ->
 
@@ -100,7 +101,7 @@ describe 'ProductTypeGenerator', ->
         isSearchable: false
         inputHint: 'MultiLine'
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type ltext', ->
 
@@ -127,7 +128,7 @@ describe 'ProductTypeGenerator', ->
         isSearchable: false
         inputHint: 'MultiLine'
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type enum', ->
 
@@ -166,7 +167,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type lenum', ->
 
@@ -219,7 +220,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2, attributeRow3])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type number', ->
 
@@ -244,7 +245,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type money', ->
 
@@ -269,7 +270,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
 
   it 'should return one attribute definition of type date', ->
@@ -295,7 +296,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type time', ->
 
@@ -320,7 +321,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type datetime', ->
 
@@ -345,7 +346,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
 
   it 'should return one attribute definition of type time', ->
@@ -371,7 +372,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
 
   it 'should return one attribute definition of type boolean', ->
@@ -397,7 +398,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type dateTime', ->
 
@@ -422,7 +423,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type set (elementtype text)', ->
 
@@ -451,7 +452,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type set (elementtype enum)', ->
 
@@ -492,7 +493,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).to.deep.equal expectedAttributeDefinition
 
   it 'should return one attribute definition of type set (elementtype set with elementtype enum)', ->
 
@@ -535,7 +536,7 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow1, attributeRow2])).to.deep.equal expectedAttributeDefinition
 
   it 'should return an array with product type definitions with mastersku', ->
 
@@ -574,7 +575,7 @@ describe 'ProductTypeGenerator', ->
 
     expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
 
-    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, mastersku)).toEqual expectedProductTypeDefinitions
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, mastersku)).to.deep.equal expectedProductTypeDefinitions
 
   it 'should return an array with product type definitions with attributes', ->
 
@@ -641,7 +642,7 @@ describe 'ProductTypeGenerator', ->
 
     expectedProductTypeDefinitions = [expectedProductTypeDefinition1, expectedProductTypeDefinition2]
 
-    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, mastersku)).toEqual expectedProductTypeDefinitions
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions, mastersku)).to.deep.equal expectedProductTypeDefinitions
 
   it 'should skip product types with unkown product attributes', ->
 
@@ -685,7 +686,7 @@ describe 'ProductTypeGenerator', ->
       }
     ]
 
-    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).toEqual expectedProductTypeDefinitions
+    expect(@generator._createProductTypesDefinitions(productTypeDefinitions, attributeDefinitions)).to.deep.equal expectedProductTypeDefinitions
 
   it 'should return attribute with product type specific name', ->
 
@@ -725,7 +726,7 @@ describe 'ProductTypeGenerator', ->
         inputHint: 'SingleLine'
       ]
 
-    expect(@generator._createProductTypesDefinitions([productTypeDefinition], attributeDefinitions)).toEqual [expectedProductTypeDefinition]
+    expect(@generator._createProductTypesDefinitions([productTypeDefinition], attributeDefinitions)).to.deep.equal [expectedProductTypeDefinition]
 
   it 'should return attribute definition for attribute mastersku', ->
 
@@ -740,7 +741,7 @@ describe 'ProductTypeGenerator', ->
       isSearchable: false
       inputHint: 'SingleLine'
 
-    expect(@generator._createAttributeDefinitionMastersku()).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitionMastersku()).to.deep.equal expectedAttributeDefinition
 
   it 'should return an attribute definition of type reference', ->
 
@@ -766,16 +767,16 @@ describe 'ProductTypeGenerator', ->
         isRequired: false
         isSearchable: false
 
-    expect(@generator._createAttributeDefinitions([attributeRow])).toEqual expectedAttributeDefinition
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
   it 'should split and return attribute element type or ettribute type', ->
 
-    expect(@generator._typeOrElementType('set:set:type')).toBe 'set:type'
-    expect(@generator._typeOrElementType('set:type')).toBe 'type'
-    expect(@generator._typeOrElementType('type')).toBe 'type'
+    expect(@generator._typeOrElementType('set:set:type')).to.deep.equal 'set:type'
+    expect(@generator._typeOrElementType('set:type')).to.deep.equal 'type'
+    expect(@generator._typeOrElementType('type')).to.deep.equal 'type'
 
   it 'should split and return attribute type', ->
 
-    expect(@generator._type('set:set:type')).toBe 'set'
-    expect(@generator._type('set:type')).toBe 'set'
-    expect(@generator._type('type')).toBe 'type'
+    expect(@generator._type('set:set:type')).to.deep.equal 'set'
+    expect(@generator._type('set:type')).to.deep.equal 'set'
+    expect(@generator._type('type')).to.deep.equal 'type'

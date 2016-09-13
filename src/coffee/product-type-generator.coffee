@@ -111,7 +111,9 @@ class ProductTypeGenerator
           label: @_i18n row, "#{ATTRIBUTE_TYPES.enum}Label"
         ]
       when ATTRIBUTE_TYPES.reference
-        if row['type']
+        if row['type.referenceTypeId']
+          type['referenceTypeId'] = row['type.referenceTypeId']
+        else if row['type']
           type['referenceTypeId'] = @_type(@_typeOrElementType(rawTypeName))
       when ATTRIBUTE_TYPES.set
         # TODO: ensure set is correctly build
