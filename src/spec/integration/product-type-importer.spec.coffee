@@ -1,10 +1,11 @@
 {expect} = require 'chai'
+_ = require 'underscore'
 Promise = require 'bluebird'
 ProductTypeImporter = require '../../lib/product-type-import'
 {SphereClient} = require 'sphere-node-sdk'
 {ProjectCredentialsConfig} = require 'sphere-node-utils'
 
-errMissingCredentials = 'Missing configuration in env variables'
+errMissingCredentials = 'Missing configuration in env variable named SPHERE_PROJECT_KEY'
 
 argv =
   projectKey: process.env.SPHERE_PROJECT_KEY
@@ -70,12 +71,17 @@ describe 'ProductTypeImporter', ->
       sphereClient = new SphereClient options
 
   beforeEach ->
-    sphereClient.productTypes.fetch()
-    .then (res) ->
+    sphereClient.productTypes
+    .process (res) ->
       console.log "Deleting old product types", res.body.results.length
       Promise.map res.body.results, (productType) ->
         sphereClient.productTypes.byId(productType.id)
         .delete(productType.version)
+      , concurrency: 5
+      .then ->
+        console.log "Product types were deleted"
+      .catch (err) ->
+        console.error "There was an error while deleting product types", err
 
   it 'should import product type', ->
     sphereClient.productTypes.fetch()
@@ -88,8 +94,29 @@ describe 'ProductTypeImporter', ->
     .then (res) ->
       expect(res.body.results.length).to.equal 1
 
+  it 'should import product type and generate key', ->
+    key = "unslugified name 1928 - "
+    keySlugified = "unslugified-name-1928"
+
+    sphereClient.productTypes.fetch()
+    .then (res) ->
+      expect(res.body.results.length).to.equal 0
+      console.log "Importing product type using importer"
+
+      testProductType.name = key
+      delete testProductType.key
+
+      importer.import {productTypes: [testProductType]}
+    .then ->
+      sphereClient.productTypes.fetch()
+    .then (res) ->
+      expect(res.body.results.length).to.equal 1
+      productType = res.body.results[0]
+      expect(productType.key).to.equal keySlugified
+
   it 'should not import wrong product type', (done) ->
     delete testProductType.name
+
     importer.import {productTypes: [testProductType]}
     .then ->
       done "Importer wrong product type"

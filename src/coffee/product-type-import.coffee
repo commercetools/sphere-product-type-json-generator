@@ -29,7 +29,7 @@ class ProductTypeImporter
       @logger.bunyanLogger.debug = -> # noop
 
     @_ensureCredentials argv
-    .then (credentials) ->
+    .then (credentials) =>
       @sphereImporter = new ProductTypeImport.default(@logger, credentials)
       Promise.resolve @
 
@@ -75,7 +75,10 @@ class ProductTypeImporter
   ###
   import: (data) ->
     console.log "Importing product types to sphere"
-    Promise.map data.productTypes, (productType) ->
+    Promise.map data.productTypes, (productType) =>
+      console.log "Importing product type with name:", productType.name
+      if productType.name && not productType.key
+        productType.key =  _.slugify(productType.name)
       @sphereImporter.importProductType productType
       .then (res) ->
         console.log "Imported product type", res.name
