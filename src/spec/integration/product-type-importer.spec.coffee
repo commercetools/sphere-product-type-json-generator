@@ -76,6 +76,7 @@ describe 'ProductTypeImporter', ->
       Promise.map res.body.results, (productType) ->
         sphereClient.productTypes.byId(productType.id)
         .delete(productType.version)
+      , concurrency: 5
 
   it 'should import product type', ->
     sphereClient.productTypes.fetch()
