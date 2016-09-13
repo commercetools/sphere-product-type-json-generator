@@ -96,6 +96,7 @@ describe 'ProductTypeImporter', ->
 
   it 'should import product type and generate key', ->
     key = "unslugified name 1928 - "
+    keySlugified = "unslugified-name-1928"
 
     sphereClient.productTypes.fetch()
     .then (res) ->
@@ -111,7 +112,7 @@ describe 'ProductTypeImporter', ->
     .then (res) ->
       expect(res.body.results.length).to.equal 1
       productType = res.body.results[0]
-      expect(productType.key).to.equal _.slugify(key)
+      expect(productType.key).to.equal keySlugified
 
   it 'should not import wrong product type', (done) ->
     delete testProductType.name
