@@ -1,4 +1,5 @@
 {expect} = require 'chai'
+_ = require 'underscore'
 Promise = require 'bluebird'
 ProductTypeImporter = require '../../lib/product-type-import'
 {SphereClient} = require 'sphere-node-sdk'
@@ -92,6 +93,25 @@ describe 'ProductTypeImporter', ->
       sphereClient.productTypes.fetch()
     .then (res) ->
       expect(res.body.results.length).to.equal 1
+
+  it 'should import product type and generate key', ->
+    key = "unslugified name 1928 - "
+
+    sphereClient.productTypes.fetch()
+    .then (res) ->
+      expect(res.body.results.length).to.equal 0
+      console.log "Importing product type using importer"
+
+      testProductType.name = key
+      delete testProductType.key
+
+      importer.import {productTypes: [testProductType]}
+    .then ->
+      sphereClient.productTypes.fetch()
+    .then (res) ->
+      expect(res.body.results.length).to.equal 1
+      productType = res.body.results[0]
+      expect(productType.key).to.equal _.slugify(key)
 
   it 'should not import wrong product type', (done) ->
     delete testProductType.name
