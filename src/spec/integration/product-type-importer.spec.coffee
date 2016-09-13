@@ -77,6 +77,10 @@ describe 'ProductTypeImporter', ->
         sphereClient.productTypes.byId(productType.id)
         .delete(productType.version)
       , concurrency: 5
+      .then ->
+        console.log "Product types were deleted"
+      .catch (err) ->
+        console.error "There was an error while deleting product types", err
 
   it 'should import product type', ->
     sphereClient.productTypes.fetch()
