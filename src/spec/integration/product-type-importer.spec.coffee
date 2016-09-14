@@ -8,7 +8,7 @@ ProductTypeImporter = require '../../lib/product-type-import'
 errMissingCredentials = 'Missing configuration in env variable named SPHERE_PROJECT_KEY'
 
 argv =
-  projectKey: process.env.SPHERE_PROJECT_KEY
+  projectKey: process.env.SPHERE_PROJECT_KEY || "producttype-json-generator-tests"
   logSilent: true
 
 testProductType = {
@@ -50,6 +50,7 @@ describe 'ProductTypeImporter', ->
   importer = null
   sphereClient = null
 
+  console.log "Using project %s for testing", argv.projectKey
   before ->
     expect(argv.projectKey).to.be.a 'string', errMissingCredentials
 
@@ -71,17 +72,21 @@ describe 'ProductTypeImporter', ->
       sphereClient = new SphereClient options
 
   beforeEach ->
+    # increase timeout so we will have time to delete all previous product types
+    this.timeout 60000
+
     sphereClient.productTypes
+    .perPage(50)
     .process (res) ->
       console.log "Deleting old product types", res.body.results.length
       Promise.map res.body.results, (productType) ->
         sphereClient.productTypes.byId(productType.id)
         .delete(productType.version)
-      , concurrency: 5
-      .then ->
-        console.log "Product types were deleted"
-      .catch (err) ->
-        console.error "There was an error while deleting product types", err
+      , concurrency: 10
+    .then ->
+      console.log "Product types were deleted"
+    .catch (err) ->
+      console.error "There was an error while deleting product types", err
 
   it 'should import product type', ->
     sphereClient.productTypes.fetch()
