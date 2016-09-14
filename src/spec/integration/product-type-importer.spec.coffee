@@ -73,7 +73,7 @@ describe 'ProductTypeImporter', ->
 
   beforeEach ->
     # increase timeout so we will have time to delete all previous product types
-    this.timeout 1000000
+    this.timeout 60000
 
     sphereClient.productTypes
     .perPage(50)
