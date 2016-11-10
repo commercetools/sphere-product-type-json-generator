@@ -9,7 +9,7 @@ Feature: Show common information for tooling
     """
 
   Scenario: Show general help
-    When I run `product-type-generator --attributes ../../data/tests/product-types-attributes-boolean-text-number.csv --types ../../data/tests/product-types.csv --target .`
+    When I run `product-type-generator --attributes ../../data/tests/product-types-attributes-all.csv --types ../../data/tests/product-types.csv --target .`
     Then the exit status should be 0
     And the output should contain:
     """

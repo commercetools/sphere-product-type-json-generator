@@ -1,10 +1,14 @@
 _ = require 'underscore'
 Promise = require 'bluebird'
 fs = Promise.promisifyAll require('fs')
+Path = require 'path'
 Csv = require 'csv'
 JSZip = require 'jszip'
 ProductTypeGenerator = require './product-type-generator'
+Reader = require './io/reader'
 ProductTypeImporter = require './product-type-import'
+
+supportedFileTypes = ['csv', 'xlsx']
 
 argv = require('optimist')
   .usage('Usage: $0 --types [CSV] --attributes [CSV] --target [folder] --withRetailer --zip --zipFileName [name]')
@@ -14,6 +18,9 @@ argv = require('optimist')
   .describe('withRetailer', 'whether to generate an extra file for master<->retailer support with a "mastersku" attribute or not')
   .describe('zip', 'whether to zip the target folder or not')
   .describe('zipFileName', 'the zipped file name (without extension)')
+  .describe('encoding', 'encoding used when importing data (default: utf8)')
+  .describe('importFormat', 'data format of imported data, supported are: csv, xlsx (default: csv)')
+  .describe('csvDelimiter', 'delimiter used in CSV file (default: ,)')
 
   # product type import tool config
   .describe('projectKey', 'your SPHERE.IO project-key')
@@ -33,6 +40,9 @@ argv = require('optimist')
   .default('logSilent', false)
   .default('logDir', '.')
   .default('logLevel', 'info')
+  .default('importFormat', 'csv')
+  .default('csvDelimiter', ',')
+  .default('encoding', 'utf8')
 
   .default('withRetailer', false)
   .default('zip', false)
@@ -48,15 +58,29 @@ argv = require('optimist')
   .argv
 
 ###
-Reads a CSV file by given path and returns a promise for the result.
-@param {string} path The path of the CSV file.
-@return Promise of csv read result.
+Reads a CSV or XLSX file by given path and returns a promise for the result.
+@param {string} path The path of the file.
+@return Promise of csv/xlsx read result.
 ###
-readCsvAsync = (path) ->
-  new Promise (resolve, reject) ->
-    Csv().from.path(path, {columns: true, trim: true})
-    .to.array (data, count) -> resolve data
-    .on 'error', (error) -> reject error
+readFileContent = (path) ->
+  fileType = getFileType(path)
+
+  if not isSupportedFileType(fileType)
+    return Promise.reject(Error("File type #{fileType} is not supported. Use one of #{supportedFileTypes}"))
+
+  reader = new Reader
+    csvDelimiter: argv.csvDelimiter,
+    encoding: argv.encoding,
+    importFormat: fileType,
+  reader.read(path)
+
+isSupportedFileType = (type) ->
+  return supportedFileTypes.indexOf(type) >= 0
+
+getFileType = (filePath) ->
+  ext = Path.extname(filePath)
+  if ext.length
+    return ext.substr(1).toLocaleLowerCase()
 
 writeFileAsync = (productTypeDefinition, target, prefix = 'product-type') ->
   prettified = JSON.stringify productTypeDefinition, null, 2
@@ -119,8 +143,8 @@ importSphereProductTypes = (data) ->
   .then ->
     importer.import data
 
-console.log 'About to read CSV files...'
-Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
+console.log 'About to read files...'
+Promise.all [readFileContent(argv.types), readFileContent(argv.attributes)]
 .spread (types, attributes) ->
   console.log 'Running generator...'
   generator = new ProductTypeGenerator
@@ -142,6 +166,6 @@ Promise.all [readCsvAsync(argv.types), readCsvAsync(argv.attributes)]
     console.dir e.stack
     process.exit 1
 .catch (e) ->
-  console.error "Could not read CSV files: #{e.message}"
+  console.error "Could not read files: #{e.message}"
   process.exit 1
 .done()
