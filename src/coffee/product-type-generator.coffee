@@ -196,21 +196,6 @@ class ProductTypeGenerator
     i18n = {}
     languages = @_languages header, _.keys row
     for language in languages
-      # condition was commented out due to an error:
-      # attributes -> type -> elementType -> values -> label: Values of LocalizedString must not be empty.
-      # which was caused by empty value label:
-      #  "values": [
-      #    {
-      #      "key": "",
-      #      "label": {}
-      #    }, ....
-      #  ]
-      # where correct version should look for example like this:
-      #  "label": {
-      #    "de": ""
-      #  }
-
-      # if row["#{header}.#{language}"].trim() isnt ''
       i18n[language] = row["#{header}.#{language}"].trim()
     i18n
 

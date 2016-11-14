@@ -1,7 +1,7 @@
 _ = require 'underscore'
 Promise = require 'bluebird'
 fs = Promise.promisifyAll require('fs')
-Path = require 'path'
+path = require 'path'
 Csv = require 'csv'
 JSZip = require 'jszip'
 ProductTypeGenerator = require './product-type-generator'
@@ -66,7 +66,7 @@ readFileContent = (path) ->
   fileType = getFileType(path)
 
   if not isSupportedFileType(fileType)
-    return Promise.reject(Error("File type #{fileType} is not supported. Use one of #{supportedFileTypes}"))
+    return Promise.reject(new Error("File type #{fileType} is not supported. Use one of #{supportedFileTypes}"))
 
   reader = new Reader
     csvDelimiter: argv.csvDelimiter,
@@ -78,7 +78,7 @@ isSupportedFileType = (type) ->
   return supportedFileTypes.indexOf(type) >= 0
 
 getFileType = (filePath) ->
-  ext = Path.extname(filePath)
+  ext = path.extname(filePath)
   if ext.length
     return ext.substr(1).toLocaleLowerCase()
 

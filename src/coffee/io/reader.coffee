@@ -31,13 +31,13 @@ class Reader
     else
       @_readCsv(@inputStream)
 
-  @mapRow: (header, row) ->
+  _mapRow: (header, row) ->
     res = {}
     header.forEach (item, index) ->
       res[item] = row[index]
     res
 
-  @parseCsv: (csv, delimiter, encoding) ->
+  _parseCsv: (csv, delimiter, encoding) =>
     header = null
     rows = []
     options =
@@ -46,16 +46,16 @@ class Reader
 
     # only buffer can be decoded from another encoding
     if csv instanceof Buffer
-      csv = @decode(csv, encoding)
+      csv = @_decode(csv, encoding)
 
-    new Promise (resolve, reject) ->
+    new Promise (resolve, reject) =>
       Csv()
       .from.string(csv, options)
-      .on 'record', (row) ->
+      .on 'record', (row) =>
         if not header
           header = row
         else
-          rows.push Reader.mapRow(header, row)
+          rows.push @_mapRow(header, row)
       .on 'error', (err) ->
         reject(err)
       .on 'end', ->
@@ -72,18 +72,18 @@ class Reader
       stream.on 'error', (err) -> reject(err)
       stream.on 'end', =>
         buffer = Buffer.concat(buffers)
-        Reader.parseCsv(buffer, @options.csvDelimiter, @options.encoding)
+        @_parseCsv(buffer, @options.csvDelimiter, @options.encoding)
         .then (parsed) -> resolve(parsed)
         .catch (err) -> reject(err)
 
-  _readXlsx: (stream) ->
+  _readXlsx: (stream) =>
     workbook = new Excel.Workbook()
     workbook.xlsx.read(stream)
-    .then (workbook) ->
+    .then (workbook) =>
       header = null
       rows = []
       worksheet = workbook.getWorksheet(1)
-      worksheet.eachRow (row) ->
+      worksheet.eachRow (row) =>
         rowValues = row.values
         rowValues.shift()
         rowVaues = _.map rowValues, (item) ->
@@ -94,10 +94,10 @@ class Reader
         if not header
           header = rowVaues
         else
-          rows.push Reader.mapRow(header, rowVaues)
+          rows.push @_mapRow(header, rowVaues)
       rows
 
-  @decode: (buffer, encoding) ->
+  _decode: (buffer, encoding) ->
     debugLog "READER:decode from %s",encoding
     if encoding == 'utf-8'
       return buffer.toString()

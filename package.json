@@ -49,7 +49,6 @@
     "exceljs": "^0.2.36",
     "iconv-lite": "^0.4.13",
     "jszip": "2.5.x",
-    "lodash": "^4.16.6",
     "optimist": "0.6.x",
     "sphere-node-sdk": "1.3.x",
     "sphere-node-utils": "0.8.1",
