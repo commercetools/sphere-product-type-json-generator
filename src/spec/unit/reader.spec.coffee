@@ -103,8 +103,11 @@ describe 'Reader', ->
 
     writeCsv(tempFile, dataInput)
     .then ->
+      resultPromise = null
       try
         createReader('csv', undefined, 'unsupportedEncoding')
-        Promise.reject('Should throw an error with unsupported encoding')
+        resultPromise = Promise.reject('Should throw an error with unsupported encoding')
       catch e
-        Promise.resolve()
+        resultPromise = Promise.resolve()
+
+      resultPromise
