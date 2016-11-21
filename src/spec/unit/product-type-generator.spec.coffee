@@ -769,6 +769,53 @@ describe 'ProductTypeGenerator', ->
 
     expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
 
+  it 'should return an attribute definition of type set:lenum', ->
+
+    attributeRow =
+      name: '60048507_einschubfuer',
+      type: 'set:lenum',
+      attributeConstraint: 'None',
+      isRequired: 'false',
+      isSearchable: 'true',
+      enumKey: '60048507_einschubfuer_ep60059811',
+      'enumLabel.nl': 'MM-Card',
+      'enumLabel.it': 'MM-Card',
+      'enumLabel.fr': 'MMC',
+      'enumLabel.de': 'MM-Card',
+      'type.referenceTypeId': '',
+      'type.typeReference.typeId': '',
+      'type.typeReference.id': '',
+      'label.en': '',
+      'label.nl': 'geïntegreerde deel voor',
+      'label.it': 'Slot integrata per',
+      'label.fr': 'Slot intégré pour carte(s):',
+      'label.de': 'Einschub für',
+      textInputHint: 'SingleLine',
+      displayGroup: 'Other'
+
+    expectedAttributeDefinition =
+      '60048507_einschubfuer':
+        name: '60048507_einschubfuer',
+        label:
+          nl: 'geïntegreerde deel voor',
+          it: 'Slot integrata per',
+          fr: 'Slot intégré pour carte(s):',
+          de: 'Einschub für',
+        type:
+          name: 'set',
+          elementType:
+            name: 'lenum',
+            values:
+              [
+                key: '60048507_einschubfuer_ep60059811',
+                label: { nl: 'MM-Card', it: 'MM-Card', fr: 'MMC', de: 'MM-Card' }
+              ]
+        attributeConstraint: 'None',
+        isRequired: false,
+        isSearchable: true
+
+    expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
+
   it 'should split and return attribute element type or ettribute type', ->
 
     expect(@generator._typeOrElementType('set:set:type')).to.deep.equal 'set:type'
