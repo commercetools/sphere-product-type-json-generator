@@ -121,7 +121,6 @@ class ProductTypeGenerator
         #   name,description,set_set_gender
         #   women,Woman Product Type,x
         attributeDefinition['isRequired'] = false
-        attributeDefinition['isSearchable'] = false
 
         if row['type']
           type['elementType'] = {name: @_type(@_typeOrElementType(rawTypeName))}
