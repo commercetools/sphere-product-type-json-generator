@@ -195,8 +195,7 @@ class ProductTypeGenerator
     i18n = {}
     languages = @_languages header, _.keys row
     for language in languages
-      if row["#{header}.#{language}"].trim() isnt ''
-        i18n[language] = row["#{header}.#{language}"].trim()
+      i18n[language] = row["#{header}.#{language}"].trim()
     i18n
 
   ###*

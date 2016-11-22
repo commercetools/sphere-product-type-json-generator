@@ -34,12 +34,11 @@ module.exports = (grunt) ->
             dest + matchedSrcPath
           )
       test:
-        files: grunt.file.expandMapping(['**/*.spec.coffee'], 'test/',
+        files: grunt.file.expandMapping(['**/*.coffee'], 'test/',
           flatten: false
           cwd: 'src/spec'
-          ext: '.spec.js'
           rename: (dest, matchedSrcPath) ->
-            dest + matchedSrcPath
+            dest + matchedSrcPath.replace('coffee', 'js')
           )
 
     concat:
@@ -56,10 +55,10 @@ module.exports = (grunt) ->
     # watching for changes
     watch:
       default:
-        files: ['src/coffee/*.coffee']
+        files: ['src/**/**/*.coffee']
         tasks: ['build']
       test:
-        files: ['src/**/*.coffee']
+        files: ['src/**/**/*.coffee']
         tasks: ['test']
 
     shell:
