@@ -4,7 +4,7 @@ fs = Promise.promisifyAll require('fs')
 {SphereClient} = require 'sphere-node-sdk'
 {ProjectCredentialsConfig} = require 'sphere-node-utils'
 package_json = require '../package.json'
-
+#test
 argv = require('optimist')
   .usage('Usage: $0 --projectKey [key] --clientId [id] --clientSecret [secret] --source [path]')
   .describe('projectKey', 'your SPHERE.IO project-key')
