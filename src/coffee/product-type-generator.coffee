@@ -220,8 +220,9 @@ class ProductTypeGenerator
 
         if _.isString(value) and value.length > 0
           if attributeDefinitions[header]
+            unless value.toLowerCase() is 'x'
+              continue
             attributeDefinition = attributeDefinitions[header]
-            attributeDefinition.name = value unless value.toLowerCase() is 'x'
             productTypeDefinition.attributes.push attributeDefinition
           else
             console.log "[WARN] No attribute definition found with name '#{header}', skipping..."
