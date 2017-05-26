@@ -1,4 +1,4 @@
-![SPHERE.IO icon](https://admin.sphere.io/assets/images/sphere_logo_rgb_long.png)
+![commercetools logo](https://cdn.rawgit.com/commercetools/press-kit/master/PNG/72DPI/CT%20logo%20horizontal%20RGB%2072dpi.png)
 
 # ProductType JSON generator
 
@@ -6,11 +6,11 @@
 
 [![Build Status](https://travis-ci.org/sphereio/sphere-product-type-json-generator.png?branch=master)](https://travis-ci.org/sphereio/sphere-product-type-json-generator) [![Dependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator) [![devDependency Status](https://david-dm.org/sphereio/sphere-product-type-json-generator/dev-status.png?theme=shields.io)](https://david-dm.org/sphereio/sphere-product-type-json-generator#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/sphereio/sphere-product-type-json-generator/badge.png?branch=master)](https://coveralls.io/r/sphereio/sphere-product-type-json-generator?branch=master) [![Code Climate](https://codeclimate.com/github/sphereio/sphere-product-type-json-generator.png)](https://codeclimate.com/github/sphereio/sphere-product-type-json-generator)
 
-This component allows you to generate SPHERE.IO **ProductType** _JSON_ drafts from _CSV_ files in order to create those product types in your SPHERE.IO project.
+This component allows you to generate commercetools **ProductType** _JSON_ drafts from _CSV_ files in order to create those product types in your commercetools project.
 
 ## Getting started
 
-If you just want to use the tool, we recommend to use [SPHERE.IO's impex platform](https://impex.sphere.io) to avoid any local installation - you only need your browser.
+If you just want to use the tool, we recommend to use [commercetools' impex platform](https://impex.commercetools.com) to avoid any local installation - you only need your browser.
 
 Nevertheless you can run the program locally. You need [NodeJS](https://nodejs.org/download/) installed and simply run the following command in your terminal:
 
@@ -30,7 +30,7 @@ The component requires two _CSV_ files:
 > Please find some example CSV files in the [data](data) folder
 
 ### Posting generated product types
-The generated JSON files can be used then to be directly imported via SPHERE.IO HTTP API to your project.
+The generated JSON files can be used then to be directly imported via commercetools HTTP API to your project.
 We provide a simple command to do that:
 
 ```bash
