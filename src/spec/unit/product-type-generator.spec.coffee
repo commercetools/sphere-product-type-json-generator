@@ -798,6 +798,7 @@ describe 'ProductTypeGenerator', ->
         name: '60048507_einschubfuer',
         label:
           nl: 'geïntegreerde deel voor',
+          en: '',
           it: 'Slot integrata per',
           fr: 'Slot intégré pour carte(s):',
           de: 'Einschub für',
