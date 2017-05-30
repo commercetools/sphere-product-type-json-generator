@@ -66,7 +66,6 @@ describe 'Reader', ->
     .then ->
       createReader('csv', ';').read(tempFile)
     .then (data) ->
-
       expect(data).to.be.an('array')
       expect(data.length).to.equal(1)
       expect(data[0]).to.deep.equal(expectedOutput)
