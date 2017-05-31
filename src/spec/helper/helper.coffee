@@ -41,3 +41,30 @@ exports.createReader = (fileType, delimiter = ',', encoding = 'utf-8' ) ->
     csvDelimiter: delimiter,
     encoding: encoding,
     importFormat: fileType,
+
+exports.unpublishAllProducts = (client) ->
+  client.productProjections
+  .where 'published=true'
+  .perPage 200
+  .process (res) ->
+    Promise.map res.body.results, (item) ->
+      client.products
+        .byId item.id
+        .update
+          version: item.version
+          actions: [{
+            action: 'unpublish'
+          }]
+    , { concurrency: 10 }
+
+exports.deleteAllProducts = (client) ->
+  exports.unpublishAllProducts client
+  .then ->
+    client.products
+    .perPage 200
+    .process (res) ->
+      Promise.map res.body.results, (item) ->
+        client.products
+          .byId item.id
+          .delete item.version
+      , { concurrency: 10 }

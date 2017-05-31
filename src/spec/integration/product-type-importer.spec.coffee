@@ -4,6 +4,7 @@ Promise = require 'bluebird'
 ProductTypeImporter = require '../../lib/product-type-import'
 {SphereClient} = require 'sphere-node-sdk'
 {ProjectCredentialsConfig} = require 'sphere-node-utils'
+Helper = require '../helper/helper'
 
 errMissingCredentials = 'Missing configuration in env variable named SPHERE_PROJECT_KEY'
 
@@ -75,14 +76,16 @@ describe 'ProductTypeImporter', ->
     # increase timeout so we will have time to delete all previous product types
     this.timeout 60000
 
-    sphereClient.productTypes
-    .perPage(50)
-    .process (res) ->
-      console.log "Deleting old product types", res.body.results.length
-      Promise.map res.body.results, (productType) ->
-        sphereClient.productTypes.byId(productType.id)
-        .delete(productType.version)
-      , concurrency: 10
+    Helper.deleteAllProducts sphereClient
+    .then ->
+      sphereClient.productTypes
+      .perPage(50)
+      .process (res) ->
+        console.log "Deleting old product types", res.body.results.length
+        Promise.map res.body.results, (productType) ->
+          sphereClient.productTypes.byId(productType.id)
+          .delete(productType.version)
+        , concurrency: 10
     .then ->
       console.log "Product types were deleted"
     .catch (err) ->
