@@ -89,15 +89,19 @@ writeFileAsync = (productTypeDefinition, target, prefix = 'product-type') ->
 
 zipFiles = (path, filename) ->
   zip = new JSZip()
-  zip.folder('product-type-json')
+  folder = zip.folder('product-type-json')
   fs.readdirAsync(path)
   .then (allFiles) ->
     jsonFiles = _.filter allFiles, (file) -> file.match(/\.json/)
     Promise.map jsonFiles, (file) ->
-      zip.file("product-type-json/#{file}", fs.readFileSync("#{path}/#{file}", 'utf8'))
+      folder.file("product-type-json/#{file}", fs.readFileSync("#{path}/#{file}", 'utf8'))
     .then ->
-      buffer = zip.generate type: 'nodebuffer'
-      fs.writeFileAsync "#{path}/#{filename}.zip", buffer, 'utf8'
+      new Promise (resolve, reject) ->
+        folder
+          .generateNodeStream { type: 'nodebuffer', streamFiles:true }
+          .pipe fs.createWriteStream("#{path}/#{filename}.zip")
+          .on 'error', (err) -> reject(err)
+          .on 'finish', resolve
 
 saveProductTypes = (result) ->
   console.log 'About to write files...'
