@@ -41,3 +41,45 @@ exports.createReader = (fileType, delimiter = ',', encoding = 'utf-8' ) ->
     csvDelimiter: delimiter,
     encoding: encoding,
     importFormat: fileType,
+
+unpublishAllProducts = (client) ->
+  client.productProjections
+  .where 'published=true'
+  .perPage 200
+  .process (res) ->
+    Promise.map res.body.results, (item) ->
+      client.products
+        .byId item.id
+        .update
+          version: item.version
+          actions: [{
+            action: 'unpublish'
+          }]
+    , { concurrency: 10 }
+
+deleteAllProducts = (client) ->
+  unpublishAllProducts client
+  .then ->
+    client.products
+    .perPage 200
+    .process (res) ->
+      Promise.map res.body.results, (item) ->
+        client.products
+          .byId item.id
+          .delete item.version
+      , { concurrency: 10 }
+
+deleteAllProductTypes = (client) ->
+  client.productTypes
+  .perPage(50)
+  .process (res) ->
+    console.log "Deleting old product types", res.body.results.length
+    Promise.map res.body.results, (productType) ->
+      client.productTypes.byId(productType.id)
+        .delete(productType.version)
+    , concurrency: 10
+
+exports.cleanProject = (client) ->
+  deleteAllProducts client
+  .then ->
+    deleteAllProductTypes client

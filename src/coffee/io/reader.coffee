@@ -38,9 +38,8 @@ class Reader
     res
 
   _parseCsv: (csv, delimiter, encoding) =>
-    header = null
-    rows = []
     options =
+      columns: true
       delimiter: delimiter
       skip_empty_lines: true
 
@@ -48,18 +47,12 @@ class Reader
     if csv instanceof Buffer
       csv = @_decode(csv, encoding)
 
-    new Promise (resolve, reject) =>
-      Csv()
-      .from.string(csv, options)
-      .on 'record', (row) =>
-        if not header
-          header = row
+    new Promise (resolve, reject) ->
+      Csv.parse csv, options, (err, output) ->
+        if err
+          reject err
         else
-          rows.push @_mapRow(header, row)
-      .on 'error', (err) ->
-        reject(err)
-      .on 'end', ->
-        resolve(rows)
+          resolve output
 
   _readCsv: (stream) =>
     new Promise (resolve, reject) =>
