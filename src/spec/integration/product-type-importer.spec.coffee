@@ -76,16 +76,7 @@ describe 'ProductTypeImporter', ->
     # increase timeout so we will have time to delete all previous product types
     this.timeout 60000
 
-    Helper.deleteAllProducts sphereClient
-    .then ->
-      sphereClient.productTypes
-      .perPage(50)
-      .process (res) ->
-        console.log "Deleting old product types", res.body.results.length
-        Promise.map res.body.results, (productType) ->
-          sphereClient.productTypes.byId(productType.id)
-          .delete(productType.version)
-        , concurrency: 10
+    Helper.cleanProject sphereClient
     .then ->
       console.log "Product types were deleted"
     .catch (err) ->
