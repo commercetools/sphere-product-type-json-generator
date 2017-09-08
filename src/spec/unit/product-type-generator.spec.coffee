@@ -83,7 +83,7 @@ describe 'ProductTypeGenerator', ->
       type: 'text'
       attributeConstraint: 'None'
       isRequired: 'false'
-      isSearchable: 'false'
+      isSearchable: 'true'
       textInputHint: 'MultiLine'
       'label.de-DE': 'Beschreibung'
       'label.en': 'Description'
@@ -98,7 +98,7 @@ describe 'ProductTypeGenerator', ->
           name: 'text'
         attributeConstraint: 'None'
         isRequired: false
-        isSearchable: false
+        isSearchable: true
         inputHint: 'MultiLine'
 
     expect(@generator._createAttributeDefinitions([attributeRow])).to.deep.equal expectedAttributeDefinition
@@ -109,8 +109,8 @@ describe 'ProductTypeGenerator', ->
       name: 'description'
       type: 'ltext'
       attributeConstraint: 'None'
-      isRequired: 'false'
-      isSearchable: 'false'
+      isRequired: 'TRUE'
+      isSearchable: 'FALSE'
       textInputHint: 'MultiLine'
       'label.de-DE': 'Beschreibung'
       'label.en': 'Description'
@@ -124,7 +124,7 @@ describe 'ProductTypeGenerator', ->
         type:
           name: 'ltext'
         attributeConstraint: 'None'
-        isRequired: false
+        isRequired: true
         isSearchable: false
         inputHint: 'MultiLine'
 

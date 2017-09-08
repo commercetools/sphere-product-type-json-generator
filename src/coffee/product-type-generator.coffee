@@ -14,6 +14,9 @@ ATTRIBUTE_TYPES =
 
 MASTER_SKU_NAME = 'mastersku'
 
+isTrue = (val) ->
+  val is 'true' or val is 'TRUE'
+
 ###*
  * Class for generating JSON product-type representations from CSV files
  * @class ProductTypeGenerator
@@ -69,8 +72,8 @@ class ProductTypeGenerator
           type:
             name: @_type row['type']
           attributeConstraint: row['attributeConstraint']
-          isRequired: row['isRequired'] is 'true'
-          isSearchable: row['isSearchable'] is 'true'
+          isRequired: isTrue row['isRequired']
+          isSearchable: isTrue row['isSearchable']
 
         inputTip = @_i18n row, 'inputTip'
         if _.keys(inputTip).length > 0

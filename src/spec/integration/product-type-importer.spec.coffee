@@ -82,7 +82,7 @@ describe 'ProductTypeImporter', ->
     .catch (err) ->
       console.error "There was an error while deleting product types", err
 
-  it 'should import product type', ->
+  it('should import product type', ->
     sphereClient.productTypes.fetch()
     .then (res) ->
       expect(res.body.results.length).to.equal 0
@@ -92,8 +92,9 @@ describe 'ProductTypeImporter', ->
       sphereClient.productTypes.fetch()
     .then (res) ->
       expect(res.body.results.length).to.equal 1
+  ).timeout(5000)
 
-  it 'should import product type and generate key', ->
+  it('should import product type and generate key', ->
     key = "unslugified name 1928 - "
     keySlugified = "unslugified-name-1928"
 
@@ -112,6 +113,7 @@ describe 'ProductTypeImporter', ->
       expect(res.body.results.length).to.equal 1
       productType = res.body.results[0]
       expect(productType.key).to.equal keySlugified
+    ).timeout(5000)
 
   it 'should not import wrong product type', (done) ->
     delete testProductType.name
