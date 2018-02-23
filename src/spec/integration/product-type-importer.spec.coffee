@@ -83,6 +83,9 @@ describe 'ProductTypeImporter', ->
     .catch (err) ->
       console.error "There was an error while deleting product types", err
 
+  afterEach ->
+    Helper.cleanProject sphereClient
+    
   it('should import product type', ->
     sphereClient.productTypes.fetch()
     .then (res) ->
