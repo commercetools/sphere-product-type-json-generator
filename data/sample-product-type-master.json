@@ -1,5 +1,6 @@
 {
   "name": "epic-base"
+  ,"key": "epic-base-key"
   ,"description": "Basistyp für alle Produkte"
   ,"attributes": [
 
