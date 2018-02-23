@@ -1,6 +1,6 @@
 key,name,description,gender,designer,set_longtext,set_gender,set_gender,zone_reference,custom_date,custom_time,custom_datetime,active,age,price
-key1,base,Base Product Type,x,,,,,,,,,,,
-key2,men,Men Product Type,sex,x,x,,,,,,,,,
-key3,women,Woman Product Type,,brand,,x,x,,,,,,,
-key4,product_zone_restriction,Product with zone restriction,,,,,,x,,,,,,
-key5,product_dates,Product with multiplecustom fields,,,,,,,x,x,x,x,x,x
+sample-key1,base,Base Product Type,x,,,,,,,,,,,
+sample-key2,men,Men Product Type,sex,x,x,,,,,,,,,
+sample-key3,women,Woman Product Type,,brand,,x,x,,,,,,,
+sample-key4,product_zone_restriction,Product with zone restriction,,,,,,x,,,,,,
+sample-key5,product_dates,Product with multiplecustom fields,,,,,,,x,x,x,x,x,x
