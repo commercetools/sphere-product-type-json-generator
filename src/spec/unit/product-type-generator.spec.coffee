@@ -1,5 +1,6 @@
 ProductTypeGenerator = require '../../lib/product-type-generator'
 {expect} = require 'chai'
+sinon = require 'sinon'
 
 describe 'ProductTypeGenerator', ->
 
@@ -19,8 +20,6 @@ describe 'ProductTypeGenerator', ->
 
   it 'should return full locale codes and languages for localized property header', ->
     expect(@generator._languages('label', ['name', 'label.de', 'label.en-US', 'enumlabel.de', 'enumlabel.en-US', 'enumlabel.it-IT'])).to.deep.equal ['de', 'en-US']
-
-
 
   it 'should return an object with localized values', ->
 
@@ -541,10 +540,12 @@ describe 'ProductTypeGenerator', ->
   it 'should return an array with product type definitions with mastersku', ->
 
     productTypeDefinition1 =
+      key: 'key1'
       name: 'ProductType1'
       description: 'Description1'
 
     productTypeDefinition2 =
+      key: 'key2'
       name: 'ProductType2'
       description: 'Description2'
 
@@ -564,11 +565,13 @@ describe 'ProductTypeGenerator', ->
     attributeDefinitions = []
 
     expectedProductTypeDefinition1 =
+      key: 'key1'
       name: 'ProductType1'
       description: 'Description1'
       attributes: [mastersku]
 
     expectedProductTypeDefinition2 =
+      key: 'key2'
       name: 'ProductType2'
       description: 'Description2'
       attributes: [mastersku]
@@ -580,11 +583,13 @@ describe 'ProductTypeGenerator', ->
   it 'should return an array with product type definitions with attributes', ->
 
     productTypeDefinition1 =
+      key: 'key1'
       name: 'ProductType1'
       description: 'Description1'
       information: 'x'
 
     productTypeDefinition2 =
+      key: 'key2'
       name: 'ProductType2'
       description: 'Description2'
       size: 'X'
@@ -631,11 +636,13 @@ describe 'ProductTypeGenerator', ->
       information: information
 
     expectedProductTypeDefinition1 =
+      key: 'key1'
       name: 'ProductType1'
       description: 'Description1'
       attributes: [information, mastersku]
 
     expectedProductTypeDefinition2 =
+      key: 'key2'
       name: 'ProductType2'
       description: 'Description2'
       attributes: [size, mastersku]
@@ -647,11 +654,13 @@ describe 'ProductTypeGenerator', ->
   it 'should skip product types with unkown product attributes', ->
 
     productTypeDefinition1 =
+      key: 'key1'
       name: 'ProductType1'
       description: 'Description1'
       unkownAttribute: 'x'
 
     productTypeDefinition2 =
+      key: 'key2'
       name: 'ProductType2'
       description: 'Description2'
       size: 'x'
@@ -675,11 +684,13 @@ describe 'ProductTypeGenerator', ->
 
     expectedProductTypeDefinitions = [
       {
+        key: 'key1'
         name: 'ProductType1'
         description: 'Description1'
         attributes: []
       },
       {
+        key: 'key2'
         name: 'ProductType2'
         description: 'Description2'
         attributes: [size]
@@ -691,6 +702,7 @@ describe 'ProductTypeGenerator', ->
   it 'should return attribute with product type specific name', ->
 
     productTypeDefinition =
+      key: 'key'
       name: 'myProductType'
       description: 'myDescription'
       size: 'myAttribName'
@@ -711,6 +723,7 @@ describe 'ProductTypeGenerator', ->
       size: size
 
     expectedProductTypeDefinition =
+      key: 'key'
       name: 'myProductType'
       description: 'myDescription'
       attributes: [
@@ -828,3 +841,17 @@ describe 'ProductTypeGenerator', ->
     expect(@generator._type('set:set:type')).to.deep.equal 'set'
     expect(@generator._type('set:type')).to.deep.equal 'set'
     expect(@generator._type('type')).to.deep.equal 'type'
+
+  it 'should log an error and skip productTypes without key', ->
+
+    errorSpy = sinon.spy console, 'error'
+    productTypeDefinition =
+      # missing key
+      name: 'myProductType'
+      description: 'myDescription'
+      size: 'myAttribName'
+
+    expect(@generator._createProductTypesDefinitions([productTypeDefinition])).to.deep.equal []
+    expect(errorSpy.called).to.equal true
+    expect(errorSpy.args[0][0]).to.equal '[ERR] No key given for productType \'myProductType\', skipping...'
+    errorSpy.restore()

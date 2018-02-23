@@ -77,8 +77,6 @@ class ProductTypeImporter
     console.log "Importing product types to sphere"
     Promise.map data.productTypes, (productType) =>
       console.log "Importing product type with name:", productType.name
-      if productType.name && not productType.key
-        productType.key =  _.slugify(productType.name)
       @sphereImporter.importProductType productType
       .then (res) ->
         console.log "Imported product type", res.name
