@@ -213,13 +213,19 @@ class ProductTypeGenerator
     productTypeDefinitions = []
 
     for row in types
+      # enforce the key field - see issue #52
+      if not row['key']
+        console.error "[ERR] No key given for productType '#{row['name']}', skipping..."
+        continue
+
       productTypeDefinition =
         name: row['name']
         description: row['description']
+        key: row['key']
         attributes: []
 
       for header, value of row
-        continue if header is 'name' or header is 'description'
+        continue if header in ['name', 'description', 'key']
 
         if _.isString(value) and value.length > 0
           if attributeDefinitions[header]

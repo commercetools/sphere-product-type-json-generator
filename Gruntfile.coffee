@@ -70,6 +70,8 @@ module.exports = (grunt) ->
         command: 'istanbul cover node_modules/.bin/_mocha test/**/*.spec.js && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf ./coverage'
       mocha:
         command: './node_modules/.bin/mocha test/**/*.spec.js'
+      cleanup:
+        command: './node_modules/.bin/mocha test/integration/cleanup.spec.js'
       publish:
         command: 'npm publish'
 
@@ -101,6 +103,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'build', ['clean', 'coffeelint', 'coffee', 'concat']
   grunt.registerTask 'coverage', ['build', 'shell:coverage']
   grunt.registerTask 'test', ['build', 'shell:mocha']
+  grunt.registerTask 'cleanup', ['build', 'shell:cleanup']
   grunt.registerTask 'release', 'Release a new version, push it and publish it', (target) ->
     target = 'patch' unless target
     grunt.task.run "bump-only:#{target}", 'test', 'bump-commit', 'shell:publish'

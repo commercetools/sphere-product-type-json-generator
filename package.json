@@ -52,7 +52,7 @@
     "optimist": "^0.6.0",
     "sphere-node-sdk": "^1.20.0",
     "sphere-node-utils": "^0.9.1",
-    "sphere-product-type-import": "^1.1.0",
+    "sphere-product-type-import": "^2.0.0",
     "underscore": "^1.8.3",
     "underscore.string": "^3.3.4"
   },
@@ -69,6 +69,7 @@
     "grunt-shell": "^2.1.0",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
+    "sinon": "^4.4.0",
     "sphere-coffeelint": "git://github.com/sphereio/sphere-coffeelint.git#master",
     "tmp": "^0.0.31"
   },
