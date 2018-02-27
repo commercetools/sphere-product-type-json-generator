@@ -1,7 +1,7 @@
 {
   "name": "sphere-product-type-json-generator",
   "description": "A command line tool for generating ProductTypes JSON representations from CSV templates.",
-  "version": "0.4.2",
+  "version": "1.0.0",
   "homepage": "https://github.com/sphereio/sphere-product-type-json-generator",
   "private": false,
   "author": {
