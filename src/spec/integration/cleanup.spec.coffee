@@ -5,6 +5,7 @@ Helper = require '../helper/helper'
 projectKey = process.env.SPHERE_PROJECT_KEY || "producttype-json-generator-tests"
 
 describe 'Project cleanup', ->
+  this.timeout 15000
   sphereClient = null
 
   console.log "Removing productTypes from project", projectKey
