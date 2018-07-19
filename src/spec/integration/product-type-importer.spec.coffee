@@ -9,7 +9,7 @@ Helper = require '../helper/helper'
 errMissingCredentials = 'Missing configuration in env variable named SPHERE_PROJECT_KEY'
 
 argv =
-  projectKey: process.env.SPHERE_PROJECT_KEY || "producttype-json-generator-tests"
+  projectKey: process.env.SPHERE_PROJECT_KEY || "product-type-json-generator-tests"
   logSilent: true
 
 testProductType = {
