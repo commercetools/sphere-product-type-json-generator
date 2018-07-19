@@ -49,6 +49,7 @@ testProductType = {
 }
 
 describe 'ProductTypeImporter', ->
+  this.timeout 30000
   importer = null
   sphereClient = null
 
@@ -106,7 +107,7 @@ describe 'ProductTypeImporter', ->
     .then ->
       done "Importer wrong product type"
     .catch (err) ->
-      expect(err.toString()).to.equal "TypeError: Cannot read property 'name' of undefined"
+      expect(err.toString()).to.equal '''Error: Validation error on productType "product-type-key" - should have required property \'name\''''
       sphereClient.productTypes.fetch()
       .then (res) ->
         expect(res.body.results.length).to.equal 0
