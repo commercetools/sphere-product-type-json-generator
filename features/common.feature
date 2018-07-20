@@ -42,7 +42,7 @@ Feature: Show common information for tooling
           "inputHint": "SingleLine"
         },
     """
-    When I run `product-type-update --projectKey producttype-json-generator-tests --source product-type-boo-txt-num.json`
+    When I run `product-type-update --projectKey product-type-json-generator-tests --source product-type-boo-txt-num.json`
     #Then the exit status should be 0
     And the output should contain:
     """
