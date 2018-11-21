@@ -2,7 +2,7 @@
 {ProjectCredentialsConfig} = require 'sphere-node-utils'
 Helper = require '../helper/helper'
 
-projectKey = process.env.SPHERE_PROJECT_KEY || "product-type-json-generator-tests"
+projectKey = process.env.SPHERE_PROJECT_KEY || "product-type-json-generator-int-test"
 
 describe 'Project cleanup', ->
   this.timeout 15000
