@@ -1,14 +1,14 @@
 language: node_js
 node_js:
-  - '6'
-  - '8'
+  - '10'
+  - '12'
 before_script:
 - npm install -g grunt-cli
 - gem install cucumber aruba
 - ./create_config.sh
 script:
 - npm test
-- cucumber -t ~@wip
+- cucumber --tags "not @wip"
 - mkdir -p tmp && ./bin/product-type-generator --types data/sample-product-types.csv
   --attributes data/sample-product-types-attributes.csv --target ./tmp --zip
 - mkdir -p tmp && ./bin/product-type-generator --types data/marketplace-types.csv
