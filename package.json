@@ -48,7 +48,7 @@
     "bluebird": "^3.5.0",
     "csv": "^1.1.1",
     "exceljs": "^1.6.3",
-    "iconv-lite": "^0.5.0",
+    "iconv-lite": "^0.6.0",
     "jszip": "^3.1.3",
     "optimist": "^0.6.0",
     "sphere-node-sdk": "^3.2.2",
@@ -73,7 +73,7 @@
     "mocha": "^5.2.0",
     "sinon": "^4.4.0",
     "sphere-coffeelint": "git://github.com/sphereio/sphere-coffeelint.git#master",
-    "tmp": "^0.1.0"
+    "tmp": "^0.2.0"
   },
   "resolutions": {
     "handlebars": "^4.7.6",
